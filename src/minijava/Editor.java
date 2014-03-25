@@ -5,7 +5,9 @@
  */
 
 package minijava;
-
+import MiniJavaParser.MiniJavaParser;
+import MiniJavaParser.ParseException;
+import MiniJavaParser.TokenMgrError;
 /**
  *
  * @author Daniel
@@ -37,6 +39,9 @@ public class Editor extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocationByPlatform(true);
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -47,6 +52,11 @@ public class Editor extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTree1);
 
         jButton1.setText("RUN");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,6 +92,33 @@ public class Editor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private static String parserStart()
+    {
+        MiniJavaParser parser;
+        String messaje="";
+        try {
+            parser = new MiniJavaParser(new java.io.FileInputStream("prueba.java"));
+        } catch (java.io.FileNotFoundException e) {
+            return "Error: File not found.";
+        }
+        try {
+            parser.Goal();
+            messaje= messaje + "\n" + "MiniJava program parsed successfully.";
+        } catch (ParseException e) {
+            messaje= messaje + "\n" + "Encountered errors during parse.";
+            messaje= messaje + "\n" + e.getMessage();
+        } catch (TokenMgrError e) {
+            messaje= messaje + "\n" + "Encountered errors during Scanning.";
+            messaje= messaje + "\n" + e.getMessage();
+        }
+        return messaje;
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        jTextArea1.setText(jTextArea1.getText() + parserStart());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

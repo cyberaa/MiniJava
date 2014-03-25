@@ -3,13 +3,14 @@ options {
 }
 
 PARSER_BEGIN(MiniJavaParser)
+/*
   package MiniJavaParser;
   public class MiniJavaParser {
 	  public static void main(String args[]) {
 	    MiniJavaParser parser;
 	      try {
-	        System.out.println("MiniJava parsing from '" + args[0] + "' file...");
-	        parser = new MiniJavaParser(new java.io.FileInputStream(args[0]));
+	        System.out.println("MiniJava parsing from '" + "prueba.java" + "' file...");
+	        parser = new MiniJavaParser(new java.io.FileInputStream("prueba.java"));
 	      } catch (java.io.FileNotFoundException e) {
 	        System.out.println("Error: File not found.");
 	        return;
@@ -26,6 +27,7 @@ PARSER_BEGIN(MiniJavaParser)
 	    }
 	  }
   }
+*/
 PARSER_END(MiniJavaParser)
 
 SKIP : /* WHITE SPACE */
@@ -150,19 +152,32 @@ void Goal() :
     ( TypeDeclaration() )*
 <EOF>
 }
-
 void ImportDeclaration():
 {}
 {
-    "import" TypeName() ";" 
+    LOOKAHEAD(2)
+    SingleImportDeclaration()
 |
-    "import" TypeName() "*" ";"
+    LOOKAHEAD(3)
+    MultipleImportDeclaration()
+}
+
+void SingleImportDeclaration():
+{}
+{
+    "import" TypeName() ";" 
+}
+
+void MultipleImportDeclaration():
+{}
+{
+    "import" TypeName() "." "*" ";"
 }
 
 void TypeName ():
 {}
 {
-    Identifier() ( "." Identifier() )*
+    Identifier() ( LOOKAHEAD(2) "." Identifier() )*
 }
 
 void MainClass() :
@@ -289,8 +304,10 @@ void Statement() :
   LOOKAHEAD(2)
   ArrayAssignmentStatement()
 |
+  LOOKAHEAD( "(" Expression() ")" Statement() )
   IfStatement()
 |
+  LOOKAHEAD("(" Expression() ")" Statement() "else")
   IfElseStatement()
 |
   WhileStatement()
@@ -321,15 +338,16 @@ void ArrayAssignmentStatement() :
 void AssigmentRest():
 {}
 {
+    LOOKAHEAD( PrimaryExpression() ) 
     Expression()
-| 
+|
     "(" Type() ")" "System.in.read" "(" ")"
 }
 
 void IfStatement() :
 {}
 {
-  "if" "(" Expression() ")" Statement() //"else" Statement()
+  "if" "(" Expression() ")" Statement()
 }
 
 void  IfElseStatement():
