@@ -1,0 +1,160 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */
+options
+{
+  JDK_VERSION = "1.5";
+  static = false;
+}
+
+PARSER_BEGIN(EG1)
+package GPrueba;
+
+public class EG1
+{
+  public static void main(String args []) throws ParseException
+  {
+	EG1 parser;
+    try {
+	        System.out.println("MiniJava parsing from file...");
+	        parser = new EG1(new java.io.FileInputStream("prueba.txt"));
+	      } catch (java.io.FileNotFoundException e) {
+	        System.out.println("Error: File not found.");
+	        return;
+	      }
+      try
+      {
+        parser.program();
+        System.out.println("Pura vida!!!");
+      }
+      catch (ParseException e)
+      {
+        System.out.println("Error de parser.");
+        System.out.println(e.getMessage());
+      }
+      catch (TokenMgrError e)
+      {
+        System.out.println("Error de scanner");
+        System.out.println(e.getMessage());
+      }
+  }
+}
+
+PARSER_END(EG1)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN : 
+{
+  < TMAS : "+" > { System.out.println("TMAS"); }
+| < TMULT : "*" > { System.out.println("TMULT"); }
+| < TPYCOMA : ";" > { System.out.println("TPYCOMA"); }
+| < TCOMA : "," > { System.out.println("TCOMA"); }
+| < TASIGN : "=" > { System.out.println("TASIGN"); }
+| < TINT : "INT" > { System.out.println("TINT"); }
+| < TSTRING : "STRING" > { System.out.println("TSTRING"); }
+| < TPIZQ : "(" > { System.out.println("TPIZQ"); }
+| < TPDER : ")" > { System.out.println("TPDER"); }
+}
+
+TOKEN :
+{
+
+  < TINTLIT: ( ["1"-"9"] (["0"-"9"])* | "0" ) > { System.out.println("TINTLIT"); }
+| < TID: <LETTER> (<LETTER>|<DIGIT>)* >
+{
+  System.out.println("TID");
+}
+| < #LETTER : [ "a"-"z" , "A" - "Z" ] >
+| < #DIGIT : [ "0"-"9" ] >
+//c�digo para constantes String pero utilizando expresiones regulares
+//| < TSTRINGLIT: "\"" (~["\"","\\","\n","\r"])* "\"" >
+}
+
+//c�digo para constantes String pero utilizando estados l�xicos
+TOKEN_MGR_DECLS : {
+int longCadena;
+}
+
+MORE : {
+"\"" { longCadena= 0;} : DentroCadena
+}
+<DentroCadena>
+TOKEN :
+{
+  <TSTRINGLIT: "\"">
+  {
+    System.out.println("TSTINGLIT, Size = " + longCadena);
+  } : DEFAULT
+}
+<DentroCadena>
+MORE : {
+  <~["\n","\r"]> {longCadena++;}
+}
+
+void program() :
+{}
+{
+  decls() stats() <EOF>
+| stats()<EOF>
+| <EOF>
+}
+
+void decls() :
+{}
+{
+  decl() <TPYCOMA> (decl() <TPYCOMA>)*
+}
+
+void decl():
+{}
+{
+  <TINT> idlist()
+  |
+  < TSTRING > idlist()
+}
+
+void stats():
+{}
+{
+  stat() ( <TPYCOMA > stat() )*
+}
+
+void stat():
+{}
+{
+  LOOKAHEAD(2)
+  < TID > <TASIGN > expr()
+  |
+  expr()
+} 
+
+void expr():
+{}
+{
+  term() ( < TMAS > term() )*
+}
+
+void term():
+{}
+{
+  fact() ( < TMULT > fact() )*
+}
+
+void fact():
+{}
+{
+  < TPIZQ > expr() < TPDER > | < TID > | < TINTLIT > | < TSTRINGLIT >
+}
+ 
+void idlist():
+{}
+{
+  < TID > ( < TCOMA > < TID >)*
+}

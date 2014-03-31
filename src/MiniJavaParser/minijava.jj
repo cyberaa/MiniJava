@@ -2,15 +2,14 @@ options {
   JAVA_UNICODE_ESCAPE = true;
 }
 
-PARSER_BEGIN(MiniJavaParser)
-/*
-  package MiniJavaParser;
-  public class MiniJavaParser {
+ PARSER_BEGIN(MiniJavaParser)
+    package MiniJavaParser;
+    public class MiniJavaParser {
 	  public static void main(String args[]) {
 	    MiniJavaParser parser;
 	      try {
-	        System.out.println("MiniJava parsing from '" + "prueba.java" + "' file...");
-	        parser = new MiniJavaParser(new java.io.FileInputStream("prueba.java"));
+	        System.out.println("MiniJava parsing from '" + "prueba.txt" + "' file...");
+	        parser = new MiniJavaParser(new java.io.FileInputStream("prueba.txt"));
 	      } catch (java.io.FileNotFoundException e) {
 	        System.out.println("Error: File not found.");
 	        return;
@@ -25,10 +24,10 @@ PARSER_BEGIN(MiniJavaParser)
 	      System.out.println("Encountered errors during Scanning.");
 	      System.out.println(e.getMessage());
 	    }
-	  }
-  }
-*/
-PARSER_END(MiniJavaParser)
+	}
+    }
+
+  PARSER_END(MiniJavaParser)
 
 SKIP : /* WHITE SPACE */
 {
@@ -92,7 +91,7 @@ TOKEN : /* LITERALS */
 {
     < INTEGER_LITERAL: ( ["1"-"9"] (["0"-"9"])* | "0" ) >
 |   < CHAR_LITERAL: "'"  > 
-|   < STRING_LITERAL: """"> 
+|   < STRING_LITERAL: "/*" "*/"> 
 }
 
 TOKEN : /* IDENTIFIERS */
@@ -150,7 +149,7 @@ void Goal() :
     ( ImportDeclaration() )*
     MainClass()
     ( TypeDeclaration() )*
-<EOF>
+    <EOF>
 }
 void ImportDeclaration():
 {}
@@ -227,7 +226,7 @@ void MethodDeclaration() :
 {
   "public" Type() Identifier() 
   "(" ( FormalParameterList() )? ")"   
-  "{" ( LOOKAHEAD(2) VarDeclaration() )* 
+  "{" ( LOOKAHEAD(";") VarDeclaration() )* 
       ( Statement() )* "return" Expression() ";" "}"
 }
 
@@ -296,19 +295,20 @@ void IntegerType() :
 void Statement() :
 {}
 {
-  Block()
+    LOOKAHEAD("{" "}")
+    Block()
 | 
-  LOOKAHEAD(2)
+  LOOKAHEAD("=" ";")
   AssignmentStatement()
 |
-  LOOKAHEAD(2)
+  LOOKAHEAD(4)
   ArrayAssignmentStatement()
 |
-  LOOKAHEAD( "(" Expression() ")" Statement() )
-  IfStatement()
-|
-  LOOKAHEAD("(" Expression() ")" Statement() "else")
+  LOOKAHEAD("if" "(" ")" "else" )
   IfElseStatement()
+|
+  LOOKAHEAD( "if" "(" ")")
+  IfStatement()
 |
   WhileStatement()
 |
@@ -338,7 +338,7 @@ void ArrayAssignmentStatement() :
 void AssigmentRest():
 {}
 {
-    LOOKAHEAD( PrimaryExpression() ) 
+    LOOKAHEAD(PrimaryExpression() )
     Expression()
 |
     "(" Type() ")" "System.in.read" "(" ")"
@@ -349,11 +349,11 @@ void IfStatement() :
 {
   "if" "(" Expression() ")" Statement()
 }
-
+    
 void  IfElseStatement():
 {}
 {
-    "if" "(" Expression() ")" Statement() "else" Statement() 
+    "if" "(" Expression() ")" Statement() "else" Statement()
 }
 
 void WhileStatement() :
@@ -378,40 +378,40 @@ void PrintStatement() :
 void Expression() :
 {}
 {
-    LOOKAHEAD(PrimaryExpression() "&&" )
+    LOOKAHEAD( "&&" )
     AndExpression()
 |
-    LOOKAHEAD( PrimaryExpression() "||" )
+    LOOKAHEAD( "||" )
     OrExpression()
 |
-    LOOKAHEAD( PrimaryExpression() "=" )
+    LOOKAHEAD( "=" )
     EqualExpression()
 |
-    LOOKAHEAD( PrimaryExpression() ">" )
+    LOOKAHEAD(">" )
     GreatExpression()
 |
-    LOOKAHEAD( PrimaryExpression() "<" )
+    LOOKAHEAD("<" )
     LessExpression()
 |
-    LOOKAHEAD( PrimaryExpression() "+" )
+    LOOKAHEAD("+" )
     PlusExpression()
 |
-    LOOKAHEAD( PrimaryExpression() "-" )
+    LOOKAHEAD( "-" )
     MinusExpression()
 |
-    LOOKAHEAD( PrimaryExpression() "*" )
+    LOOKAHEAD( "*" )
     TimesExpression()
 |
-    LOOKAHEAD( PrimaryExpression() "/" )
+    LOOKAHEAD( "/" )
     SubExpression()
 |
-    LOOKAHEAD( PrimaryExpression() "[" PrimaryExpression() "]" )
+    LOOKAHEAD( "[" "]" )
     ArrayLookup()
 |
-    LOOKAHEAD( PrimaryExpression() "." "length" )
+    LOOKAHEAD("." "length" )
     ArrayLength()
 |
-    LOOKAHEAD( PrimaryExpression() "." Identifier() )
+    LOOKAHEAD( "." "(" ")")
     MessageSend()
 |
     PrimaryExpression()

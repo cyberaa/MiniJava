@@ -8,6 +8,12 @@ package minijava;
 import MiniJavaParser.MiniJavaParser;
 import MiniJavaParser.ParseException;
 import MiniJavaParser.TokenMgrError;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 /**
  *
  * @author Daniel
@@ -42,6 +48,11 @@ public class Editor extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(1000, 700));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -93,13 +104,46 @@ public class Editor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private static String parserStart()
+    private String filepos="";
+    private static MiniJavaParser nn=null;
+    private static String readFile(String filename)
     {
-        MiniJavaParser parser;
-        String messaje="";
+        String content = null;
+            File file = new File(filename); //for ex foo.txt
+            try {
+                FileReader reader = new FileReader(file);
+                char[] chars = new char[(int) file.length()];
+                reader.read(chars);
+                content = new String(chars);
+                reader.close();
+            } catch(IOException e){
+                e.printStackTrace();
+            }
+            return content;
+    }
+
+    private void writeFile(String filename,String inputtext)
+    {
         try {
-            parser = new MiniJavaParser(new java.io.FileInputStream("prueba.java"));
-        } catch (java.io.FileNotFoundException e) {
+                BufferedWriter out = new BufferedWriter(new FileWriter(filename));
+                out.write(inputtext);
+                out.close();
+            }
+            catch (IOException e)
+            {
+                System.out.println("Exception ");       
+            }
+    }  
+    
+    public String parserStart(String url) throws IOException
+    {
+        String messaje="";
+        MiniJavaParser parser;    
+        try {
+            FileInputStream nnfile= new java.io.FileInputStream(url);
+            parser = new MiniJavaParser(nnfile);
+            nnfile.close();
+        }catch (java.io.FileNotFoundException e) {
             return "Error: File not found.";
         }
         try {
@@ -114,11 +158,24 @@ public class Editor extends javax.swing.JFrame {
         }
         return messaje;
     }
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        jTextArea1.setText(jTextArea1.getText() + parserStart());
+        try
+        {
+            //writeFile(readFile("last.txt"),jEditorPane1.getText());
+            //jTextArea1.setText(jTextArea1.getText() + parserStart());
+        }
+        catch(Exception e)
+        {
+           
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        jEditorPane1.setText(readFile(readFile("last.txt")));
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
