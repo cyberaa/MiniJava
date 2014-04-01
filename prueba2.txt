@@ -1,5 +1,6 @@
-import java.awt.*
+import java.awt.*;
 import java.awt.event.*;
+
 
 class Fac extends Frame
 {
@@ -7,10 +8,9 @@ class Fac extends Frame
   Label l1;
   TextField t1;
     
-  public Fac()
+  public int Fac()
   {
-    ClassActions Acciones;
-
+    char Acciones;
     this.addWindowListener(new  Cierre()); 
     this.setTitle("Ejemplo del uso de Interacciones de objetos");
     this.setSize(220,400);

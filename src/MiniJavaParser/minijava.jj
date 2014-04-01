@@ -147,17 +147,16 @@ void Goal() :
 {}
 {
     ( ImportDeclaration() )*
-    MainClass()
     ( TypeDeclaration() )*
     <EOF>
 }
 void ImportDeclaration():
 {}
 {
-    LOOKAHEAD(2)
+    LOOKAHEAD("import" TypeName() ";")
     SingleImportDeclaration()
 |
-    LOOKAHEAD(3)
+    LOOKAHEAD("import" TypeName() "." "*" ";")
     MultipleImportDeclaration()
 }
 
@@ -191,10 +190,13 @@ void MainClass() :
 void TypeDeclaration() :  
 {}
 { 
-    LOOKAHEAD(3)
+    LOOKAHEAD("class" Identifier() "{" "public" "static" "void" "main" )
+    MainClass()
+|
+    LOOKAHEAD("class" Identifier() "{" )
     ClassDeclaration()
 |
-    LOOKAHEAD(4)
+    LOOKAHEAD("class" Identifier() "extends")
     ClassExtendsDeclaration()
 }
 
