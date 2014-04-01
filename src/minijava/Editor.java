@@ -135,12 +135,12 @@ public class Editor extends javax.swing.JFrame {
             }
     }  
     
-    public String parserStart(String url) throws IOException
+    public String parserStart() throws IOException
     {
         String messaje="";
         MiniJavaParser parser;    
         try {
-            FileInputStream nnfile= new java.io.FileInputStream(url);
+            FileInputStream nnfile= new java.io.FileInputStream(readFile("last.txt"));
             parser = new MiniJavaParser(nnfile);
             nnfile.close();
         }catch (java.io.FileNotFoundException e) {
@@ -163,8 +163,8 @@ public class Editor extends javax.swing.JFrame {
         // TODO add your handling code here:
         try
         {
-            //writeFile(readFile("last.txt"),jEditorPane1.getText());
-            //jTextArea1.setText(jTextArea1.getText() + parserStart());
+            writeFile(readFile("last.txt"),jEditorPane1.getText());
+            jTextArea1.setText(jTextArea1.getText() + parserStart());
         }
         catch(Exception e)
         {

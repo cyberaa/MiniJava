@@ -226,7 +226,7 @@ void MethodDeclaration() :
 {
   "public" Type() Identifier() 
   "(" ( FormalParameterList() )? ")"   
-  "{" ( LOOKAHEAD(";") VarDeclaration() )* 
+  "{" (LOOKAHEAD(1) VarDeclaration() )* 
       ( Statement() )* "return" Expression() ";" "}"
 }
 
@@ -378,7 +378,7 @@ void PrintStatement() :
 void Expression() :
 {}
 {
-    LOOKAHEAD( "&&" )
+    LOOKAHEAD("&&")
     AndExpression()
 |
     LOOKAHEAD( "||" )
@@ -411,9 +411,10 @@ void Expression() :
     LOOKAHEAD("." "length" )
     ArrayLength()
 |
-    LOOKAHEAD( "." "(" ")")
+    LOOKAHEAD(PrimaryExpression() ".")
     MessageSend()
 |
+    
     PrimaryExpression()
 }
 
@@ -519,8 +520,8 @@ void PrimaryExpression() :
 |
   ThisExpression()
 |
-  LOOKAHEAD(3)
-  ArrayAllocationExpression()
+    LOOKAHEAD("new" SimpleType())
+    ArrayAllocationExpression()
 |
   AllocationExpression()
 |   
