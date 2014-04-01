@@ -8,8 +8,8 @@ options {
 	  public static void main(String args[]) {
 	    MiniJavaParser parser;
 	      try {
-	        System.out.println("MiniJava parsing from '" + "prueba2.txt" + "' file...");
-	        parser = new MiniJavaParser(new java.io.FileInputStream("prueba2.txt"));
+	        System.out.println("MiniJava parsing from '" + "prueba.txt" + "' file...");
+	        parser = new MiniJavaParser(new java.io.FileInputStream("prueba.txt"));
 	      } catch (java.io.FileNotFoundException e) {
 	        System.out.println("Error: File not found.");
 	        return;
@@ -147,6 +147,7 @@ void Goal() :
 {}
 {
     ( ImportDeclaration() )*
+    MainClass()
     ( TypeDeclaration() )*
     <EOF>
 }
@@ -190,14 +191,11 @@ void MainClass() :
 void TypeDeclaration() :  
 {}
 { 
-    LOOKAHEAD("class" Identifier() "{" "public" "static" "void" "main" )
-    MainClass()
+    LOOKAHEAD("class" Identifier() "extends" Identifier())
+    ClassExtendsDeclaration()
 |
     LOOKAHEAD("class" Identifier() "{" )
     ClassDeclaration()
-|
-    LOOKAHEAD("class" Identifier() "extends")
-    ClassExtendsDeclaration()
 }
 
 void ClassDeclaration() :
