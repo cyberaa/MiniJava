@@ -8,8 +8,8 @@ options {
 	  public static void main(String args[]) {
 	    MiniJavaParser parser;
 	      try {
-	        System.out.println("MiniJava parsing from '" + "prueba.txt" + "' file...");
-	        parser = new MiniJavaParser(new java.io.FileInputStream("prueba.txt"));
+	        System.out.println("MiniJava parsing from '" + "prueba2.txt" + "' file...");
+	        parser = new MiniJavaParser(new java.io.FileInputStream("prueba2.txt"));
 	      } catch (java.io.FileNotFoundException e) {
 	        System.out.println("Error: File not found.");
 	        return;
@@ -298,16 +298,16 @@ void Statement() :
     LOOKAHEAD("{" "}")
     Block()
 | 
-  LOOKAHEAD("=" ";")
+  LOOKAHEAD(Identifier() "=")
   AssignmentStatement()
 |
-  LOOKAHEAD(4)
+  LOOKAHEAD(Identifier() "[" Expression() "]" "=" )
   ArrayAssignmentStatement()
 |
-  LOOKAHEAD("if" "(" ")" "else" )
+  LOOKAHEAD("if" "(" Expression() ")" Statement() "else" Statement() )
   IfElseStatement()
 |
-  LOOKAHEAD( "if" "(" ")")
+  LOOKAHEAD("if")
   IfStatement()
 |
   WhileStatement()
@@ -378,37 +378,37 @@ void PrintStatement() :
 void Expression() :
 {}
 {
-    LOOKAHEAD("&&")
+    LOOKAHEAD(PrimaryExpression() "&&" PrimaryExpression())
     AndExpression()
 |
-    LOOKAHEAD( "||" )
+    LOOKAHEAD(PrimaryExpression() "||" PrimaryExpression() )
     OrExpression()
 |
-    LOOKAHEAD( "=" )
+    LOOKAHEAD(PrimaryExpression() "=" PrimaryExpression())
     EqualExpression()
 |
-    LOOKAHEAD(">" )
+    LOOKAHEAD(PrimaryExpression() ">" PrimaryExpression())
     GreatExpression()
 |
-    LOOKAHEAD("<" )
+    LOOKAHEAD(PrimaryExpression()  "<" PrimaryExpression() )
     LessExpression()
 |
-    LOOKAHEAD("+" )
+    LOOKAHEAD(PrimaryExpression() "+" PrimaryExpression() )
     PlusExpression()
 |
-    LOOKAHEAD( "-" )
+    LOOKAHEAD(PrimaryExpression() "-" PrimaryExpression())
     MinusExpression()
 |
-    LOOKAHEAD( "*" )
+    LOOKAHEAD(PrimaryExpression() "*" PrimaryExpression())
     TimesExpression()
 |
-    LOOKAHEAD( "/" )
+    LOOKAHEAD(PrimaryExpression() "/" PrimaryExpression())
     SubExpression()
 |
-    LOOKAHEAD( "[" "]" )
+    LOOKAHEAD(PrimaryExpression() "[" PrimaryExpression() "]" )
     ArrayLookup()
 |
-    LOOKAHEAD("." "length" )
+    LOOKAHEAD(PrimaryExpression() "." "length" )
     ArrayLength()
 |
     LOOKAHEAD(PrimaryExpression() ".")
