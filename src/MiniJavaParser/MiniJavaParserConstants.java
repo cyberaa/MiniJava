@@ -93,17 +93,19 @@ public interface MiniJavaParserConstants {
   /** RegularExpression Id. */
   int VOID = 46;
   /** RegularExpression Id. */
-  int INTEGER_LITERAL = 47;
+  int OBJECT = 47;
   /** RegularExpression Id. */
-  int CHAR_LITERAL = 48;
+  int INTEGER_LITERAL = 48;
   /** RegularExpression Id. */
-  int STRING_LITERAL = 49;
+  int CHAR_LITERAL = 49;
   /** RegularExpression Id. */
-  int IDENTIFIER = 50;
+  int STRING_LITERAL = 50;
   /** RegularExpression Id. */
-  int LETTER = 51;
+  int IDENTIFIER = 51;
   /** RegularExpression Id. */
-  int DIGIT = 52;
+  int LETTER = 52;
+  /** RegularExpression Id. */
+  int DIGIT = 53;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -157,6 +159,7 @@ public interface MiniJavaParserConstants {
     "\"char\"",
     "\"import\"",
     "\"void\"",
+    "\"object\"",
     "<INTEGER_LITERAL>",
     "\"\\\'\"",
     "<STRING_LITERAL>",

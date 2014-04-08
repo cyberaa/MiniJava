@@ -14,9 +14,6 @@ class Fac {
     }
 }
 
-
-
-
 class Fac extends Frame
 {
   Button b1;
@@ -26,10 +23,10 @@ class Fac extends Frame
   public int Fac()
   {
     char Acciones;
-    this.addWindowListener(new  Cierre()); 
+
+    this.addWindowListener(new Cierre()); 
     this.setTitle("Ejemplo del uso de Interacciones de objetos");
     this.setSize(220,400);
-          
 
     b1 = new Button("Acción");
     b1.setBounds(470,55,100,30); //setBounds(x,y,ancho,alto)
@@ -49,6 +46,7 @@ class Fac extends Frame
     aceptar.addActionListener(Acciones);
     //hago visible el Frame
     this.setVisible(true);
+    return 0;
   }
   
   public int ComputeFac(int num) 
@@ -60,21 +58,23 @@ class Fac extends Frame
       num_aux = num * (this.ComputeFac(num-1));
     return num_aux;
   }
+}
   
-  class ClassActions implements ActionListener 
-  {
+class ClassActions extends ActionListener 
+{
     public void actionPerformed(ActionEvent evento) 
     {
-      Object objeto; 
-objeto = evento.getSource(); 
-      
+      object objeto; 
+      objeto = evento.getSource(); 
+         
       if (objeto == b1) 
         { this.b1_ActionPerformed(evento); }
     }
-  }
+}
   
-  public void b1_ActionPerformed(ActionEvent evento)
-  { 
+
+public void b1_ActionPerformed(ActionEvent evento)
+{ 
     int res,n;
     String temp;
     temp = t1.getText();
@@ -82,7 +82,6 @@ objeto = evento.getSource();
     res = this.ComputeFac(n);
     temp = String.valueOf(res);
     l1.setText(temp);
-  }
 }
 
 class Cierre extends WindowAdapter
