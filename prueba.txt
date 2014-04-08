@@ -1,8 +1,9 @@
 class Factorial {
-    public static void main(String[] a) {
+    public static void main(string[] a) {
         System.out.println(new Fac().ComputeFac(10));
     }
 }
+
 class Fac {
     public int ComputeFac(int num) {
         int num_aux;
@@ -46,7 +47,7 @@ class Fac extends Frame
     aceptar.addActionListener(Acciones);
     //hago visible el Frame
     this.setVisible(true);
-    return 0;
+    return null;
   }
   
   public int ComputeFac(int num) 
@@ -60,6 +61,7 @@ class Fac extends Frame
   }
 }
   
+
 class ClassActions extends ActionListener 
 {
     public void actionPerformed(ActionEvent evento) 
@@ -68,32 +70,30 @@ class ClassActions extends ActionListener
       objeto = evento.getSource(); 
          
       if (objeto == b1) 
-        { this.b1_ActionPerformed(evento); }
+         this.b1_ActionPerformed(evento);
+      return null;
     }
-}
-  
 
-public void b1_ActionPerformed(ActionEvent evento)
-{ 
-    int res,n;
-    String temp;
+  public void b1_ActionPerformed(ActionEvent evento)
+  { 
+    int res;
+    string temp;
     temp = t1.getText();
     n = Integer.parseInt(temp); 
     res = this.ComputeFac(n);
     temp = String.valueOf(res);
     l1.setText(temp);
+    return null;
+  }
 }
+
 
 class Cierre extends WindowAdapter
 {
      public void windowClosing(WindowEvent e)
      {
           System.exit(0);
+          return null;
      }
 }
 
-class Factorial {
-    public static void main(String[] a) {
-        System.out.println((new Fac()).ComputeFac(10));
-    }
-}

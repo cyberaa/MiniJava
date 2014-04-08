@@ -151,7 +151,7 @@ public interface MiniJavaParserConstants {
     "\"public\"",
     "\"return\"",
     "\"static\"",
-    "\"String\"",
+    "\"string\"",
     "\"this\"",
     "\"true\"",
     "\"System.out.println\"",
@@ -174,7 +174,6 @@ public interface MiniJavaParserConstants {
     "\"||\"",
     "\">\"",
     "\"/\"",
-    "\"==\"",
   };
 
 }

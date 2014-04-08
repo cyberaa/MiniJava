@@ -77,7 +77,7 @@ TOKEN :
 | < PUBLIC: "public" >
 | < RETURN: "return" >
 | < STATIC: "static" >
-| < STRING: "String" >
+| < STRING: "string" >
 | < THIS: "this" >
 | < TRUE: "true" >
 | < PRINT: "System.out.println" >
@@ -184,7 +184,7 @@ void MainClass() :
 {}
 {
   "class" Identifier()"{"
-    "public" "static" "void" "main" "(" "String" "[" "]" Identifier() ")"   
+    "public" "static" "void" "main" "(" "string" "[" "]" Identifier() ")"   
     "{" PrintStatement() "}"
   "}"
 }
@@ -227,7 +227,7 @@ void MethodDeclaration() :
 {
   "public" Type() Identifier() 
   "(" ( FormalParameterList() )? ")"   
-  "{" (LOOKAHEAD(1) VarDeclaration() )* 
+  "{" (LOOKAHEAD( Type() Identifier() ";" ) VarDeclaration() )* 
       ( Statement() (";")* )* "return" Expression() ";" "}"
 }
 
@@ -272,6 +272,8 @@ void SimpleType():
     VoidType()
 |
     ObjectType()
+|
+    StringType()
 }
 
 void ArrayType() :
@@ -296,6 +298,12 @@ void ObjectType():
 {}
 {
     "object"
+}
+
+void StringType():
+{}
+{
+    "string"
 }
 
 void IntegerType() :
@@ -404,7 +412,7 @@ void Expression() :
     LOOKAHEAD(PrimaryExpression() "||" PrimaryExpression() )
     OrExpression()
 |
-    LOOKAHEAD(PrimaryExpression() "=" PrimaryExpression())
+    LOOKAHEAD(PrimaryExpression() "=" "=" PrimaryExpression())
     EqualExpression()
 |
     LOOKAHEAD(PrimaryExpression() ">" PrimaryExpression())
@@ -453,7 +461,7 @@ void OrExpression() :
 void EqualExpression() :
 {} 
 {
-  PrimaryExpression() "==" PrimaryExpression()
+  PrimaryExpression() "=" "=" PrimaryExpression()
 }
 
 void GreatExpression () :
