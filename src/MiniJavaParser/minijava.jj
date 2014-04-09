@@ -1,9 +1,11 @@
 options {
   JAVA_UNICODE_ESCAPE = true;
+  static = false;
 }
 
  PARSER_BEGIN(MiniJavaParser)
     package MiniJavaParser;
+    import AST.*;
     public class MiniJavaParser {
 	  public static void main(String args[]) {
 	    MiniJavaParser parser;
@@ -144,26 +146,46 @@ TOKEN : /* IDENTIFIERS */
  ************************************/
 
 
-void Goal() :
-{}
+GoalAST Goal() :
 {
-    ( ImportDeclaration() )*
-    MainClass()
-    ( TypeDeclaration() )*
-    <EOF>
+    ImportDeclarationAST id=null;
+    MainClassAST mc=null;
+    TypeDeclarationAST t=null;
 }
+{
+    ( 
+        ImportDeclaration() 
+        //{id= new ImportDeclarationAST();}
+    )*
+    MainClass()
+    //{ mc=new MainClassAST(mc);}
+    ( 
+        TypeDeclaration()
+        //{ t=new TypeDeclarationAST(); }
+    )*
+    <EOF>
+    { return  new GoalAST(id,mc,t);}
+}
+
 void ImportDeclaration():
-{}
+{
+    //SingleImportDeclarationAST sid;
+    //MultipleImportDeclarationAST mid;
+}
 {
     LOOKAHEAD("import" TypeName() ";")
     SingleImportDeclaration()
+    //{ return new SingleImportDeclarationAST(sid);}
 |
     LOOKAHEAD("import" TypeName() "." "*" ";")
     MultipleImportDeclaration()
+    //{ return new MultipleImportDeclarationAST(mid);  }
 }
 
 void SingleImportDeclaration():
-{}
+{
+    TypeNameAST tn;
+}
 {
     "import" TypeName() ";" 
 }

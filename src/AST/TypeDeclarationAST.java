@@ -12,4 +12,7 @@ package AST;
  */
 public class TypeDeclarationAST {
     
+    public Object visit(Visitor v,Object arg){
+        return v.visitTypeDeclarationAST(this, arg);
+    } 
 }

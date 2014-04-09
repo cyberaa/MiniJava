@@ -5,6 +5,8 @@
  */
 
 package minijava;
+import AST.*;
+import ASTPRINT.ASTPRINT;
 import MiniJavaParser.MiniJavaParser;
 import MiniJavaParser.ParseException;
 import MiniJavaParser.TokenMgrError;
@@ -14,6 +16,10 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 /**
  *
  * @author Daniel
@@ -104,77 +110,40 @@ public class Editor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private String filepos="";
-    private static MiniJavaParser nn=null;
-    private static String readFile(String filename)
-    {
-        String content = null;
-            File file = new File(filename); //for ex foo.txt
-            try {
-                FileReader reader = new FileReader(file);
-                char[] chars = new char[(int) file.length()];
-                reader.read(chars);
-                content = new String(chars);
-                reader.close();
-            } catch(IOException e){
-                e.printStackTrace();
-            }
-            return content;
-    }
-
-    private void writeFile(String filename,String inputtext)
-    {
-        try {
-                BufferedWriter out = new BufferedWriter(new FileWriter(filename));
-                out.write(inputtext);
-                out.close();
-            }
-            catch (IOException e)
-            {
-                System.out.println("Exception ");       
-            }
-    }  
     
-    public String parserStart() throws IOException
+    private void parse() throws Exception
     {
-        String messaje="";
-        MiniJavaParser parser;    
-        try {
-            FileInputStream nnfile= new java.io.FileInputStream(readFile("last.txt"));
-            parser = new MiniJavaParser(nnfile);
-            nnfile.close();
-        }catch (java.io.FileNotFoundException e) {
-            return "Error: File not found.";
-        }
-        try {
-            parser.Goal();
-            messaje= messaje + "\n" + "MiniJava program parsed successfully.";
-        } catch (ParseException e) {
-            messaje= messaje + "\n" + "Encountered errors during parse.";
-            messaje= messaje + "\n" + e.getMessage();
-        } catch (TokenMgrError e) {
-            messaje= messaje + "\n" + "Encountered errors during Scanning.";
-            messaje= messaje + "\n" + e.getMessage();
-        }
-        return messaje;
-    }
-
+        Controlador controller = new Controlador(this);
+        try{
+            AST arbol=controller.ParseProgram();            
+            if(arbol!=null)
+            {
+                ASTPRINT imp= new ASTPRINT();
+                DefaultMutableTreeNode tree = new DefaultMutableTreeNode();
+                GoalAST goal = (GoalAST)arbol;
+                imp.visitAGoal(goal, tree);
+                jTree1.setModel(new DefaultTreeModel(tree));
+                jTextArea1.setText(jTextArea1.getText()+"\n"+"MiniJava program parsed successfully.");                
+            }
+        }catch (ParseException e) {
+	      jTextArea1.setText(jTextArea1.getText()+"\n"+"Encountered errors during parse.");
+	      jTextArea1.setText(jTextArea1.getText()+"\n"+e.getMessage());
+	} catch (TokenMgrError e) {
+	      jTextArea1.setText(jTextArea1.getText()+"\n"+"Encountered errors during Scanning.");
+	      jTextArea1.setText(jTextArea1.getText()+"\n"+e.getMessage());
+	}
+}
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try
-        {
-            writeFile(readFile("last.txt"),jEditorPane1.getText());
-            jTextArea1.setText(jTextArea1.getText() + parserStart());
-        }
-        catch(Exception e)
-        {
-           
-        }
+        try{
+            parse();
+        }catch(Exception er){}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        jEditorPane1.setText(readFile(readFile("last.txt")));
+        
     }//GEN-LAST:event_formWindowOpened
 
     /**

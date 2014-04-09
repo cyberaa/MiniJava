@@ -15,9 +15,11 @@ public interface Visitor {
     public Object visitGoalAST(GoalAST c, Object arg);
     public Object visitImportDeclaration(ImportDeclarationAST c, Object arg);
     public Object visitSingleImportDeclaration(SingleImportDeclaration c, Object arg);
+    
     public Object visitMultipleImportDeclarationAST(MultipleImportDeclarationAST c, Object arg);
     public Object visitMainClassAST(MainClassAST c, Object arg);
     public Object visitClassDeclarationAST(ClassDeclarationAST c, Object arg);
+    
     public Object visitClassExtendsDeclaration(ClassExtendsDeclarationAST c, Object arg);
     public Object visitVarDeclarationAST(VarDeclarationAST c, Object arg);
     public Object visitFormalParameterRepAST(FormalParameterRepAST c, Object arg);
@@ -30,6 +32,7 @@ public interface Visitor {
     public Object visitFormalParameterListRestAST(FormalParameterListRestAST c, Object arg);
     public Object visitSimpleTypeAST(SimpleTypeAST c, Object arg);
     public Object visitArrayTypeAST(ArrayTypeAST c, Object arg);
+    public Object visitTypeDeclarationAST(TypeDeclarationAST c, Object arg);
     
     
     
