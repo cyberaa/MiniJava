@@ -10,6 +10,12 @@ package AST;
  *
  * @author administrador
  */
-public class PrintStatementAST {
-    
+public class PrintStatementAST extends AST{
+    public ExpressionAST ex;
+    public PrintStatementAST(ExpressionAST ex) {
+        this.ex = ex;
+    }
+    public Object visit(Visitor v, Object arg) {
+        return v.visitPrintStatementAST(this,arg);
+    }
 }
