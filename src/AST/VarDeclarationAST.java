@@ -11,13 +11,14 @@ package AST;
  * @author administrador
  */
 public class VarDeclarationAST extends AST{
-    public Type ty;
-    public Object id;
+    public TypeAST t;
+    public IdentifierAST  id;
 
-    public VarDeclarationAST(Type ty, Object id) {
-        this.ty = ty;
+    public VarDeclarationAST(TypeAST t, IdentifierAST id) {
+        this.t = t;
         this.id = id;
     }
+
     
     public Object visit(Visitor v, Object arg) {
         return v.visitVarDeclarationAST(this,arg);

@@ -10,16 +10,13 @@ package AST;
  *
  * @author administrador
  */
-public class FormalParameterRestAST extends AST{
-    
-    public FormalParameterList fpl;
-
-    public FormalParameterRestAST(FormalParameterList fpl) {
-        this.fpl = fpl;
+public class FormalParameterRestAST extends AST{    
+    public FormalParameterAST fp;
+    public FormalParameterRestAST(FormalParameterAST fpl) {
+        this.fp = fpl;
     }
 
     public Object visit(Visitor v, Object arg) {
         return v.visitFormalParameterRestAST(this,arg);
     }
-    
 }

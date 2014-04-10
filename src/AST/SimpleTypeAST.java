@@ -10,16 +10,6 @@ package AST;
  *
  * @author administrador
  */
-public class SimpleTypeAST extends Type{
-    
-    public SimpleType st;
-
-    public SimpleTypeAST(SimpleType st) {
-        this.st = st;
-    }
-
-    public Object visit(Visitor v, Object arg) {
-        return v.visitSimpleTypeAST(this,arg);
-    }
-    
+public abstract class SimpleTypeAST extends TypeAST{
+    public abstract Object visit(Visitor v,Object arg);
 }

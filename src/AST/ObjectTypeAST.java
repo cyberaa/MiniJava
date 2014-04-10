@@ -8,9 +8,13 @@ package AST;
 
 /**
  *
- * @author administrador
+ * @author Daniel
  */
-public abstract class FormalParameterList extends AST{
+public class ObjectTypeAST extends SimpleTypeAST{
 
-    public abstract Object visit(Visitor v,Object arg);   
+    public ObjectTypeAST() {
+    }
+    public Object visit(Visitor v, Object arg) {    
+        return v.visitObjectTypeAST(this,arg);
+    }
 }

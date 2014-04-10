@@ -8,18 +8,15 @@ package AST;
 
 /**
  *
- * @author administrador
+ * @author Daniel
  */
-public class FormalParameterRepAST extends AST{
+public class BlockAST extends StatementAST{
+    public StatementAST st=null;
 
-    public FormalParameterList fpl;
-
-    public FormalParameterRepAST(FormalParameterList fpl) {
-        this.fpl = fpl;
+    public BlockAST(StatementAST st) {
+        this.st=st;
     }
-
     public Object visit(Visitor v, Object arg) {
-        return v.visitFormalParameterRepAST(this,arg);
-    }
-    
+        return v.visitBlockAST(this,arg);
+    }  
 }

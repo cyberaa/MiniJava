@@ -8,9 +8,13 @@ package AST;
 
 /**
  *
- * @author administrador
+ * @author Daniel
  */
-public abstract class SimpleType extends AST{
-    
-    public abstract Object visit(Visitor v,Object arg);
+public class VoidTypeAST extends SimpleTypeAST{
+
+    public VoidTypeAST() {
+    }
+    public Object visit(Visitor v, Object arg) {    
+        return v.visitVoidTypeAST(this,arg);
+    }
 }

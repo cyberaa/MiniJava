@@ -8,9 +8,8 @@ package AST;
 
 /**
  *
- * @author administrador
+ * @author Daniel
  */
-public abstract class Type extends AST{
-    
+public abstract class StatementAST extends AST{
     public abstract Object visit(Visitor v,Object arg);
 }

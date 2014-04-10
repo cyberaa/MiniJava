@@ -8,17 +8,13 @@ package AST;
 
 /**
  *
- * @author administrador
+ * @author Daniel
  */
-public class ArrayTypeAST extends TypeAST{    
-    public SimpleTypeAST st;
+public class BooleanTypeAST extends SimpleTypeAST{
 
-    public ArrayTypeAST(SimpleTypeAST st0) {
-        this.st = st0;
+    public BooleanTypeAST() {
     }
-
     public Object visit(Visitor v, Object arg) {    
-        return v.visitArrayTypeAST(this,arg);
+        return v.visitBooleanTypeAST(this,arg);
     }
-    
 }

@@ -12,22 +12,22 @@ package AST;
  */
 public class MethodDeclarationAST {
 
-    public Type type;
-    public Object id;
-    public FormalParameterRepAST fpr;
-    public VarDeclarationRepAST vdr;
-    public StatementRepAST str;
-    public Expression e;
+    public TypeAST t=null;
+    public IdentifierAST id=null;
+    public FormalParameterListAST  fpl=null;
+    public VarDeclarationAST  vd=null;
+    public StatementAST  st=null;
+    public ExpressionAST  ex=null;
 
-    public MethodDeclarationAST(Type type, Object id, FormalParameterRepAST fpr, VarDeclarationRepAST vdr, StatementRepAST str, Expression e) {
-        this.type = type;
+    public MethodDeclarationAST(TypeAST t, IdentifierAST id, FormalParameterListAST fpl, VarDeclarationAST vd, StatementAST st, ExpressionAST ex) {
+        this.t = t;
         this.id = id;
-        this.fpr = fpr;
-        this.vdr = vdr;
-        this.str = str;
-        this.e = e;
+        this.fpl = fpl;
+        this.vd = vd;
+        this.st = st;
+        this.ex = ex;
     }
-    
+      
     public Object visit(Visitor v, Object arg) {
         return v.visitMethodDeclarationAST(this,arg);
     }

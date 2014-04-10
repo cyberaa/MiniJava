@@ -10,17 +10,15 @@ package AST;
  *
  * @author Daniel
  */
-public class SwitchStatementAST extends StatementAST{
+public class AssignmentStatementAST extends StatementAST{
     public IdentifierAST id=null;
-    public IntegerTypeAST intt=null;
-    public StatementAST st=null;
+    public AssigmentRestAST ar=null;
 
-    public SwitchStatementAST(IdentifierAST id,IntegerTypeAST intt,StatementAST st) {
+    public AssignmentStatementAST(IdentifierAST id,AssigmentRestAST ar) {
         this.id=id;
-        this.intt=intt;
-        this.st=st;
+        this.ar=ar;
     }
     public Object visit(Visitor v, Object arg) {
-        return v.visitSwitchStatementAST(this,arg);
-    }
+        return v.visitAssignmentStatementAST(this,arg);
+    } 
 }

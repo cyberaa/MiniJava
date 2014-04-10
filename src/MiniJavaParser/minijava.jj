@@ -148,23 +148,24 @@ TOKEN : /* IDENTIFIERS */
 
 GoalAST Goal() :
 {
-    ImportDeclarationAST id=null;
+    List<ImportDeclarationAST> implist = new ArrayList<ImportDeclarationAST>();
+    List<TypeDeclarationAST> tydecls = new ArrayList<TypeDeclarationAST>();
     MainClassAST mc=null;
+    ImportDeclarationAST imp=null;
     TypeDeclarationAST t=null;
 }
 {
     ( 
-        id=ImportDeclaration() 
-        {id= new ImportDeclarationAST(id.sid,id.mid);}
+        imp=ImportDeclaration() 
+        {implist.add(imp);}
     )*
     mc=MainClass()
-    { mc=new MainClassAST(mc.id1,mc.id2,mc.ps0);}
     ( 
         t=TypeDeclaration()
-        { t=new TypeDeclarationAST(); }
+        {tydecls.add(t);}
     )*
     <EOF>
-    {return  new GoalAST(id,mc,t);}
+    {return  new GoalAST(implist,mc,t);}
 }
 
 ImportDeclarationAST ImportDeclaration():
@@ -175,7 +176,7 @@ ImportDeclarationAST ImportDeclaration():
 {
     LOOKAHEAD("import" TypeName() ";")
     sid=SingleImportDeclaration()
-    { return new ImportDeclarationAST(sid,mid);}
+    {return new ImportDeclarationAST(sid,mid);}
 |
     LOOKAHEAD("import" TypeName() "." "*" ";")
     mid=MultipleImportDeclaration()
@@ -202,14 +203,16 @@ MultipleImportDeclarationAST MultipleImportDeclaration():
 
 TypeNameAST TypeName():
 {
+    List<IdentifierAST> idlist = new ArrayList<IdentifierAST>();
     IdentifierAST id=null;
 }
 {
     id=Identifier() 
     ( LOOKAHEAD(2) "." 
         id=Identifier() 
-        {id=new IdentifierAST(id);}
+        {idlist.add(id);}
     )*
+    {return new TypeNameAST(idlist);}
 }
 
 MainClassAST MainClass() :

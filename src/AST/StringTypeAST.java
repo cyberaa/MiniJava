@@ -8,9 +8,13 @@ package AST;
 
 /**
  *
- * @author administrador
+ * @author Daniel
  */
-public abstract class TypeDeclaration extends AST{
-    
-    public abstract Object visit(Visitor v, Object arg);
+public class StringTypeAST extends SimpleTypeAST{
+
+    public StringTypeAST() {
+    }
+    public Object visit(Visitor v, Object arg) {    
+        return v.visitStringTypeAST(this,arg);
+    }
 }

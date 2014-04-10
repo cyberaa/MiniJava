@@ -10,7 +10,7 @@ package AST;
  *
  * @author administrador
  */
-public class SingleImportDeclarationAST extends AST{
+public class SingleImportDeclarationAST extends ImportDeclarationAST{
     public TypeNameAST tn;
 
     public SingleImportDeclarationAST(TypeNameAST tn) {

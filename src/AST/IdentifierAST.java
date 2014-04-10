@@ -10,11 +10,21 @@ package AST;
  *
  * @author Daniel
  */
-public class IdentifierAST extends PrimaryExpressionAST{
-
+public class IdentifierAST extends AST{
     public IdentifierAST() {
     }
     public Object visit(Visitor v, Object arg) {
         return v.visitIdentifierAST(this,arg);
     }  
 }
+
+public class IdentifierAST_PrimaryExpression extends PrimaryExpressionAST{
+    public IdentifierAST_PrimaryExpression() {
+    }
+    public Object visit(Visitor v, Object arg) {
+        return v.visitIdentifierAST_PrimaryExpression(this,arg);
+    }  
+}
+
+
+

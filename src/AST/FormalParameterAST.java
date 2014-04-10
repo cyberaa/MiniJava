@@ -12,10 +12,10 @@ package AST;
  */
 public class FormalParameterAST extends AST{
     
-    public Type type;	
-    public Object id;
+    public TypeAST type;	
+    public IdentifierAST id;
 
-    public FormalParameterAST(Type type, Object id) {
+    public FormalParameterAST(TypeAST type, IdentifierAST id) {
         this.type = type;
         this.id = id;
     }

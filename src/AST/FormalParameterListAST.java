@@ -8,16 +8,17 @@ package AST;
 
 /**
  *
- * @author administrador
+ * @author Daniel
  */
-public class FormalParameterListAST extends FormalParameterList{
-    
-    public FormalParameterListAST fpl;
+public class FormalParameterListAST extends AST{
+    public FormalParameterAST fp=null;
+    public FormalParameterRestAST fpr=null;
 
-    public FormalParameterListAST(FormalParameterListAST fpl) {
-        this.fpl = fpl;
+    public FormalParameterListAST(FormalParameterAST a,FormalParameterRestAST b) {
+        this.fp=a;
+        this.fpr=b;
     }
-
+    
     public Object visit(Visitor v, Object arg) {
         return v.visitFormalParameterListAST(this,arg);
     }
