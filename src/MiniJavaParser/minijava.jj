@@ -154,217 +154,365 @@ GoalAST Goal() :
 }
 {
     ( 
-        ImportDeclaration() 
-        //{id= new ImportDeclarationAST();}
+        id=ImportDeclaration() 
+        {id= new ImportDeclarationAST(id.sid,id.mid);}
     )*
-    MainClass()
-    //{ mc=new MainClassAST(mc);}
+    mc=MainClass()
+    { mc=new MainClassAST(mc.id1,mc.id2,mc.ps0);}
     ( 
-        TypeDeclaration()
-        //{ t=new TypeDeclarationAST(); }
+        t=TypeDeclaration()
+        { t=new TypeDeclarationAST(); }
     )*
     <EOF>
-    { return  new GoalAST(id,mc,t);}
+    {return  new GoalAST(id,mc,t);}
 }
 
-void ImportDeclaration():
+ImportDeclarationAST ImportDeclaration():
 {
-    //SingleImportDeclarationAST sid;
-    //MultipleImportDeclarationAST mid;
+    SingleImportDeclarationAST sid=null;
+    MultipleImportDeclarationAST mid=null;
 }
 {
     LOOKAHEAD("import" TypeName() ";")
-    SingleImportDeclaration()
-    //{ return new SingleImportDeclarationAST(sid);}
+    sid=SingleImportDeclaration()
+    { return new ImportDeclarationAST(sid,mid);}
 |
     LOOKAHEAD("import" TypeName() "." "*" ";")
-    MultipleImportDeclaration()
-    //{ return new MultipleImportDeclarationAST(mid);  }
+    mid=MultipleImportDeclaration()
+    {return new ImportDeclarationAST(sid,mid);}
 }
 
-void SingleImportDeclaration():
+SingleImportDeclarationAST SingleImportDeclaration():
 {
-    TypeNameAST tn;
+    TypeNameAST tn=null;
 }
 {
-    "import" TypeName() ";" 
-}
-
-void MultipleImportDeclaration():
-{}
-{
-    "import" TypeName() "." "*" ";"
+    "import" tn=TypeName() ";" 
+    {return new SingleImportDeclarationAST(tn);}
 }
 
-void TypeName ():
-{}
+MultipleImportDeclarationAST MultipleImportDeclaration():
 {
-    Identifier() ( LOOKAHEAD(2) "." Identifier() )*
+    TypeNameAST tn=null;
+}
+{
+    "import" Tn=TypeName() "." "*" ";"
+    {return new MultipleImportDeclarationAST(tn);}
 }
 
-void MainClass() :
-{}
+TypeNameAST TypeName():
 {
-  "class" Identifier()"{"
-    "public" "static" "void" "main" "(" "string" "[" "]" Identifier() ")"   
-    "{" PrintStatement() "}"
+    IdentifierAST id=null;
+}
+{
+    id=Identifier() 
+    ( LOOKAHEAD(2) "." 
+        id=Identifier() 
+        {id=new IdentifierAST(id);}
+    )*
+}
+
+MainClassAST MainClass() :
+{
+    IdentifierAST id1=null;
+    IdentifierAST id2=null;
+    PrintStatementAST pstm=null;
+    
+}
+{
+  "class" id1=Identifier()
+    {id1= new IdentifierAST(id1);}
+    "{"
+    "public" "static" "void" "main" "(" "string" "[" "]" id2=Identifier()
+    {id2= new IdentifierAST(id2);}
+     ")" 
+    "{" pstm=PrintStatement()
+    {new PrintStatementAST(pstm);}
+     "}"
   "}"
+    {return new MainClassAST(id1,id2,pstm);}
 }
 
-void TypeDeclaration() :  
-{}
+TypeDeclarationAST TypeDeclaration() :  
+{
+    ClassExtendsDeclarationAST cxd=null;
+    ClassDeclarationAST cd=null;
+}
 { 
     LOOKAHEAD("class" Identifier() "extends" Identifier())
-    ClassExtendsDeclaration()
+    cxd=ClassExtendsDeclaration()
+    {return new ClassExtendsDeclarationAST();}
 |
     LOOKAHEAD("class" Identifier() "{" )
-    ClassDeclaration()
+    cd=ClassDeclaration()
+    {return new ClassDeclarationAST();}
 }
 
-void ClassDeclaration() :
-{}
+ClassDeclarationAST ClassDeclaration() :
 {
-  "class" Identifier() "{" ( VarDeclaration() )* 
-                           ( MethodDeclaration() )* 
-                       "}"
+    IdentifierAST id=null;
+    VarDeclarationAST vd=null;
+    MethodDeclarationAST md=null;
 }
-
-void ClassExtendsDeclaration() :
-{}
 {
-  "class" Identifier() "extends" Identifier()
-                       "{" ( VarDeclaration())* 
-                           ( MethodDeclaration())* 
-                       "}"
+  "class" id=Identifier()
+    {id= new IdentifierAST(id);}
+     "{" ( 
+            vd=VarDeclaration()
+            {vd=new VarDeclarationAST(vd);}
+        )*
+        ( 
+            md=MethodDeclaration()
+            {md= new MethodDeclarationAST(md);}   
+        )*
+    "}"
+    {return new ClassDeclarationAST(id,vd,md);}
 }
 
-void VarDeclaration() :  
-{}
+ClassExtendsDeclarationAST ClassExtendsDeclaration() :
+{
+    IdentifierAST id1=null;
+    IdentifierAST id2=null;
+    VarDeclarationAST vd=null;
+    MethodDeclaration md=null;
+}
+{
+  "class" id=Identifier()
+    {id1= new IdentifierAST(id1);} 
+    "extends" id2=Identifier()
+    {id2= new IdentifierAST(id2);}
+    "{" ( vd=VarDeclaration()
+    {vd=new VarDeclarationAST(vd);}
+        )*( md=MethodDeclaration()
+            {return new ClassDeclarationAST();}
+           )* "}"
+    {return new ClassExtendsDeclarationAST(id1,id2,vd,md);}
+}
+
+VarDeclarationAST VarDeclaration():  
+{
+    TypeAST t=null;
+    IdentifierAST id=null;
+}
 { 
-  Type() Identifier() ";"      
+    t=Type()
+        {t = new TypeAST();}
+     id=Identifier()
+        {id=new IdentifierAST();}
+     ";"
+     {return new VarDeclarationAST(t,id);}
 }
 
-void MethodDeclaration() :  
-{}
+MethodDeclarationAST MethodDeclaration():  
 {
-  "public" Type() Identifier() 
-  "(" ( FormalParameterList() )? ")"   
-  "{" (LOOKAHEAD( Type() Identifier() ";" ) VarDeclaration() )* 
-      ( Statement() (";")* )* "return" Expression() ";" "}"
+    TypeAST t=null;
+    IdentifierAST id=null;
+    FormalParameterListAST fpl=null;
+    VarDeclarationAST vd=null;
+    StatementAST stm=null;
+    ExpressionAST ex=null;
+}   
+{
+  "public" 
+    t=Type()
+        {t=new TypeAST();}
+    id=Identifier()
+        {id=IdentifierAST();}
+  "(" ( fpl=FormalParameterList()
+        {fpl=new FormalParameterListAST(fpl);}
+      )? ")"   
+  "{" ( LOOKAHEAD( Type() Identifier() ";" ) 
+    vd=VarDeclaration() 
+    {vd= new VarDeclarationAST(vd);}
+      )* 
+    ( stm=Statement()
+        {stm=new StatementAST(stm);}
+     (";")* )* "return" ex=Expression()
+     {ex= new ExpressionAST(ex);}
+    ";" "}"
+    {return new MethodDeclarationAST(t,id,fpl,vd,stm,ex);}
 }
 
-void FormalParameterList() :
-{}
+FormalParameterListAST FormalParameterList() :
 {
-  FormalParameter() ( FormalParameterRest() )*
+    FormalParameterAST fp=null;
+    FormalParameterRestAST fpr=null;
+}
+{
+  fp=FormalParameter()
+    {fp=new FormalPfprarameterAST(fp);}
+ ( fpr=FormalParameterRest()
+    {fpr= new FormalParameterRestAST(fpr);}
+ )*
+{return new FormalParameterListAST(fp,fpr);}
 }
 
-void FormalParameter() :
-{}
+FormalParameterAST FormalParameter() :
 {
-  Type() Identifier()
+    TypeAST t=null;
+    IdentifierAST id=null;
+}
+{
+    t=Type()
+    {t=new TypeAST(t);}
+    id=Identifier()
+    {id=new IdentifierAST(id);}
+    {return new FormalParameterAST(t,id);}
 }
 
-void FormalParameterRest() :
-{}
+FormalParameterRestAST FormalParameterRest() :
 {
-  "," FormalParameter()
+    FormalParameterAST fp=null;
+}
+{
+    "," fp=FormalParameter()
+    {return new FormalParameterRestAST(fp);}
 }
 
-void Type() :
-{}
+TypeAST Type():
 {
-  LOOKAHEAD(3)
-  SimpleType()
-|
-  LOOKAHEAD(SimpleType() "[" "]")  
-  ArrayType()
-|
-  Identifier()     
+    SimpleTypeAST st=null;
+    ArrayTypeAST at=null;
+    IdentifierAST id=null;
 }
-void SimpleType():
-{}
 {
-    CharType()
+    LOOKAHEAD(3)
+    st=SimpleType()
+    {return new TypeAST(st,at,id);}
 |
-    BooleanType()
+    LOOKAHEAD(SimpleType() "[" "]")  
+    ArrayType()
+    {return new TypeAST(st,at,id);}
 |
-    IntegerType()
-|
-    VoidType()
-|
-    ObjectType()
-|
-    StringType()
+    Identifier()
+    {return new TypeAST(st,at,id);}
 }
 
-void ArrayType() :
-{}
+SimpleTypeAST SimpleType():
 {
-    SimpleType() "[" "]"
+    CharTypeAST ct;
+    BooleanTypeAST bt;
+    IntegerTypeAST it;
+    VoidTypeAST vt;
+    ObjectTypeAST ot;
+    StringTypeASR st;
+}
+{
+    ct=CharType()
+    {return new SimpleTypeAST(ct,bt,it,vt,ot,st);}
+|
+    bt=BooleanType()
+    {return new SimpleTypeAST(ct,bt,it,vt,ot,st);}
+|
+    it=IntegerType()
+    {return new SimpleTypeAST(ct,bt,it,vt,ot,st);}
+|
+    vt=VoidType()
+    {return new SimpleTypeAST(ct,bt,it,vt,ot,st);}
+|
+    ot=ObjectType()
+    {return new SimpleTypeAST(ct,bt,it,vt,ot,st);}
+|
+    st=StringType()
+    {return new SimpleTypeAST(ct,bt,it,vt,ot,st);}
 }
 
-void CharType():
+ArrayTypeAST ArrayType() :
+{
+    SimpleTypeAST st=null;
+}
+{
+    st=SimpleType() "[" "]"
+    {return new ArrayTypeAST(st);}
+}
+
+CharTypeAST CharType():
 {}
 {
     "char"
+    {return new CharTypeAST();}
+    
 }
 
-void BooleanType() :
+BooleanTypeAST BooleanType() :
 {}
 {
-  "boolean"
+    "boolean"
+    {return new BooleanTypeAST();}
 }
 
-void ObjectType():
+ObjectTypeAST ObjectType():
 {}
 {
     "object"
+    {return new ObjectTypeAST();}
 }
 
-void StringType():
+StringTypeAST StringType():
 {}
 {
     "string"
+    {return new StringTypeAST();}
 }
 
-void IntegerType() :
+IntegerTypeAST IntegerType() :
 {}
 {
-  "int"
+    "int"
+    {return new IntegerTypeAST();}
 }
 
-void VoidType():
+VoidTypeAST VoidType():
 {} 
 {
     "void"
+    {return new VoidTypeAST();}
 }
 
-void Statement() :
-{}
+StatementAST Statement() :
+{
+    BlockAST a=null;
+    AssignmentStatementAST b=null;
+    ArrayAssignmentStatementAST c=null;
+    IfElseStatementAST d=null;
+    IfStatementAST e=null;
+    WhileStatementAST f=null;
+    SwitchStatementAST g=null;
+    PrintStatementAST h=null;
+    ExpressionAST i=null;
+}
 {
     LOOKAHEAD("{" "}")
-    Block()
+    a=Block()
+    {return new StatementAST(a,b,c,d,e,f,g,h,i);}
 | 
-  LOOKAHEAD(Identifier() "=")
-  AssignmentStatement()
+    LOOKAHEAD(Identifier() "=")
+    b=AssignmentStatement()
+    {return new StatementAST(a,b,c,d,e,f,g,h,i);}
 |
-  LOOKAHEAD(Identifier() "[" Expression() "]" "=" )
-  ArrayAssignmentStatement()
+    LOOKAHEAD(Identifier() "[" Expression() "]" "=" )
+    c=ArrayAssignmentStatement()
+    {return new StatementAST(a,b,c,d,e,f,g,h,i);}
 |
-  LOOKAHEAD("if" "(" Expression() ")" Statement() "else" Statement() )
-  IfElseStatement()
+    LOOKAHEAD("if" "(" Expression() ")" Statement() "else" Statement() )
+    d=IfElseStatement()
+    {return new StatementAST(a,b,c,d,e,f,g,h,i);}
 |
-  LOOKAHEAD("if")
-  IfStatement()
+    LOOKAHEAD("if")
+    e=IfStatement()
+    {return new StatementAST(a,b,c,d,e,f,g,h,i);}
 |
-  WhileStatement()
+    f=WhileStatement()
+    {return new StatementAST(a,b,c,d,e,f,g,h,i);}
 |
-  SwitchStatement()
+    g=SwitchStatement()
+    {return new StatementAST(a,b,c,d,e,f,g,h,i);}
 |
-  PrintStatement()
+    h=PrintStatement()
+    {return new StatementAST(a,b,c,d,e,f,g,h,i);}
 |
-   Expression()
+    i=Expression()
+    {return new StatementAST(a,b,c,d,e,f,g,h,i);}
 }
 
 void Block() :

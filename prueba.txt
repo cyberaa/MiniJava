@@ -61,7 +61,6 @@ class Fac extends Frame
   }
 }
   
-
 class ClassActions extends ActionListener 
 {
     public void actionPerformed(ActionEvent evento) 
@@ -96,4 +95,3 @@ class Cierre extends WindowAdapter
           return null;
      }
 }
-

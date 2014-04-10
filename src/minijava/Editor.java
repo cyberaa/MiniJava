@@ -66,6 +66,9 @@ public class Editor extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Program");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.setAutoscrolls(true);
         jScrollPane3.setViewportView(jTree1);
 
         jButton1.setText("RUN");
@@ -111,6 +114,32 @@ public class Editor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
+    
+   private String filepos="";
+    private static MiniJavaParser nn=null;
+    private static String readFile(String filename)
+    {
+        String content = null;
+            File file = new File(filename); //for ex foo.txt
+            try {
+                FileReader reader = new FileReader(file);
+                char[] chars = new char[(int) file.length()];
+                reader.read(chars);
+                content = new String(chars);
+                reader.close(); } catch(IOException e){
+                    e.printStackTrace();
+            }return content;
+    }
+
+   private void writeFile(String filename,String inputtext)
+    {try {
+        BufferedWriter out = new BufferedWriter(new FileWriter(filename));
+        out.write(inputtext);
+        out.close();}catch (IOException e){
+            System.out.println("Exception ");       
+        }
+    }
+    
     private void parse() throws Exception
     {
         Controlador controller = new Controlador(this);
@@ -137,13 +166,14 @@ public class Editor extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
+            //writeFile(readFile("last.txt"),jEditorPane1.getText());
             parse();
         }catch(Exception er){}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+        jEditorPane1.setText(readFile(readFile("last.txt")));
     }//GEN-LAST:event_formWindowOpened
 
     /**

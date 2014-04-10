@@ -5,26 +5,7 @@
  */
 
 package ASTPRINT;
-import AST.ArrayTypeAST;
-import AST.ClassDeclarationAST;
-import AST.ClassExtendsDeclarationAST;
-import AST.FormalParameterAST;
-import AST.FormalParameterListAST;
-import AST.FormalParameterListRestAST;
-import AST.FormalParameterRepAST;
-import AST.FormalParameterRestAST;
-import AST.GoalAST;
-import AST.ImportDeclarationAST;
-import AST.MainClassAST;
-import AST.MethodDeclarationAST;
-import AST.MultipleImportDeclarationAST;
-import AST.SimpleTypeAST;
-import AST.SingleImportDeclaration;
-import AST.StatementRepAST;
-import AST.TypeDeclarationAST;
-import AST.VarDeclarationAST;
-import AST.VarDeclarationRepAST;
-import AST.Visitor;
+import AST.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -34,7 +15,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class ASTPRINT implements Visitor{
     
     public Object visitAGoal(GoalAST aThis, Object arg) {
-
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
         if (aThis.id != null) {
             DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id.getClass().getName());
@@ -54,7 +34,7 @@ public class ASTPRINT implements Visitor{
             aThis.td.visit(this, h0);
         }
         ///////
-        return null;
+        return raiz;
     }   
 
     @Override
@@ -68,7 +48,7 @@ public class ASTPRINT implements Visitor{
     }
 
     @Override
-    public Object visitSingleImportDeclaration(SingleImportDeclaration c, Object arg) {
+    public Object visitSingleImportDeclaration(SingleImportDeclarationAST c, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -151,4 +131,5 @@ public class ASTPRINT implements Visitor{
     public Object visitTypeDeclarationAST(TypeDeclarationAST c, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

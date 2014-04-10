@@ -14,7 +14,7 @@ public interface Visitor {
     
     public Object visitGoalAST(GoalAST c, Object arg);
     public Object visitImportDeclaration(ImportDeclarationAST c, Object arg);
-    public Object visitSingleImportDeclaration(SingleImportDeclaration c, Object arg);
+    public Object visitSingleImportDeclaration(SingleImportDeclarationAST c, Object arg);
     
     public Object visitMultipleImportDeclarationAST(MultipleImportDeclarationAST c, Object arg);
     public Object visitMainClassAST(MainClassAST c, Object arg);

@@ -11,12 +11,10 @@ package AST;
  * @author administrador
  */
 public class ImportDeclarationAST extends AST{
-    public TypeNameAST tn;
-    public SingleImportDeclaration sid;
+    public SingleImportDeclarationAST sid;
     public MultipleImportDeclarationAST mid;
 
-    public ImportDeclarationAST(TypeNameAST tn, SingleImportDeclaration sid, MultipleImportDeclarationAST mid) {
-        this.tn = tn;
+    public ImportDeclarationAST(SingleImportDeclarationAST sid, MultipleImportDeclarationAST mid) {
         this.sid = sid;
         this.mid = mid;
     }
