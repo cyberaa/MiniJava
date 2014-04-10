@@ -515,7 +515,7 @@ StatementAST Statement() :
     {return new StatementAST(a,b,c,d,e,f,g,h,i);}
 }
 
-void Block() :
+BlockAST Block() :
 {}
 {
   "{" ( Statement() )* "}"
