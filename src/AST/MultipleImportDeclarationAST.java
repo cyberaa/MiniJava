@@ -6,18 +6,22 @@
 
 package AST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author administrador
  */
 public class MultipleImportDeclarationAST extends AST{
-    public TypeNameAST tn;
-
-    public MultipleImportDeclarationAST(TypeNameAST tn) {
-        this.tn = tn;
-    }
     
-            public Object visit(Visitor v,Object arg){
+     public List<TypeNameAST> td = new ArrayList<TypeNameAST>();
+
+    public MultipleImportDeclarationAST(List<TypeNameAST> tn) {
+        this.td = tn;
+    }
+
+    public Object visit(Visitor v,Object arg){
         return v.visitMultipleImportDeclarationAST(this, arg);
     }
     
