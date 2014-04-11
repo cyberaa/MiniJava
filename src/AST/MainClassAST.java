@@ -12,11 +12,11 @@ package AST;
  */
 public class MainClassAST extends AST{
     
-    public Object id1;
-    public Object id2;
+    public IdentifierAST id1;
+    public IdentifierAST id2;
     public PrintStatementAST ps0;
 
-    public MainClassAST(Object id1, Object id2, PrintStatementAST ps0) {
+    public MainClassAST(IdentifierAST id1, IdentifierAST id2, PrintStatementAST ps0) {
         this.id1 = id1;
         this.id2 = id2;
         this.ps0 = ps0;
@@ -25,5 +25,4 @@ public class MainClassAST extends AST{
     public Object visit(Visitor v, Object arg) {
         return v.visitMainClassAST(this,arg);
     }
-    
 }

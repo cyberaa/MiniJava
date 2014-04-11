@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Daniel
  */
 public class BlockAST extends Statement{
-    ArrayList<Statement> st = new ArrayList<Statement>();
+    public ArrayList<Statement> st = new ArrayList<Statement>();
 
     public BlockAST(ArrayList<Statement> st) {
         this.st=st;

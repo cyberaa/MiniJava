@@ -11,12 +11,14 @@ package AST;
  * @author Daniel
  */
 public class IdentifierAST extends PrimaryExpression{
-    public Object t;
+    private Object t;
     public IdentifierAST(Object t) {
         this.t=t;
     }  
-    public IdentifierAST() {
+    public String getStringvalue() {
+        return t.toString();
     }
+    
     public Object visit(Visitor v, Object arg) {
         return v.visitIdentifierAST(this,arg);
     }  

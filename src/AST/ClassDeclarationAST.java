@@ -6,11 +6,11 @@ import java.util.List;
 
 public class ClassDeclarationAST extends TypeDeclarationAST {
 	public IdentifierAST id;
-	public List<VarDeclarationAST> vd = new ArrayList<VarDeclarationAST>();
-	public List<MethodDeclarationAST> md = new ArrayList<MethodDeclarationAST>();
+	public ArrayList<VarDeclarationAST> vd = new ArrayList<VarDeclarationAST>();
+	public ArrayList<MethodDeclarationAST> md = new ArrayList<MethodDeclarationAST>();
 
   
-    public ClassDeclarationAST(IdentifierAST id, List<VarDeclarationAST> vd, List<MethodDeclarationAST> md) {
+    public ClassDeclarationAST(IdentifierAST id, ArrayList<VarDeclarationAST> vd, ArrayList<MethodDeclarationAST> md) {
         this.id = id;
         this.vd = vd;
         this.md = md;

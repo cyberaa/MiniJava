@@ -471,7 +471,7 @@ Statement Statement():
     WhileStatementAST f=null;
     SwitchStatementAST g=null;
     PrintStatementAST h=null;
-   //Expression i=null;
+    Expression i=null;
 }
 {
     LOOKAHEAD("{" "}")
@@ -502,9 +502,9 @@ Statement Statement():
 |
     h=PrintStatement()
     {return h;}
-//|
-  //  i=Expression()
-   // {return i;}
+|
+    i=Expression()
+   {return i;}
 }
 
 BlockAST Block() :
@@ -589,12 +589,12 @@ WhileStatementAST WhileStatement():
 SwitchStatementAST SwitchStatement():
 {
     IdentifierAST id=null;
-    IntegerTypeAST it=null;
+    IdentifierAST it=null;
     Statement st=null;
     ArrayList<Statement> stlist = new ArrayList<Statement>();
 }
 {   
-    "switch" "(" id=Identifier() ")" "{" "case" it=IntegerType() ":"
+    "switch" "(" id=Identifier() ")" "{" "case" it=Identifier() ":"
      "{" ( 
             st=Statement()
             {stlist.add(st);}

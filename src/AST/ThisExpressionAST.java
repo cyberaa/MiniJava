@@ -11,9 +11,15 @@ package AST;
  * @author Daniel
  */
 public class ThisExpressionAST extends PrimaryExpression{
+    private Object t="this";
 
     public ThisExpressionAST() {
     }
+
+    public String getStringValue() {
+        return t.toString();
+    }
+    
     public Object visit(Visitor v, Object arg) {
         return v.visitThisExpressionAST(this,arg);
     }

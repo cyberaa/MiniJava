@@ -12,9 +12,7 @@ package AST;
  */
 public class BracketExpressionAST extends PrimaryExpression{
     
-    public Expression ex=null;    
-    public BracketExpressionAST(){ 
-    }    
+    public Expression ex=null;        
     public BracketExpressionAST(Expression expre){
         this.ex=expre;        
     }    

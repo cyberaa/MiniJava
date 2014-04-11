@@ -14,15 +14,12 @@ import MiniJavaParser.*;
  *
  * @author Daniel
  */
-public class Controlador {
-    
-    Editor GUI;
-    
+public class Controlador {    
+    Editor GUI;    
     public Controlador(Editor nn)
     {
         GUI=nn;
     }
-    
     public AST ParseProgram() throws Exception{
         MiniJavaParser P=  new MiniJavaParser(new java.io.FileInputStream("prueba.txt"));
         AST raiz = P.Goal();        

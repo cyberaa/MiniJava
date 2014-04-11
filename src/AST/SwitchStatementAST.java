@@ -15,12 +15,12 @@ import java.util.List;
  */
 public class SwitchStatementAST extends Statement{
     public IdentifierAST id=null;
-    public IntegerTypeAST intt=null;
-    List<Statement> st = new ArrayList<Statement>();
+    public IdentifierAST id2=null;
+    public List<Statement> st = new ArrayList<Statement>();
 
-    public SwitchStatementAST(IdentifierAST id,IntegerTypeAST intt,List<Statement> st) {
+    public SwitchStatementAST(IdentifierAST id,IdentifierAST intt,List<Statement> st) {
         this.id=id;
-        this.intt=intt;
+        this.id2=intt;
         this.st=st;
     }
     public Object visit(Visitor v, Object arg) {

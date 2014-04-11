@@ -10,7 +10,7 @@ package AST;
  *
  * @author Darknihus
  */
-public class TypeSimpleTypeAST extends Type{
+ public class TypeSimpleTypeAST extends Type{
     public SimpleType st;
 
     public TypeSimpleTypeAST(SimpleType st) {

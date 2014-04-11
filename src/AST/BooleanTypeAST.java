@@ -11,9 +11,19 @@ package AST;
  * @author Daniel
  */
 public class BooleanTypeAST extends SimpleType{
-
-    public BooleanTypeAST() {
+    private Object t;
+    
+    public BooleanTypeAST(Object o){ 
+        t=o;
+    }    
+    public BooleanTypeAST(){ 
+        t=false;
     }
+
+    public String getStringValue() {
+        return t.toString();
+    }    
+    
     public Object visit(Visitor v, Object arg) {    
         return v.visitBooleanTypeAST(this,arg);
     }

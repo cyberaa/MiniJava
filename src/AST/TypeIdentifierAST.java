@@ -17,6 +17,14 @@ public class TypeIdentifierAST extends Type{
     public TypeIdentifierAST(Object id) {
         this.id = id;
     }
+    public TypeIdentifierAST() {
+    }    
+
+    public String getStringValue() {
+        return id.toString();
+    }
+    
+    
     
 public Object visit(Visitor v, Object arg) {
     return v.visitTypeIdentifierAST(this,arg);

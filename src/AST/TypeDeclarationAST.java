@@ -11,5 +11,5 @@ package AST;
  * @author Darknihus
  */
 public abstract class TypeDeclarationAST extends AST{
- public abstract Object visit(Visitor v,Object arg);
+    public abstract Object visit(Visitor v,Object arg);
 }

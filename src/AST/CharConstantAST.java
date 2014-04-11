@@ -19,6 +19,10 @@ public class CharConstantAST extends PrimaryExpression{
 
     public CharConstantAST() {
     }
+
+    public String getStringValue() {
+        return value.toString();
+    }
     
     public Object visit(Visitor v, Object arg) {
         return v.visitCharConstantAST(this,arg);

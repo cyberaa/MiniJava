@@ -11,9 +11,19 @@ package AST;
  * @author Daniel
  */
 public class IntegerTypeAST extends SimpleType{
-
+    private Object Value=null;
+    
     public IntegerTypeAST() {
     }
+
+    public IntegerTypeAST(Object v) {
+        this.Value=v;
+    }
+
+    public String getStringValue() {
+        return Value.toString();
+    }
+    
     public Object visit(Visitor v, Object arg) {    
         return v.visitIntegerTypeAST(this,arg);
     }

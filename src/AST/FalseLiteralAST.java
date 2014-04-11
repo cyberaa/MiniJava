@@ -11,9 +11,14 @@ package AST;
  * @author Daniel
  */
 public class FalseLiteralAST extends PrimaryExpression{
-
+    private Object t=false;
     public FalseLiteralAST() {
     }
+
+    public Object getStringValue() {
+        return t.toString();
+    }
+
     public Object visit(Visitor v, Object arg) {
         return v.visitFalseLiteralAST(this,arg);
     }

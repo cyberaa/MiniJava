@@ -19,6 +19,12 @@ public class StringConstantAST extends PrimaryExpression{
 
     public StringConstantAST() {
     }
+
+    public String getStringValue() {
+        return value.toString();
+    }
+    
+    
     
     public Object visit(Visitor v, Object arg) {
         return v.visitStringConstantAST(this,arg);
