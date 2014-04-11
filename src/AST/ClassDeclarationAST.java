@@ -1,15 +1,18 @@
 
 package AST;
 
-public class ClassDeclarationAST extends AST {
-	public Object id;
-	public VarDeclarationAST vd;
-	public MethodDeclarationAST md;
+import java.util.ArrayList;
+import java.util.List;
 
-    public ClassDeclarationAST(Object id, VarDeclarationAST vd, MethodDeclarationAST md) {
+public class ClassDeclarationAST extends TypeDeclarationAST {
+	public IdentifierAST id;
+	public List<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
+	public List<MethodDeclarationAST> mdlist = new ArrayList<MethodDeclarationAST>();
+
+    public ClassDeclarationAST(IdentifierAST id, List<VarDeclarationAST> vd, List<MethodDeclarationAST> md) {
         this.id = id;
-        this.vd = vd;
-        this.md = md;
+        this.vdlist = vd;
+        this.mdlist = md;
     }
 
     public Object visit(Visitor v, Object arg) {

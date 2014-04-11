@@ -1,6 +1,6 @@
 package AST;
 
-public class ClassExtendsDeclarationAST extends AST {
+public class ClassExtendsDeclarationAST extends TypeDeclarationAST {
 	public Object id1;
 	public Object id2;
 	public VarDeclarationAST vd;
