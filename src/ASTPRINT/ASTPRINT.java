@@ -21,10 +21,9 @@ public class ASTPRINT implements Visitor{
     public Object visitGoalAST(GoalAST c, Object arg) {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) arg;
         if(c.id.size() >0 ){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id.getClass().getName());
             for(int i=0; i < c.id.size(); i++){
-                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.id.get(i).getClass().getName());
-                h0.add(temp);
+                DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id.get(i).getClass().getName());
+                root.add(h0);
                 c.id.get(i).visit(this, h0);
             }
         }
@@ -126,24 +125,27 @@ public class ASTPRINT implements Visitor{
 
     @Override
     public Object visitClassExtendsDeclaration(ClassExtendsDeclarationAST c, Object arg) {
-
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) arg;
-        if (c.md.size() >0 ) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.md.getClass().getName());
-            for(int i=0; i < c.md.size(); i++){
-                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.md.get(i).getClass().getName());
-                h0.add(temp);
-                c.md.get(i).visit(this, temp);
-                root.add(h0);     
-            }
+        if (c.id1 != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id1.getStringvalue());
+            root.add(h0);
+        }
+        if (c.id2 != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id2.getStringvalue());
+            root.add(h0);
         }
         if(c.vd.size() >0 ){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.vd.getClass().getName());
             for(int i=0; i < c.vd.size(); i++){
-                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.vd.get(i).getClass().getName());
-                h0.add(temp);
-                c.vd.get(i).visit(this, temp);
-                root.add(h0);  
+                DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.vd.get(i).getClass().getName());
+                root.add(h0);
+                c.vd.get(i).visit(this, h0);                  
+            }
+        }                
+        if (c.md.size() >0 ){
+            for(int i=0; i < c.md.size(); i++){
+                DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.md.get(i).getClass().getName());
+                root.add(h0);     
+                c.md.get(i).visit(this, h0);                
             }
         }
        return null;
@@ -153,15 +155,14 @@ public class ASTPRINT implements Visitor{
     public Object visitVarDeclarationAST(VarDeclarationAST c, Object arg) {
         
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) arg;
+        if (c.id != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id.getStringvalue());
+            root.add(h0);
+        }
         if (c.t != null) {
             DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.t.getClass().getName());
             root.add(h0);
             c.t.visit(this, h0);
-        }
-        //--------------------------------------------------//
-        if (c.id != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id.getStringvalue());
-            root.add(h0);
         }
         return null;
     }
@@ -188,16 +189,16 @@ public class ASTPRINT implements Visitor{
         if(c.vd.size() >0 ){
             for(int i=0; i < c.vd.size(); i++){
                 DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.vd.get(i).getClass().getName());
-                c.vd.get(i).visit(this, h0);
-                raiz.add(h0);  
+                raiz.add(h0); 
+                c.vd.get(i).visit(this, h0);                 
             }
         }
         //--------------------------------------------------//
         if (c.st.size() >0 ) {
             for(int i=0; i < c.st.size(); i++){
                 DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.st.get(i).getClass().getName());
-                c.st.get(i).visit(this, h0);
                 raiz.add(h0);  
+                c.st.get(i).visit(this, h0);
             }
         }
         //--------------------------------------------------//
@@ -384,7 +385,7 @@ public class ASTPRINT implements Visitor{
     public Object visitAssignmentStatementAST(AssignmentStatementAST aThis, Object arg) {
         DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
         if (aThis.id != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id.getStringvalue());
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id.getClass().getName());
             root.add(h0);
             aThis.id.visit(this, h0);
         }
@@ -752,9 +753,9 @@ public class ASTPRINT implements Visitor{
     @Override
     public Object visitStringConstantAST(StringConstantAST aThis, Object arg) {
         DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
-        DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.getStringValue());
+        DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.getClass().getName());
         root.add(h0);
-        return  root;
+        return  null;
     }
 
     @Override
@@ -828,7 +829,7 @@ public class ASTPRINT implements Visitor{
         DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
         DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.getClass().getName());
         root.add(h0);
-        return  root;
+        return  null;
     }
 
     @Override
