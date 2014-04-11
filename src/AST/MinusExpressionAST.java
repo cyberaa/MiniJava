@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class MinusExpressionAST  extends ExpressionAST{
+public class MinusExpressionAST  extends Expression{
     public PrimaryExpression pex1=null;
     public PrimaryExpression pex2=null;
     public MinusExpressionAST(PrimaryExpression ex1,PrimaryExpression ex2) {

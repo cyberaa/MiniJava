@@ -11,11 +11,11 @@ package AST;
  * @author Daniel
  */
 public class IfElseStatementAST extends Statement{
-    public ExpressionAST ex=null;
+    public Expression ex=null;
     public Statement stif=null;
     public Statement stelse=null;
 
-    public IfElseStatementAST(ExpressionAST a,Statement b,Statement c) {
+    public IfElseStatementAST(Expression a,Statement b,Statement c) {
         this.ex=a;
         this.stif=b;
         this.stelse=c;

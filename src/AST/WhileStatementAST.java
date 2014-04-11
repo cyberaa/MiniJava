@@ -11,10 +11,10 @@ package AST;
  * @author Daniel
  */
 public class WhileStatementAST extends Statement{
-    public ExpressionAST ex=null;
+    public Expression ex=null;
     public Statement st=null;    
 
-    public WhileStatementAST(ExpressionAST ex,Statement st) {
+    public WhileStatementAST(Expression ex,Statement st) {
         this.ex=ex;
         this.st=st;
     }

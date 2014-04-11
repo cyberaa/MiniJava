@@ -11,9 +11,12 @@ package AST;
  * @author Daniel
  */
 public class StringConstantAST extends PrimaryExpression{
+    private Object value;
 
-    public StringConstantAST() {
+    public StringConstantAST(Object value) {
+        this.value = value;
     }
+
     public Object visit(Visitor v, Object arg) {
         return v.visitStringConstantAST(this,arg);
     }

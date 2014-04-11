@@ -11,10 +11,10 @@ package AST;
  * @author Daniel
  */
 public class IfStatementAST extends Statement{
-    public ExpressionAST ex=null;
+    public Expression ex=null;
     public Statement st=null;
 
-    public IfStatementAST(ExpressionAST a,Statement b) {
+    public IfStatementAST(Expression a,Statement b) {
         this.ex=a;
         this.st=b;
     }

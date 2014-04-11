@@ -10,9 +10,9 @@ package AST;
  *
  * @author Daniel
  */
-public class NotExpressionAST extends AST{
-    public ExpressionAST ex=null;
-    public NotExpressionAST(ExpressionAST in){
+public class NotExpressionAST extends PrimaryExpression{
+    public Expression ex=null;
+    public NotExpressionAST(Expression in){
         this.ex=in;
     }
     public Object visit(Visitor v, Object arg) {

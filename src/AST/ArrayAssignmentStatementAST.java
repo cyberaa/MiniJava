@@ -12,10 +12,10 @@ package AST;
  */
 public class ArrayAssignmentStatementAST extends Statement{
     public IdentifierAST id=null;
-    public ExpressionAST ex=null;
+    public Expression ex=null;
     public AssigmentRestAST ar=null;
 
-    public ArrayAssignmentStatementAST(IdentifierAST id,ExpressionAST ex,AssigmentRestAST ar) {
+    public ArrayAssignmentStatementAST(IdentifierAST id,Expression ex,AssigmentRestAST ar) {
         this.id=id;
         this.ex=ex;
         this.ar=ar;

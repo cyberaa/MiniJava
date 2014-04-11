@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class EqualExpressionAST extends ExpressionAST{
+public class EqualExpressionAST extends Expression{
     public PrimaryExpression pex1=null;
     public PrimaryExpression pex2=null;
     public EqualExpressionAST(PrimaryExpression ex1,PrimaryExpression ex2) {

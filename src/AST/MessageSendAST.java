@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class MessageSendAST extends ExpressionAST{
+public class MessageSendAST extends Expression{
     public PrimaryExpression ex=null;
     public IdentifierAST id=null;
     public ExpressionListAST exl=null;

@@ -6,15 +6,18 @@
 
 package AST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Daniel
  */
 public class ExpressionListAST extends AST{
-    public ExpressionAST  ex=null;
-    public ExpressionRestAST exr=null;
+    public Expression  ex=null;
+    public List<ExpressionRestAST> exr = new ArrayList<ExpressionRestAST>();
 
-    public ExpressionListAST(ExpressionAST nex,ExpressionRestAST nexr) {
+    public ExpressionListAST(Expression nex,List<ExpressionRestAST> nexr) {
         this.ex=nex;
         this.exr=nexr;
     }

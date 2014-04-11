@@ -11,9 +11,9 @@ package AST;
  * @author Daniel
  */
 public class ExpressionRestAST extends AST{
-    public ExpressionAST ex=null;
+    public Expression ex=null;
 
-    public ExpressionRestAST(ExpressionAST nex) {
+    public ExpressionRestAST(Expression nex) {
         this.ex=nex;
     }
     public Object visit(Visitor v, Object arg) {

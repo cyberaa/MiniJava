@@ -11,8 +11,8 @@ package AST;
  * @author administrador
  */
 public class PrintStatementAST extends Statement{
-    public ExpressionAST ex;
-    public PrintStatementAST(ExpressionAST ex) {
+    public Expression ex;
+    public PrintStatementAST(Expression ex) {
         this.ex = ex;
     }
     public Object visit(Visitor v, Object arg) {

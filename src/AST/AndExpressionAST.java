@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class AndExpressionAST extends ExpressionAST{
+public class AndExpressionAST extends Expression{
     public PrimaryExpression pex1=null;
     public PrimaryExpression pex2=null;
     public AndExpressionAST(PrimaryExpression ex1,PrimaryExpression ex2) {

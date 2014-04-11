@@ -11,9 +11,12 @@ package AST;
  * @author Daniel
  */
 public class IntegerLiteralAST extends PrimaryExpression{
+    private Object value;
 
-    public IntegerLiteralAST() {
+    public IntegerLiteralAST(Object value) {
+        this.value = value;
     }
+    
     public Object visit(Visitor v, Object arg) {
         return v.visitIntegerLiteralAST(this,arg);
     }

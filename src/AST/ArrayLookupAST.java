@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class ArrayLookupAST extends ExpressionAST{
+public class ArrayLookupAST extends Expression{
     public PrimaryExpression pex1=null;
     public PrimaryExpression pex2=null;
     public ArrayLookupAST(PrimaryExpression ex1,PrimaryExpression ex2) {

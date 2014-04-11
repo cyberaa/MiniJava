@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class ThisExpressionAST extends Exception{
+public class ThisExpressionAST extends Expression{
 
     public ThisExpressionAST() {
     }

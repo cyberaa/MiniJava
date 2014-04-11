@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class TimesExpressionAST  extends ExpressionAST{
+public class TimesExpressionAST  extends Expression{
     public PrimaryExpression pex1=null;
     public PrimaryExpression pex2=null;
     public TimesExpressionAST(PrimaryExpression ex1,PrimaryExpression ex2) {

@@ -11,8 +11,10 @@ package AST;
  * @author Daniel
  */
 public class CharConstantAST extends PrimaryExpression{
+    private Object value;
 
-    public CharConstantAST() {
+    public CharConstantAST(Object value) {
+        this.value = value;
     }
     
     public Object visit(Visitor v, Object arg) {

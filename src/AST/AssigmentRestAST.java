@@ -12,12 +12,12 @@ package AST;
  */
 public class AssigmentRestAST extends Statement{
     public Type t=null;
-    public ExpressionAST ex=null; 
+    public Expression ex=null; 
 
     public AssigmentRestAST(Type t) {
         this.t=t;
     }
-    public AssigmentRestAST(ExpressionAST ex) {
+    public AssigmentRestAST(Expression ex) {
         this.ex=ex;
     }
     public Object visit(Visitor v, Object arg) {

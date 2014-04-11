@@ -13,8 +13,8 @@ package AST;
 public class ArrayAllocationExpressionAST extends PrimaryExpression{
     
     public SimpleType st=null;
-    public ExpressionAST ex=null;
-    public ArrayAllocationExpressionAST(SimpleType nst,ExpressionAST nex) {
+    public Expression ex=null;
+    public ArrayAllocationExpressionAST(SimpleType nst,Expression nex) {
         this.st=nst;
         this.ex=nex;
     }

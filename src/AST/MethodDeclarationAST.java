@@ -20,9 +20,9 @@ public class MethodDeclarationAST extends AST{
     private FormalParameterListAST  fpl=null;
     List<VarDeclarationAST>  vd = new ArrayList<VarDeclarationAST>();
     List<Statement>  st = new ArrayList<Statement>();
-    public ExpressionAST  ex=null;
+    public Expression  ex=null;
 
-    public MethodDeclarationAST(Type t, IdentifierAST id, FormalParameterListAST fpl, List<VarDeclarationAST> vd, List<Statement> st, ExpressionAST ex) {
+    public MethodDeclarationAST(Type t, IdentifierAST id, FormalParameterListAST fpl, List<VarDeclarationAST> vd, List<Statement> st, Expression ex) {
         this.t = t;
         this.id = id;
         this.fpl = fpl;

@@ -6,6 +6,9 @@
 
 package AST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Daniel
@@ -13,9 +16,9 @@ package AST;
 public class SwitchStatementAST extends Statement{
     public IdentifierAST id=null;
     public IntegerTypeAST intt=null;
-    public Statement st=null;
+    List<Statement> st = new ArrayList<Statement>();
 
-    public SwitchStatementAST(IdentifierAST id,IntegerTypeAST intt,Statement st) {
+    public SwitchStatementAST(IdentifierAST id,IntegerTypeAST intt,List<Statement> st) {
         this.id=id;
         this.intt=intt;
         this.st=st;

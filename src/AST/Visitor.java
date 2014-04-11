@@ -22,14 +22,14 @@ public interface Visitor {
     
     public Object visitClassExtendsDeclaration(ClassExtendsDeclarationAST c, Object arg);
     public Object visitVarDeclarationAST(VarDeclarationAST c, Object arg);
-    public Object visitFormalParameterRepAST(FormalParameterRepAST c, Object arg);
+    
     public Object visitMethodDeclarationAST(MethodDeclarationAST c, Object arg);
-    public Object visitVarDeclarationRepAST(VarDeclarationRepAST c, Object arg);
-    public Object visitStatementRepAST(StatementRepAST c, Object arg);
+   
+    
     public Object visitFormalParameterAST(FormalParameterAST c, Object arg);
     public Object visitFormalParameterListAST(FormalParameterListAST c, Object arg);
     public Object visitFormalParameterRestAST(FormalParameterRestAST c, Object arg);
-    public Object visitFormalParameterListRestAST(FormalParameterListRestAST c, Object arg);
+    
     public Object visitSimpleTypeAST(SimpleType c, Object arg);
     public Object visitArrayTypeAST(ArrayTypeAST c, Object arg);
     public Object visitTypeDeclarationAST(TypeDeclarationAST c, Object arg);
@@ -99,6 +99,24 @@ public interface Visitor {
     public Object visitStringTypeAST(StringTypeAST aThis, Object arg);
 
     public Object visitWhileStatementAST(WhileStatementAST aThis, Object arg);
+
+    public Object visitOrExpressionAST(OrExpressionAST aThis, Object arg);
+
+    public Object visitPlusExpressionAST(PlusExpressionAST aThis, Object arg);
+
+    public Object visitPrintStatementAST(PrintStatementAST aThis, Object arg);
+
+    public Object visitStringConstantAST(StringConstantAST aThis, Object arg);
+
+    public Object visitSubExpressionAST(SubExpressionAST aThis, Object arg);
+
+    public Object visitSwitchStatementAST(SwitchStatementAST aThis, Object arg);
+
+    public Object visitThisExpressionAST(ThisExpressionAST aThis, Object arg);
+
+    public Object visitTimesExpressionAST(TimesExpressionAST aThis, Object arg);
+
+    public Object visitTrueLiteralAST(TrueLiteralAST aThis, Object arg);
     
     
     

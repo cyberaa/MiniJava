@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class OrExpressionAST extends ExpressionAST{
+public class OrExpressionAST extends Expression{
     public PrimaryExpression pex1=null;
     public PrimaryExpression pex2=null;
     public OrExpressionAST(PrimaryExpression ex1,PrimaryExpression ex2) {

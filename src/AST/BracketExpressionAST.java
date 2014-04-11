@@ -10,12 +10,12 @@ package AST;
  *
  * @author Daniel
  */
-public class BracketExpressionAST extends AST{
+public class BracketExpressionAST extends PrimaryExpression{
     
-    public ExpressionAST ex=null;    
+    public Expression ex=null;    
     public BracketExpressionAST(){ 
     }    
-    public BracketExpressionAST(ExpressionAST expre){
+    public BracketExpressionAST(Expression expre){
         this.ex=expre;        
     }    
     public Object visit(Visitor v, Object arg) {

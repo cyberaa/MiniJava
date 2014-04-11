@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class GreatExpressionAST  extends ExpressionAST{
+public class GreatExpressionAST  extends Expression{
     public PrimaryExpression pex1=null;
     public PrimaryExpression pex2=null;
     public GreatExpressionAST(PrimaryExpression ex1,PrimaryExpression ex2) {

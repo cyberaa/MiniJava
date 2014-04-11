@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class ArrayLengthAST extends ExpressionAST{
+public class ArrayLengthAST extends Expression{
     public PrimaryExpression ex=null;
     public ArrayLengthAST(PrimaryExpression ex1) {
         this.ex=ex1;
