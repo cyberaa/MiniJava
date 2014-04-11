@@ -8,13 +8,8 @@ package AST;
 
 /**
  *
- * @author Daniel
+ * @author administrador
  */
-public class IntegerTypeAST extends SimpleType{
-
-    public IntegerTypeAST() {
-    }
-    public Object visit(Visitor v, Object arg) {    
-        return v.visitIntegerTypeAST(this,arg);
-    }
+public abstract class SimpleType extends Type{
+    public abstract Object visit(Visitor v,Object arg);
 }

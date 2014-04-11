@@ -62,7 +62,7 @@
          tydecls.add(t);
     }
     jj_consume_token(0);
-     {if (true) return  new GoalAST(implist,mc,t);}
+     {if (true) return  new GoalAST(implist,mc,tydecls);}
     throw new Error("Missing return statement in function");
   }
 

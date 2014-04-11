@@ -6,15 +6,18 @@
 
 package AST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Daniel
  */
 public class FormalParameterListAST extends AST{
-    public FormalParameterAST fp=null;
-    public FormalParameterRestAST fpr=null;
+    List<FormalParameterRestAST> fpr = new ArrayList<FormalParameterRestAST>();
+    private FormalParameterAST fp = null;
 
-    public FormalParameterListAST(FormalParameterAST a,FormalParameterRestAST b) {
+    public FormalParameterListAST(FormalParameterAST a,List<FormalParameterRestAST> b) {
         this.fp=a;
         this.fpr=b;
     }

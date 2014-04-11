@@ -10,18 +10,16 @@ package AST;
  *
  * @author administrador
  */
-public class VarDeclarationAST extends AST{
-    public Type t;
-    public IdentifierAST  id;
+public class TypeIdentifierAST extends Type{
+    
+    private Object id;
 
-    public VarDeclarationAST(Type t, IdentifierAST id) {
-        this.t = t;
+    public TypeIdentifierAST(Object id) {
         this.id = id;
     }
-
     
-    public Object visit(Visitor v, Object arg) {
-        return v.visitVarDeclarationAST(this,arg);
-    }
+public Object visit(Visitor v, Object arg) {
+    return v.visitTypeIdentifierAST(this,arg);
+}
     
 }

@@ -10,11 +10,11 @@ package AST;
  *
  * @author Daniel
  */
-public class AssigmentRestAST extends StatementAST{
-    public TypeAST t=null;
+public class AssigmentRestAST extends Statement{
+    public Type t=null;
     public ExpressionAST ex=null; 
 
-    public AssigmentRestAST(TypeAST t) {
+    public AssigmentRestAST(Type t) {
         this.t=t;
     }
     public AssigmentRestAST(ExpressionAST ex) {

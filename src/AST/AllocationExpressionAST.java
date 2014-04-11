@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class AllocationExpressionAST extends PrimaryExpressionAST{
+public class AllocationExpressionAST extends PrimaryExpression{
     public IdentifierAST id=null;
     public BracketExpressionAST ex=null;
     public AllocationExpressionAST(IdentifierAST nid,BracketExpressionAST bex) {

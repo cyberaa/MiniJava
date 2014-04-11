@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class ObjectTypeAST extends SimpleTypeAST{
+public class ObjectTypeAST extends SimpleType{
 
     public ObjectTypeAST() {
     }

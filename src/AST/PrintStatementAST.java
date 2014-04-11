@@ -10,7 +10,7 @@ package AST;
  *
  * @author administrador
  */
-public class PrintStatementAST extends StatementAST{
+public class PrintStatementAST extends Statement{
     public ExpressionAST ex;
     public PrintStatementAST(ExpressionAST ex) {
         this.ex = ex;

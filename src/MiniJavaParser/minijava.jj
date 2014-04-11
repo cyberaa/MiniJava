@@ -167,7 +167,7 @@ GoalAST Goal() :
         {tydecls.add(t);}
     )*
     <EOF>
-    {return  new GoalAST(implist,mc,t);}
+    {return  new GoalAST(implist,mc,tydecls);}
 }
 
 ImportDeclarationAST ImportDeclaration():

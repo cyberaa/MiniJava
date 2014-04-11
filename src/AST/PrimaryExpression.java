@@ -10,11 +10,6 @@ package AST;
  *
  * @author Daniel
  */
-public class IntegerTypeAST extends SimpleType{
-
-    public IntegerTypeAST() {
-    }
-    public Object visit(Visitor v, Object arg) {    
-        return v.visitIntegerTypeAST(this,arg);
-    }
+public abstract class PrimaryExpression extends AST{    
+    public abstract Object visit(Visitor v,Object arg);
 }

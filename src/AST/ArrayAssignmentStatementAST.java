@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class ArrayAssignmentStatementAST extends StatementAST{
+public class ArrayAssignmentStatementAST extends Statement{
     public IdentifierAST id=null;
     public ExpressionAST ex=null;
     public AssigmentRestAST ar=null;

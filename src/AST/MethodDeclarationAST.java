@@ -6,20 +6,23 @@
 
 package AST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author administrador
  */
-public class MethodDeclarationAST {
-
-    public TypeAST t=null;
-    public IdentifierAST id=null;
-    public FormalParameterListAST  fpl=null;
-    public VarDeclarationAST  vd=null;
-    public StatementAST  st=null;
+public class MethodDeclarationAST extends AST{
+    
+    private Type t=null;
+    private IdentifierAST id=null;
+    private FormalParameterListAST  fpl=null;
+    List<VarDeclarationAST>  vd = new ArrayList<VarDeclarationAST>();
+    List<Statement>  st = new ArrayList<Statement>();
     public ExpressionAST  ex=null;
 
-    public MethodDeclarationAST(TypeAST t, IdentifierAST id, FormalParameterListAST fpl, VarDeclarationAST vd, StatementAST st, ExpressionAST ex) {
+    public MethodDeclarationAST(Type t, IdentifierAST id, FormalParameterListAST fpl, List<VarDeclarationAST> vd, List<Statement> st, ExpressionAST ex) {
         this.t = t;
         this.id = id;
         this.fpl = fpl;

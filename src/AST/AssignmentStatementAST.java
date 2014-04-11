@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class AssignmentStatementAST extends StatementAST{
+public class AssignmentStatementAST extends Statement{
     public IdentifierAST id=null;
     public AssigmentRestAST ar=null;
 

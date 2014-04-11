@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class VoidTypeAST extends SimpleTypeAST{
+public class VoidTypeAST extends SimpleType{
 
     public VoidTypeAST() {
     }

@@ -30,9 +30,75 @@ public interface Visitor {
     public Object visitFormalParameterListAST(FormalParameterListAST c, Object arg);
     public Object visitFormalParameterRestAST(FormalParameterRestAST c, Object arg);
     public Object visitFormalParameterListRestAST(FormalParameterListRestAST c, Object arg);
-    public Object visitSimpleTypeAST(SimpleTypeAST c, Object arg);
+    public Object visitSimpleTypeAST(SimpleType c, Object arg);
     public Object visitArrayTypeAST(ArrayTypeAST c, Object arg);
     public Object visitTypeDeclarationAST(TypeDeclarationAST c, Object arg);
+
+    public Object visitAllocationExpressionAST(AllocationExpressionAST aThis, Object arg);
+
+    public Object visitAndExpressionAST(AndExpressionAST aThis, Object arg);
+
+    public Object visitArrayAllocationExpressionAST(ArrayAllocationExpressionAST aThis, Object arg);
+
+    public Object visitArrayAssignmentStatementAST(ArrayAssignmentStatementAST aThis, Object arg);
+
+    public Object visitArrayLengthAST(ArrayLengthAST aThis, Object arg);
+
+    public Object visitArrayLookupAST(ArrayLookupAST aThis, Object arg);
+
+    public Object visitAssigmentRestAST(AssigmentRestAST aThis, Object arg);
+
+    public Object visitAssignmentStatementAST(AssignmentStatementAST aThis, Object arg);
+
+    public Object visitBlockAST(BlockAST aThis, Object arg);
+
+    public Object visitBooleanTypeAST(BooleanTypeAST aThis, Object arg);
+
+    public Object visitBracketExpressionAST(BracketExpressionAST aThis, Object arg);
+
+    public Object visitCharConstantAST(CharConstantAST aThis, Object arg);
+
+    public Object visitCharTypeAST(CharTypeAST aThis, Object arg);
+
+    public Object visitEqualExpressionAST(EqualExpressionAST aThis, Object arg);
+
+    public Object visitExpressionListAST(ExpressionListAST aThis, Object arg);
+
+    public Object visitExpressionRestAST(ExpressionRestAST aThis, Object arg);
+
+    public Object visitFalseLiteralAST(FalseLiteralAST aThis, Object arg);
+
+    public Object visitGreatExpressionAST(GreatExpressionAST aThis, Object arg);
+
+    public Object visitIfElseStatementAST(IfElseStatementAST aThis, Object arg);
+
+    public Object visitIfStatementAST(IfStatementAST aThis, Object arg);
+
+    public Object visitIntegerLiteralAST(IntegerLiteralAST aThis, Object arg);
+
+    public Object visitIntegerTypeAST(IntegerTypeAST aThis, Object arg);
+
+    public Object visitLessExpressionAST(LessExpressionAST aThis, Object arg);
+
+    public Object visitMessageSendAST(MessageSendAST aThis, Object arg);
+
+    public Object visitMinusExpressionAST(MinusExpressionAST aThis, Object arg);
+
+    public Object visitNotExpressionAST(NotExpressionAST aThis, Object arg);
+
+    public Object visitIdentifierAST(IdentifierAST aThis, Object arg);
+
+    public Object visitTypeNameAST(TypeNameAST aThis, Object arg);
+
+    public Object visitTypeIdentifierAST(TypeIdentifierAST aThis, Object arg);
+
+    public Object visitVoidTypeAST(VoidTypeAST aThis, Object arg);
+
+    public Object visitObjectTypeAST(ObjectTypeAST aThis, Object arg);
+
+    public Object visitStringTypeAST(StringTypeAST aThis, Object arg);
+
+    public Object visitWhileStatementAST(WhileStatementAST aThis, Object arg);
     
     
     

@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class FalseLiteralAST extends PrimaryExpressionAST{
+public class FalseLiteralAST extends PrimaryExpression{
 
     public FalseLiteralAST() {
     }

@@ -10,11 +10,11 @@ package AST;
  *
  * @author Daniel
  */
-public class ArrayAllocationExpressionAST extends PrimaryExpressionAST{
+public class ArrayAllocationExpressionAST extends PrimaryExpression{
     
-    public SimpleTypeAST st=null;
+    public SimpleType st=null;
     public ExpressionAST ex=null;
-    public ArrayAllocationExpressionAST(SimpleTypeAST nst,ExpressionAST nex) {
+    public ArrayAllocationExpressionAST(SimpleType nst,ExpressionAST nex) {
         this.st=nst;
         this.ex=nex;
     }

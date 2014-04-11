@@ -11,8 +11,8 @@ package AST;
  * @author Daniel
  */
 public class ArrayLengthAST extends ExpressionAST{
-    public PrimaryExpressionAST ex=null;
-    public ArrayLengthAST(PrimaryExpressionAST ex1) {
+    public PrimaryExpression ex=null;
+    public ArrayLengthAST(PrimaryExpression ex1) {
         this.ex=ex1;
     }
     public Object visit(Visitor v, Object arg) {

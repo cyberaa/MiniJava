@@ -13,9 +13,10 @@ import java.util.List;
  *
  * @author administrador
  */
-public class MultipleImportDeclarationAST extends ImportDeclarationAST{    
-     public List<TypeNameAST> td = new ArrayList<TypeNameAST>();
-    public MultipleImportDeclarationAST(List<TypeNameAST> tn) {
+public class MultipleImportDeclarationAST extends ImportDeclarationAST{
+    
+     public TypeNameAST td;
+    public MultipleImportDeclarationAST(TypeNameAST tn) {
         this.td = tn;
     }
 

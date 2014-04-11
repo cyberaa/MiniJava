@@ -10,12 +10,12 @@ package AST;
  *
  * @author Daniel
  */
-public class IfElseStatementAST extends StatementAST{
+public class IfElseStatementAST extends Statement{
     public ExpressionAST ex=null;
-    public StatementAST stif=null;
-    public StatementAST stelse=null;
+    public Statement stif=null;
+    public Statement stelse=null;
 
-    public IfElseStatementAST(ExpressionAST a,StatementAST b,StatementAST c) {
+    public IfElseStatementAST(ExpressionAST a,Statement b,Statement c) {
         this.ex=a;
         this.stif=b;
         this.stelse=c;

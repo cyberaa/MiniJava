@@ -10,12 +10,12 @@ package AST;
  *
  * @author Daniel
  */
-public class SwitchStatementAST extends StatementAST{
+public class SwitchStatementAST extends Statement{
     public IdentifierAST id=null;
     public IntegerTypeAST intt=null;
-    public StatementAST st=null;
+    public Statement st=null;
 
-    public SwitchStatementAST(IdentifierAST id,IntegerTypeAST intt,StatementAST st) {
+    public SwitchStatementAST(IdentifierAST id,IntegerTypeAST intt,Statement st) {
         this.id=id;
         this.intt=intt;
         this.st=st;

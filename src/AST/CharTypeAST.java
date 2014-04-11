@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class CharTypeAST extends SimpleTypeAST{
+public class CharTypeAST extends SimpleType{
 
     public CharTypeAST() {
     }

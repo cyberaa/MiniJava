@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class CharConstantAST extends PrimaryExpressionAST{
+public class CharConstantAST extends PrimaryExpression{
 
     public CharConstantAST() {
     }

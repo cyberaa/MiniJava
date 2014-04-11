@@ -11,10 +11,10 @@ package AST;
  * @author Daniel
  */
 public class MessageSendAST extends ExpressionAST{
-    public PrimaryExpressionAST ex=null;
+    public PrimaryExpression ex=null;
     public IdentifierAST id=null;
     public ExpressionListAST exl=null;
-    public MessageSendAST(PrimaryExpressionAST ex1,IdentifierAST nid,ExpressionListAST exlist) {
+    public MessageSendAST(PrimaryExpression ex1,IdentifierAST nid,ExpressionListAST exlist) {
         this.ex=ex1;
         this.id=nid;
         this.exl=exlist;
@@ -22,3 +22,4 @@ public class MessageSendAST extends ExpressionAST{
     public Object visit(Visitor v, Object arg) {
         return v.visitMessageSendAST(this,arg);
     }
+}

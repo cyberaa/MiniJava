@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class IntegerLiteralAST extends PrimaryExpressionAST{
+public class IntegerLiteralAST extends PrimaryExpression{
 
     public IntegerLiteralAST() {
     }

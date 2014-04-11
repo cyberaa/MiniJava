@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class BooleanTypeAST extends SimpleTypeAST{
+public class BooleanTypeAST extends SimpleType{
 
     public BooleanTypeAST() {
     }

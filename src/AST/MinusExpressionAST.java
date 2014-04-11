@@ -11,9 +11,9 @@ package AST;
  * @author Daniel
  */
 public class MinusExpressionAST  extends ExpressionAST{
-    public PrimaryExpressionAST pex1=null;
-    public PrimaryExpressionAST pex2=null;
-    public MinusExpressionAST(PrimaryExpressionAST ex1,PrimaryExpressionAST ex2) {
+    public PrimaryExpression pex1=null;
+    public PrimaryExpression pex2=null;
+    public MinusExpressionAST(PrimaryExpression ex1,PrimaryExpression ex2) {
         this.pex1=ex1;
         this.pex2=ex2;
     }

@@ -6,21 +6,24 @@
 
 package AST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author administrador
  */
 public class GoalAST extends AST{
-    public ImportDeclarationAST id;
+    List<ImportDeclarationAST> id = new ArrayList<ImportDeclarationAST>();
     public MainClassAST mc;
-    public TypeDeclarationAST td;
+    List<TypeDeclarationAST> td = new ArrayList<TypeDeclarationAST>();
 
-    public GoalAST(ImportDeclarationAST id, MainClassAST mc, TypeDeclarationAST td) {
+    public GoalAST(List<ImportDeclarationAST> id, MainClassAST mc, List<TypeDeclarationAST> td) {
         this.id = id;
         this.mc = mc;
         this.td = td;
     }
-    
+
     public Object visit(Visitor v,Object arg){
         return v.visitGoalAST(this, arg);
     }     
