@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class MethodDeclarationAST extends AST{
     
-    private Type t=null;
-    private IdentifierAST id=null;
-    private FormalParameterListAST  fpl=null;
-    List<VarDeclarationAST>  vd = new ArrayList<VarDeclarationAST>();
-    List<Statement>  st = new ArrayList<Statement>();
+    public Type t=null;
+    public IdentifierAST id=null;
+    public FormalParameterListAST  fpl=null;
+    public List<VarDeclarationAST>  vd = new ArrayList<VarDeclarationAST>();
+    public List<Statement>  st = new ArrayList<Statement>();
     public Expression  ex=null;
 
     public MethodDeclarationAST(Type t, IdentifierAST id, FormalParameterListAST fpl, List<VarDeclarationAST> vd, List<Statement> st, Expression ex) {

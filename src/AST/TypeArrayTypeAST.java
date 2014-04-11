@@ -10,11 +10,11 @@ package AST;
  *
  * @author administrador
  */
-public class ArrayTypeAST extends Type{    
-    public SimpleType st;
+public class TypeArrayTypeAST extends Type{    
+    public SimpleType at;
 
-    public ArrayTypeAST(SimpleType st0) {
-        this.st = st0;
+    public TypeArrayTypeAST(SimpleType st0) {
+        this.at = st0;
     }
 
     public Object visit(Visitor v, Object arg) {    

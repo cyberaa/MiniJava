@@ -31,7 +31,7 @@ public interface Visitor {
     public Object visitFormalParameterRestAST(FormalParameterRestAST c, Object arg);
     
     public Object visitSimpleTypeAST(SimpleType c, Object arg);
-    public Object visitArrayTypeAST(ArrayTypeAST c, Object arg);
+    public Object visitArrayTypeAST(TypeArrayTypeAST c, Object arg);
     public Object visitTypeDeclarationAST(TypeDeclarationAST c, Object arg);
 
     public Object visitAllocationExpressionAST(AllocationExpressionAST aThis, Object arg);
@@ -87,7 +87,6 @@ public interface Visitor {
     public Object visitNotExpressionAST(NotExpressionAST aThis, Object arg);
 
     public Object visitIdentifierAST(IdentifierAST aThis, Object arg);
-    public Object visitIdentifier_Type(Identifier_Type aThis, Object arg);
 
     public Object visitTypeNameAST(TypeNameAST aThis, Object arg);
 
@@ -118,6 +117,10 @@ public interface Visitor {
     public Object visitTimesExpressionAST(TimesExpressionAST aThis, Object arg);
 
     public Object visitTrueLiteralAST(TrueLiteralAST aThis, Object arg);
+
+    public Object visitATypeSimple(TypeSimpleTypeAST aThis, Object arg);
+
+    public Object visitTypeSimpleTypeAST(TypeSimpleTypeAST aThis, Object arg);
     
     
     

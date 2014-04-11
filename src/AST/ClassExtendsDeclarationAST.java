@@ -6,8 +6,8 @@ import java.util.List;
 public class ClassExtendsDeclarationAST extends TypeDeclarationAST {
 	public Object id1;
 	public Object id2;
-	ArrayList<VarDeclarationAST> vd = new ArrayList<VarDeclarationAST>();
-	ArrayList<MethodDeclarationAST> md = new ArrayList<MethodDeclarationAST>();
+	public ArrayList<VarDeclarationAST> vd = new ArrayList<VarDeclarationAST>();
+	public ArrayList<MethodDeclarationAST> md = new ArrayList<MethodDeclarationAST>();
 
     public ClassExtendsDeclarationAST(Object id1, Object id2, ArrayList<VarDeclarationAST> vd, ArrayList<MethodDeclarationAST> md1) {
         this.id1 = id1;

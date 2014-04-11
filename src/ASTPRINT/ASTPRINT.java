@@ -5,199 +5,253 @@
  */
 
 package ASTPRINT;
+
 import AST.*;
-import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
- * @author Daniel
+ * @author Darknihus
  */
 public class ASTPRINT implements Visitor{
     
-    public Object visitGoalAST(GoalAST aThis, Object arg) {
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.id.size() > 0){
-            for(int i=0;i<aThis.id.size();i++){
-                DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id.get(i).getClass().getName());
-                raiz.add(h0);
-                aThis.id.get(i).visit(this, h0);
+
+    @Override
+    public Object visitGoalAST(GoalAST c, Object arg) {
+        
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) arg;
+        if(c.id != null){
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id.getClass().getName());
+            for(int i=0; i < c.id.size(); i++){
+                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.id.get(i).getClass().getName());
+                h0.add(temp);
+                c.id.get(i).visit(this, h0);
+                root.add(h0);
             }
         }
-        ///////
-        if (aThis.mc != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.mc.getClass().getName());
-            raiz.add(h0);
-            aThis.mc.visit(this, h0);
+        if (c.mc != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.mc.getClass().getName());
+            root.add(h0);
+            c.mc.visit(this, h0);
         }
-        ///////
-        if (aThis.td.size()>0) {
-            for(int i=0;i<aThis.td.size();i++){
-                DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.td.get(i).getClass().getName());
-                raiz.add(h0);
-                aThis.td.get(i).visit(this, h0);
+        //--------------------------------------------------//
+        if (c.td != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.td.getClass().getName());
+            for(int i=0; i < c.td.size(); i++){
+                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.td.get(i).getClass().getName());
+                h0.add(temp);
+                c.td.get(i).visit(this, h0);
+                root.add(h0);
             }
         }
-        ///////
-        return raiz;
+        
+        //--------------------------------------------------//
+        return null;        
     }
 
-    public Object visitSingleImportDeclaration(SingleImportDeclarationAST aThis, Object arg) {
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.tn!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.tn.getClass().getName());
-            raiz.add(h0);
-            aThis.tn.visit(this, h0);
+    @Override
+    public Object visitImportDeclaration(ImportDeclarationAST c, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitSingleImportDeclaration(SingleImportDeclarationAST c, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitMultipleImportDeclarationAST(MultipleImportDeclarationAST c, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitMainClassAST(MainClassAST c, Object arg) {
+
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) arg;
+        if (c.id1 != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id1.toString());
+            root.add(h0);
         }
+        //--------------------------------------------------//
+        if (c.id2 != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id2.toString());
+            root.add(h0);
+        }
+        //--------------------------------------------------//
+        if (c.ps0 != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.ps0.getClass().getName());
+            root.add(h0);
+            c.ps0.visit(this, h0);
+        }
+        
         return null;
     }
 
-    public Object visitMultipleImportDeclarationAST(MultipleImportDeclarationAST aThis, Object arg) {
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.td!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.td.getClass().getName());
-            raiz.add(h0);
-            aThis.td.visit(this, h0);
+    @Override
+    public Object visitClassDeclarationAST(ClassDeclarationAST c, Object arg) {
+        
+         DefaultMutableTreeNode root;
+        root = (DefaultMutableTreeNode) arg;
+        if (c.id != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id.t.toString());
+            root.add(h0);
         }
-        return null;
-    }
-
-    public Object visitMainClassAST(MainClassAST aThis, Object arg) {
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.id1!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id1.getClass().getName());
-            raiz.add(h0);
-        }   
-        if(aThis.id2!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id2.getClass().getName());
-            raiz.add(h0);
-        } 
-        if(aThis.ps0!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.ps0.getClass().getName());
-            raiz.add(h0);
-            aThis.ps0.visit(this, h0);
-        }
-        return null;
-    }
-
-    public Object visitClassDeclarationAST(ClassDeclarationAST aThis, Object arg) {
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.id!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id.getClass().getName());
-            raiz.add(h0);
-            aThis.id.visit(this, h0);
-        } 
-        if(aThis.md!=null){
-            for(int i=0;i<aThis.md.size();i++){
-                DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.md.get(i).getClass().getName());
-                raiz.add(h0);
-                aThis.md.get(i).visit(this, h0);
+        //--------------------------------------------------//
+        if (c.vd != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.vd.getClass().getName());
+            //root.add(h0);
+            //c.vd0.visit(this, h0);
+            
+            for(int i=0; i < c.vd.size(); i++){
+                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.vd.get(i).getClass().getName());
+                h0.add(temp);
+                c.vd.get(i).visit(this, h0);
+                root.add(h0);
             }
-        } 
-        if(aThis.vd!=null){
-            for(int i=0;i<aThis.vd.size();i++){
-                DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.vd.get(i).getClass().getName());
-                raiz.add(h0);
-                aThis.vd.get(i).visit(this, h0);
+        }
+        //--------------------------------------------------//
+        if (c.md != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.md.getClass().getName());
+            
+            for(int i=0; i < c.md.size(); i++){
+                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.md.get(i).getClass().getName());
+                h0.add(temp);
+                c.md.get(i).visit(this, h0);
+                root.add(h0);     
             }
-        } 
+        }
+
+        return null;
+        }
+    
+
+    @Override
+    public Object visitClassExtendsDeclaration(ClassExtendsDeclarationAST c, Object arg) {
+
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) arg;
+        if (c.md != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.md.getClass().getName());
+            for(int i=0; i < c.md.size(); i++){
+                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.md.get(i).getClass().getName());
+                h0.add(temp);
+                c.md.get(i).visit(this, temp);
+                root.add(h0);     
+            }
+        }
+        if(c.vd != null){
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.vd.getClass().getName());
+            for(int i=0; i < c.vd.size(); i++){
+                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.vd.get(i).getClass().getName());
+                h0.add(temp);
+                c.vd.get(i).visit(this, temp);
+                root.add(h0);  
+            }
+        }
         return null;
     }
 
-    public Object visitClassExtendsDeclaration(ClassExtendsDeclarationAST aThis, Object arg) {
+    @Override
+    public Object visitVarDeclarationAST(VarDeclarationAST c, Object arg) {
+        
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) arg;
+        if (c.t != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.t.getClass().getName());
+            root.add(h0);
+            c.t.visit(this, h0);
+        }
+        //--------------------------------------------------//
+        if (c.id != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id.t.getClass());
+            root.add(h0);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitMethodDeclarationAST(MethodDeclarationAST c, Object arg) {
+        
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.id1!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id1.getClass().getName());
+        
+        if (c.t != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.t.getClass().getName());
             raiz.add(h0);
-        } 
-        if(aThis.id2!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id1.getClass().getName());
+            c.t.visit(this, h0);
+        }
+        //--------------------------------------------------//
+        if (c.fpl != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.fpl.getClass().getName());
+            raiz.add(h0);
+            c.fpl.visit(this, h0);
+        }
+        //--------------------------------------------------//
+        if(c.vd != null){
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.vd.getClass().getName());
+            for(int i=0; i < c.vd.size(); i++){
+                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.vd.get(i).getClass().getName());
+                h0.add(temp);
+                c.vd.get(i).visit(this, temp);
+                raiz.add(h0);  
+            }
+        }
+        //--------------------------------------------------//
+        if (c.st != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.st.getClass().getName());
+            for(int i=0; i < c.st.size(); i++){
+                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(c.st.get(i).getClass().getName());
+                h0.add(temp);
+                c.st.get(i).visit(this, temp);
+                raiz.add(h0);  
+            }
+        }
+        //--------------------------------------------------//
+        if (c.ex != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.ex.getClass().getName());
+            raiz.add(h0);
+            c.ex.visit(this, h0);
+        }
+        //--------------------------------------------------//
+        if (c.id != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id.t.toString());
             raiz.add(h0);
         }
         return null;
     }
 
-    public Object visitVarDeclarationAST(VarDeclarationAST aThis, Object arg) {
+    @Override
+    public Object visitFormalParameterAST(FormalParameterAST c, Object arg) {
+               
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.id!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id.getClass().getName());
+        if (c.type != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.type.getClass().getName());
             raiz.add(h0);
-            aThis.id.visit(this, h0);
+            c.type.visit(this, h0);
         }
-        if(aThis.t!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.t.getClass().getName());
+//--------------------------------------------------//
+        if (c.id != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.id.t.toString());
             raiz.add(h0);
-            aThis.t.visit(this, h0);
         }
         return null;
     }
     
-    public Object visitMethodDeclarationAST(MethodDeclarationAST aThis, Object arg) {
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.ex!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.ex.getClass().getName());
-            raiz.add(h0);
-            aThis.ex.visit(this, h0);
-        }
-        return null;
-    }
-
-    public Object visitFormalParameterAST(FormalParameterAST aThis, Object arg) {
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.id!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id.getClass().getName());
-            raiz.add(h0);
-            aThis.id.visit(this, h0);
-        }
-        if(aThis.type!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.type.getClass().getName());
-            raiz.add(h0);
-            aThis.type.visit(this, h0);
-        }
-        return null;
-    }
-
-    public Object visitFormalParameterListAST(FormalParameterListAST aThis, Object arg) {
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.fp!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.fp.getClass().getName());
-            raiz.add(h0);
-            aThis.fp.visit(this, h0);
-        } 
-        if(aThis.fpr!=null){
-            for(int i=0;i<aThis.fpr.size();i++){
-                DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.fpr.get(i).getClass().getName());
-                raiz.add(h0);
-                aThis.fpr.get(i).visit(this, h0);
-            }
-        }
-        return null;
-    }
-
-    public Object visitFormalParameterRestAST(FormalParameterRestAST aThis, Object arg) {
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
-        if(aThis.fp!=null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.fp.getClass().getName());
-            raiz.add(h0);
-            aThis.fp.visit(this, h0);
-        }
-        return null;
-    }
 
     @Override
-    public Object visitSimpleTypeAST(SimpleType c, Object arg) {
+    public Object visitFormalParameterListAST(FormalParameterListAST c, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitArrayTypeAST(ArrayTypeAST c, Object arg) {
+    public Object visitFormalParameterRestAST(FormalParameterRestAST c, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
-    public Object visitTypeDeclarationAST(TypeDeclarationAST c, Object arg) {
+    public Object visitArrayTypeAST(TypeArrayTypeAST c, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
     @Override
     public Object visitAllocationExpressionAST(AllocationExpressionAST aThis, Object arg) {
@@ -246,7 +300,7 @@ public class ASTPRINT implements Visitor{
 
     @Override
     public Object visitBooleanTypeAST(BooleanTypeAST aThis, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
@@ -261,7 +315,7 @@ public class ASTPRINT implements Visitor{
 
     @Override
     public Object visitCharTypeAST(CharTypeAST aThis, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
@@ -306,7 +360,7 @@ public class ASTPRINT implements Visitor{
 
     @Override
     public Object visitIntegerTypeAST(IntegerTypeAST aThis, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
@@ -331,12 +385,7 @@ public class ASTPRINT implements Visitor{
 
     @Override
     public Object visitIdentifierAST(IdentifierAST aThis, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitIdentifier_Type(Identifier_Type aThis, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
@@ -351,17 +400,17 @@ public class ASTPRINT implements Visitor{
 
     @Override
     public Object visitVoidTypeAST(VoidTypeAST aThis, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public Object visitObjectTypeAST(ObjectTypeAST aThis, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public Object visitStringTypeAST(StringTypeAST aThis, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
@@ -381,7 +430,14 @@ public class ASTPRINT implements Visitor{
 
     @Override
     public Object visitPrintStatementAST(PrintStatementAST aThis, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) arg;
+        if (aThis.ex != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.ex.getClass().getName());
+            root.add(h0);
+            aThis.ex.visit(this, h0);
+        }
+        return null;
     }
 
     @Override
@@ -415,8 +471,29 @@ public class ASTPRINT implements Visitor{
     }
 
     @Override
-    public Object visitImportDeclaration(ImportDeclarationAST c, Object arg) {
+    public Object visitTypeDeclarationAST(TypeDeclarationAST c, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Object visitATypeSimple(TypeSimpleTypeAST aThis, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitSimpleTypeAST(SimpleType c, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitTypeSimpleTypeAST(TypeSimpleTypeAST aThis, Object arg) {
+              DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) arg;
+        if (aThis.st != null) {
+            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.st.getClass().getName());
+            raiz.add(h0);
+            aThis.st.visit(this, h0);
+        }
+        return null;
+    }
+    
 }

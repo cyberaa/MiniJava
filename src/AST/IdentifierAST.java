@@ -11,7 +11,7 @@ package AST;
  * @author Daniel
  */
 public class IdentifierAST extends PrimaryExpression{
-    private Object t;
+    public Object t;
     public IdentifierAST(Object t) {
         this.t=t;
     }  

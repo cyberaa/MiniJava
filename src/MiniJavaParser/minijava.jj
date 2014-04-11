@@ -363,21 +363,21 @@ FormalParameterRestAST FormalParameterRest() :
 
 Type Type():
 {
-    SimpleType st=null;
-    ArrayTypeAST at=null;
-    Identifier_Type id=null;
+    SimpleType st1=null;
+    TypeArrayTypeAST at1=null;
+    TypeIdentifierAST id=null;
 }
 {
     LOOKAHEAD(SimpleType())  
-    st=SimpleType()
-    {return st;}
+    st1=SimpleType()
+    {return new TypeSimpleTypeAST(st1);}
 |
     LOOKAHEAD(SimpleType() "[" "]")  
-    at=ArrayType()
-    {return at;}
+    at1=ArrayType()
+    {return at1;}
 |
     id=Identifier_t()
-    {return id;}
+    {return new TypeIdentifierAST(id);}
 }
 
 SimpleType SimpleType():
@@ -409,13 +409,13 @@ SimpleType SimpleType():
     {return st;}
 }
 
-ArrayTypeAST ArrayType() :
+TypeArrayTypeAST ArrayType() :
 {
     SimpleType st=null;
 }
 {
     st=SimpleType() "[" "]"
-    {return new ArrayTypeAST(st);}
+    {return new TypeArrayTypeAST(st);}
 }
 
 CharTypeAST CharType():
@@ -471,7 +471,7 @@ Statement Statement():
     WhileStatementAST f=null;
     SwitchStatementAST g=null;
     PrintStatementAST h=null;
-    Expression i=null;
+   //Expression i=null;
 }
 {
     LOOKAHEAD("{" "}")
@@ -503,8 +503,8 @@ Statement Statement():
     h=PrintStatement()
     {return h;}
 //|
-    //i=Expression()
-    //{return i;}
+  //  i=Expression()
+   // {return i;}
 }
 
 BlockAST Block() :
@@ -880,7 +880,7 @@ IntegerLiteralAST IntegerLiteral() :
 {}
 {
   <INTEGER_LITERAL>
-    {return new IntegerLiteralAST();}
+    {return new IntegerLiteralAST(token.image);}
 }
 
 CharConstantAST CharConstant():
@@ -912,17 +912,18 @@ FalseLiteralAST FalseLiteral() :
 }
 
 IdentifierAST Identifier() :
-{}
 {
-  <IDENTIFIER>
-   {return new IdentifierAST();}
+}
+{
+   <IDENTIFIER>
+   {return new IdentifierAST(token.image);}
 }
 
-Identifier_Type Identifier_t():
+TypeIdentifierAST Identifier_t():
 {}
 {
   <IDENTIFIER>
-    {return new Identifier_Type();}
+    {return new TypeIdentifierAST(token.image);}
 }
 
 ThisExpressionAST ThisExpression() :
