@@ -502,9 +502,9 @@ Statement Statement():
 |
     h=PrintStatement()
     {return h;}
-//|
-    //i=Expression()
-    //{return i;}
+|
+    i=Expression()
+    {return i;}
 }
 
 BlockAST Block() :

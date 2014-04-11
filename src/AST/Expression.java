@@ -10,6 +10,6 @@ package AST;
  *
  * @author administrador
  */
-public abstract class Expression extends AST{
+public abstract class Expression extends Statement{
     public abstract Object visit(Visitor v,Object arg);   
 }
