@@ -34,6 +34,7 @@ public class ASTPRINT implements Visitor{
             DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(c.mc.getClass().getName());
             root.add(h0);
             c.mc.visit(this, h0);
+            root.add(h0);
         }
         //--------------------------------------------------//
         if (c.td != null) {
@@ -47,7 +48,7 @@ public class ASTPRINT implements Visitor{
         }
         
         //--------------------------------------------------//
-        return null;        
+        return root;        
     }
 
     @Override

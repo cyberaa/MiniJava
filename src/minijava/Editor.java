@@ -168,7 +168,9 @@ public class Editor extends javax.swing.JFrame {
         try{
             //writeFile(readFile("last.txt"),jEditorPane1.getText());
             parse();
-        }catch(Exception er){}
+        }catch(Exception er){
+            jTextArea1.setText(jTextArea1.getText()+"\n"+er);
+                    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

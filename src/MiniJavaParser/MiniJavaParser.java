@@ -384,20 +384,20 @@
   }
 
   final public Type Type() throws ParseException {
-    SimpleType st=null;
-    ArrayTypeAST at=null;
-    Identifier_Type id=null;
+    SimpleType st1=null;
+    TypeArrayTypeAST at1=null;
+    TypeIdentifierAST id=null;
     if (jj_2_7(2147483647)) {
-      st = SimpleType();
-     {if (true) return st;}
+      st1 = SimpleType();
+     {if (true) return new TypeSimpleTypeAST(st1);}
     } else if (jj_2_8(2147483647)) {
-      at = ArrayType();
-     {if (true) return at;}
+      at1 = ArrayType();
+     {if (true) return at1;}
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case IDENTIFIER:
         id = Identifier_t();
-     {if (true) return id;}
+     {if (true) return new TypeIdentifierAST(id);}
         break;
       default:
         jj_la1[10] = jj_gen;
@@ -448,12 +448,12 @@
     throw new Error("Missing return statement in function");
   }
 
-  final public ArrayTypeAST ArrayType() throws ParseException {
+  final public TypeArrayTypeAST ArrayType() throws ParseException {
     SimpleType st=null;
     st = SimpleType();
     jj_consume_token(LSQPAREN);
     jj_consume_token(RSQPAREN);
-     {if (true) return new ArrayTypeAST(st);}
+     {if (true) return new TypeArrayTypeAST(st);}
     throw new Error("Missing return statement in function");
   }
 
@@ -502,7 +502,6 @@
     WhileStatementAST f=null;
     SwitchStatementAST g=null;
     PrintStatementAST h=null;
-    Expression i=null;
     if (jj_2_9(2147483647)) {
       a = Block();
      {if (true) return a;}
@@ -1030,7 +1029,7 @@
 
   final public IntegerLiteralAST IntegerLiteral() throws ParseException {
     jj_consume_token(INTEGER_LITERAL);
-     {if (true) return new IntegerLiteralAST();}
+     {if (true) return new IntegerLiteralAST(token.image);}
     throw new Error("Missing return statement in function");
   }
 
@@ -1060,13 +1059,13 @@
 
   final public IdentifierAST Identifier() throws ParseException {
     jj_consume_token(IDENTIFIER);
-    {if (true) return new IdentifierAST();}
+    {if (true) return new IdentifierAST(token.image);}
     throw new Error("Missing return statement in function");
   }
 
-  final public Identifier_Type Identifier_t() throws ParseException {
+  final public TypeIdentifierAST Identifier_t() throws ParseException {
     jj_consume_token(IDENTIFIER);
-     {if (true) return new Identifier_Type();}
+     {if (true) return new TypeIdentifierAST(token.image);}
     throw new Error("Missing return statement in function");
   }
 
@@ -1401,6 +1400,11 @@
     return false;
   }
 
+  private boolean jj_3R_97() {
+    if (jj_scan_token(THIS)) return true;
+    return false;
+  }
+
   private boolean jj_3_14() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_18()) return true;
@@ -1411,15 +1415,15 @@
     return false;
   }
 
-  private boolean jj_3R_97() {
-    if (jj_scan_token(THIS)) return true;
-    return false;
-  }
-
   private boolean jj_3R_77() {
     if (jj_3R_22()) return true;
     if (jj_scan_token(PLUS)) return true;
     if (jj_3R_22()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_65() {
+    if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
@@ -1431,11 +1435,6 @@
     if (jj_scan_token(ASSIGN)) return true;
     if (jj_3R_104()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_65() {
-    if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
@@ -2090,6 +2089,11 @@
     return false;
   }
 
+  private boolean jj_3R_106() {
+    if (jj_3R_20()) return true;
+    return false;
+  }
+
   private boolean jj_3R_16() {
     if (jj_3R_17()) return true;
     Token xsp;
@@ -2097,11 +2101,6 @@
       xsp = jj_scanpos;
       if (jj_3_3()) { jj_scanpos = xsp; break; }
     }
-    return false;
-  }
-
-  private boolean jj_3R_106() {
-    if (jj_3R_20()) return true;
     return false;
   }
 
@@ -2123,11 +2122,6 @@
     return false;
   }
 
-  private boolean jj_3R_27() {
-    if (jj_3R_67()) return true;
-    return false;
-  }
-
   private boolean jj_3R_101() {
     if (jj_scan_token(LPAREN)) return true;
     Token xsp;
@@ -2136,6 +2130,11 @@
       if (jj_3R_106()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(RPAREN)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_27() {
+    if (jj_3R_67()) return true;
     return false;
   }
 
@@ -2175,16 +2174,16 @@
     return false;
   }
 
+  private boolean jj_3R_100() {
+    if (jj_scan_token(NOT)) return true;
+    if (jj_3R_20()) return true;
+    return false;
+  }
+
   private boolean jj_3R_80() {
     if (jj_3R_22()) return true;
     if (jj_scan_token(61)) return true;
     if (jj_3R_22()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_100() {
-    if (jj_scan_token(NOT)) return true;
-    if (jj_3R_20()) return true;
     return false;
   }
 
@@ -2220,17 +2219,17 @@
     return false;
   }
 
-  private boolean jj_3_1() {
-    if (jj_scan_token(IMPORT)) return true;
-    if (jj_3R_16()) return true;
-    if (jj_scan_token(SEMICOLON)) return true;
-    return false;
-  }
-
   private boolean jj_3R_99() {
     if (jj_scan_token(NEW)) return true;
     if (jj_3R_17()) return true;
     if (jj_3R_101()) return true;
+    return false;
+  }
+
+  private boolean jj_3_1() {
+    if (jj_scan_token(IMPORT)) return true;
+    if (jj_3R_16()) return true;
+    if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
