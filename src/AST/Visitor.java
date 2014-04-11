@@ -87,6 +87,7 @@ public interface Visitor {
     public Object visitNotExpressionAST(NotExpressionAST aThis, Object arg);
 
     public Object visitIdentifierAST(IdentifierAST aThis, Object arg);
+    public Object visitIdentifier_Type(Identifier_Type aThis, Object arg);
 
     public Object visitTypeNameAST(TypeNameAST aThis, Object arg);
 

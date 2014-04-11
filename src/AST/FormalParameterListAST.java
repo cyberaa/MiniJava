@@ -14,10 +14,10 @@ import java.util.List;
  * @author Daniel
  */
 public class FormalParameterListAST extends AST{
-    List<FormalParameterRestAST> fpr = new ArrayList<FormalParameterRestAST>();
-    private FormalParameterAST fp = null;
+    public ArrayList<FormalParameterRestAST> fpr = new ArrayList<FormalParameterRestAST>();
+    public FormalParameterAST fp = null;
 
-    public FormalParameterListAST(FormalParameterAST a,List<FormalParameterRestAST> b) {
+    public FormalParameterListAST(FormalParameterAST a,ArrayList<FormalParameterRestAST> b) {
         this.fp=a;
         this.fpr=b;
     }

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class MultipleImportDeclarationAST extends ImportDeclarationAST{
     
-     public TypeNameAST td;
+    public TypeNameAST td;
     public MultipleImportDeclarationAST(TypeNameAST tn) {
         this.td = tn;
     }

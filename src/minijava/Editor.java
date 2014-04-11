@@ -150,7 +150,7 @@ public class Editor extends javax.swing.JFrame {
                 ASTPRINT imp= new ASTPRINT();
                 DefaultMutableTreeNode tree = new DefaultMutableTreeNode();
                 GoalAST goal = (GoalAST)arbol;
-                imp.visitAGoal(goal, tree);
+                imp.visitGoalAST(goal, tree);
                 jTree1.setModel(new DefaultTreeModel(tree));
                 jTextArea1.setText(jTextArea1.getText()+"\n"+"MiniJava program parsed successfully.");                
             }

@@ -16,6 +16,9 @@ public class CharConstantAST extends PrimaryExpression{
     public CharConstantAST(Object value) {
         this.value = value;
     }
+
+    public CharConstantAST() {
+    }
     
     public Object visit(Visitor v, Object arg) {
         return v.visitCharConstantAST(this,arg);

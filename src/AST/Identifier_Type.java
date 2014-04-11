@@ -10,18 +10,14 @@ package AST;
  *
  * @author Daniel
  */
-public class StringConstantAST extends PrimaryExpression{
-    private Object value;
-
-    public StringConstantAST(Object value) {
-        this.value = value;
+public class Identifier_Type extends Type{
+    private Object t;
+    public Identifier_Type(Object t) {
+        this.t=t;
+    }  
+    public Identifier_Type() {
     }
-
-    public StringConstantAST() {
-    }
-    
     public Object visit(Visitor v, Object arg) {
-        return v.visitStringConstantAST(this,arg);
-    }
-    
+        return v.visitIdentifier_Type(this,arg);
+    }  
 }

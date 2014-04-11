@@ -5,15 +5,16 @@
  */
 
 package AST;
+import java.util.ArrayList;
 
 /**
  *
  * @author administrador
  */
 public class TypeNameAST extends AST{
-    public IdentifierAST   id;
+    public ArrayList<IdentifierAST> id=new ArrayList<IdentifierAST>();
 
-    public TypeNameAST(IdentifierAST id) {
+    public TypeNameAST(ArrayList<IdentifierAST>  id) {
         this.id = id;
     }
     public Object visit(Visitor v, Object arg) {

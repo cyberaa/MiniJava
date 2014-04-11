@@ -16,7 +16,10 @@ public class IntegerLiteralAST extends PrimaryExpression{
     public IntegerLiteralAST(Object value) {
         this.value = value;
     }
-    
+
+    public IntegerLiteralAST() {
+    }
+        
     public Object visit(Visitor v, Object arg) {
         return v.visitIntegerLiteralAST(this,arg);
     }

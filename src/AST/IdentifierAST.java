@@ -12,11 +12,11 @@ package AST;
  */
 public class IdentifierAST extends PrimaryExpression{
     private Object t;
-
     public IdentifierAST(Object t) {
-        this.t = t;
+        this.t=t;
+    }  
+    public IdentifierAST() {
     }
-    
     public Object visit(Visitor v, Object arg) {
         return v.visitIdentifierAST(this,arg);
     }  

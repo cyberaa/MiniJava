@@ -10,7 +10,7 @@ package AST;
  *
  * @author Daniel
  */
-public class ThisExpressionAST extends Expression{
+public class ThisExpressionAST extends PrimaryExpression{
 
     public ThisExpressionAST() {
     }

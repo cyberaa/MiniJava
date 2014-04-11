@@ -3,13 +3,13 @@ package AST;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassExtendsDeclarationAST extends AST {
+public class ClassExtendsDeclarationAST extends TypeDeclarationAST {
 	public Object id1;
 	public Object id2;
-	List<VarDeclarationAST> vd = new ArrayList<VarDeclarationAST>();
-	List<MethodDeclarationAST> md = new ArrayList<MethodDeclarationAST>();
+	ArrayList<VarDeclarationAST> vd = new ArrayList<VarDeclarationAST>();
+	ArrayList<MethodDeclarationAST> md = new ArrayList<MethodDeclarationAST>();
 
-    public ClassExtendsDeclarationAST(Object id1, Object id2, List<VarDeclarationAST> vd, List<MethodDeclarationAST> md1) {
+    public ClassExtendsDeclarationAST(Object id1, Object id2, ArrayList<VarDeclarationAST> vd, ArrayList<MethodDeclarationAST> md1) {
         this.id1 = id1;
         this.id2 = id2;
         this.vd = vd;

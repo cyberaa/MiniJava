@@ -7,16 +7,15 @@
 package AST;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author Daniel
  */
 public class BlockAST extends Statement{
-    List<Statement> st = new ArrayList<Statement>();
+    ArrayList<Statement> st = new ArrayList<Statement>();
 
-    public BlockAST(List<Statement> st) {
+    public BlockAST(ArrayList<Statement> st) {
         this.st=st;
     }
     public Object visit(Visitor v, Object arg) {

@@ -29,8 +29,8 @@
  * The MiniJava Grammar Starts Here *
  ************************************/
   final public GoalAST Goal() throws ParseException {
-    List<ImportDeclarationAST> implist = new ArrayList<ImportDeclarationAST>();
-    List<TypeDeclarationAST> tydecls = new ArrayList<TypeDeclarationAST>();
+    ArrayList<ImportDeclarationAST> implist = new ArrayList<ImportDeclarationAST>();
+    ArrayList<TypeDeclarationAST> tydecls = new ArrayList<TypeDeclarationAST>();
     MainClassAST mc=null;
     ImportDeclarationAST imp=null;
     TypeDeclarationAST t=null;
@@ -94,7 +94,7 @@
   final public MultipleImportDeclarationAST MultipleImportDeclaration() throws ParseException {
     TypeNameAST tn=null;
     jj_consume_token(IMPORT);
-    Tn = TypeName();
+    tn = TypeName();
     jj_consume_token(DOT);
     jj_consume_token(54);
     jj_consume_token(SEMICOLON);
@@ -103,7 +103,7 @@
   }
 
   final public TypeNameAST TypeName() throws ParseException {
-    List<IdentifierAST> idlist = new ArrayList<IdentifierAST>();
+    ArrayList<IdentifierAST> idlist = new ArrayList<IdentifierAST>();
     IdentifierAST id=null;
     id = Identifier();
     label_3:
@@ -165,9 +165,9 @@
   final public ClassDeclarationAST ClassDeclaration() throws ParseException {
     IdentifierAST id=null;
     VarDeclarationAST vd=null;
-    List<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
+    ArrayList<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
     MethodDeclarationAST md=null;
-    List<MethodDeclarationAST> mdlist = new ArrayList<MethodDeclarationAST>();
+    ArrayList<MethodDeclarationAST> mdlist = new ArrayList<MethodDeclarationAST>();
     jj_consume_token(CLASS);
     id = Identifier();
     jj_consume_token(LBRACE);
@@ -212,11 +212,11 @@
     IdentifierAST id1=null;
     IdentifierAST id2=null;
     VarDeclarationAST vd=null;
-    List<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
+    ArrayList<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
     MethodDeclarationAST md=null;
-    List<MethodDeclarationAST> mdlist = new ArrayList<MethodDeclarationAST>();
+    ArrayList<MethodDeclarationAST> mdlist = new ArrayList<MethodDeclarationAST>();
     jj_consume_token(CLASS);
-    id = Identifier();
+    id1 = Identifier();
     jj_consume_token(EXTENDS);
     id2 = Identifier();
     jj_consume_token(LBRACE);
@@ -258,7 +258,7 @@
   }
 
   final public VarDeclarationAST VarDeclaration() throws ParseException {
-    TypeAST t=null;
+    Type t=null;
     IdentifierAST id=null;
     t = Type();
     id = Identifier();
@@ -268,14 +268,14 @@
   }
 
   final public MethodDeclarationAST MethodDeclaration() throws ParseException {
-    TypeAST t=null;
+    Type t=null;
     IdentifierAST id=null;
     FormalParameterListAST fpl=null;
     VarDeclarationAST vd=null;
-    List<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
-    StatementAST st=null;
-    List<StatementAST> stlist = new ArrayList<StatementAST>();
-    ExpressionAST ex=null;
+    ArrayList<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
+    Statement st=null;
+    ArrayList<Statement> stlist = new ArrayList<Statement>();
+    Expression ex=null;
     jj_consume_token(PUBLIC);
     t = Type();
     id = Identifier();
@@ -309,20 +309,11 @@
     label_9:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case LPAREN:
       case LBRACE:
-      case NOT:
-      case FALSE:
       case IF:
       case WHILE:
       case WHITCH:
-      case NEW:
-      case THIS:
-      case TRUE:
       case PRINT:
-      case INTEGER_LITERAL:
-      case CHAR_LITERAL:
-      case STRING_LITERAL:
       case IDENTIFIER:
         ;
         break;
@@ -356,7 +347,7 @@
   final public FormalParameterListAST FormalParameterList() throws ParseException {
     FormalParameterAST fp=null;
     FormalParameterRestAST fpr=null;
-    List<FormalParameterRestAST> fprlist = new ArrayList<FormalParameterRestAST>();
+    ArrayList<FormalParameterRestAST> fprlist = new ArrayList<FormalParameterRestAST>();
     fp = FormalParameter();
     label_11:
     while (true) {
@@ -376,7 +367,7 @@
   }
 
   final public FormalParameterAST FormalParameter() throws ParseException {
-    TypeAST t=null;
+    Type t=null;
     IdentifierAST id=null;
     t = Type();
     id = Identifier();
@@ -392,10 +383,10 @@
     throw new Error("Missing return statement in function");
   }
 
-  final public TypeAST Type() throws ParseException {
-    SimpleTypeAST st=null;
+  final public Type Type() throws ParseException {
+    SimpleType st=null;
     ArrayTypeAST at=null;
-    IdentifierAST id=null;
+    Identifier_Type id=null;
     if (jj_2_7(2147483647)) {
       st = SimpleType();
      {if (true) return st;}
@@ -405,7 +396,7 @@
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case IDENTIFIER:
-        id = Identifier();
+        id = Identifier_t();
      {if (true) return id;}
         break;
       default:
@@ -417,13 +408,13 @@
     throw new Error("Missing return statement in function");
   }
 
-  final public SimpleTypeAST SimpleType() throws ParseException {
+  final public SimpleType SimpleType() throws ParseException {
     CharTypeAST ct;
     BooleanTypeAST bt;
     IntegerTypeAST it;
     VoidTypeAST vt;
     ObjectTypeAST ot;
-    StringTypeASR st;
+    StringTypeAST st;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case CHAR:
       ct = CharType();
@@ -458,7 +449,7 @@
   }
 
   final public ArrayTypeAST ArrayType() throws ParseException {
-    SimpleTypeAST st=null;
+    SimpleType st=null;
     st = SimpleType();
     jj_consume_token(LSQPAREN);
     jj_consume_token(RSQPAREN);
@@ -502,7 +493,7 @@
     throw new Error("Missing return statement in function");
   }
 
-  final public StatementAST Statement() throws ParseException {
+  final public Statement Statement() throws ParseException {
     BlockAST a=null;
     AssignmentStatementAST b=null;
     ArrayAssignmentStatementAST c=null;
@@ -511,7 +502,7 @@
     WhileStatementAST f=null;
     SwitchStatementAST g=null;
     PrintStatementAST h=null;
-    ExpressionAST i=null;
+    Expression i=null;
     if (jj_2_9(2147483647)) {
       a = Block();
      {if (true) return a;}
@@ -541,19 +532,6 @@
         h = PrintStatement();
      {if (true) return h;}
         break;
-      case LPAREN:
-      case NOT:
-      case FALSE:
-      case NEW:
-      case THIS:
-      case TRUE:
-      case INTEGER_LITERAL:
-      case CHAR_LITERAL:
-      case STRING_LITERAL:
-      case IDENTIFIER:
-        i = Expression();
-     {if (true) return i;}
-        break;
       default:
         jj_la1[12] = jj_gen;
         jj_consume_token(-1);
@@ -564,26 +542,17 @@
   }
 
   final public BlockAST Block() throws ParseException {
-    StatementAST st=null;
-    List<StatementAST> stlist = new ArrayList<StatementAST>();
+    Statement st=null;
+    ArrayList<Statement> stlist = new ArrayList<Statement>();
     jj_consume_token(LBRACE);
     label_12:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case LPAREN:
       case LBRACE:
-      case NOT:
-      case FALSE:
       case IF:
       case WHILE:
       case WHITCH:
-      case NEW:
-      case THIS:
-      case TRUE:
       case PRINT:
-      case INTEGER_LITERAL:
-      case CHAR_LITERAL:
-      case STRING_LITERAL:
       case IDENTIFIER:
         ;
         break;
@@ -612,7 +581,7 @@
 
   final public ArrayAssignmentStatementAST ArrayAssignmentStatement() throws ParseException {
     IdentifierAST id=null;
-    ExpressionAST ex=null;
+    Expression ex=null;
     AssigmentRestAST sr=null;
     id = Identifier();
     jj_consume_token(LSQPAREN);
@@ -626,8 +595,8 @@
   }
 
   final public AssigmentRestAST AssigmentRest() throws ParseException {
-    TypeAST t=null;
-    ExpressionAST ex=null;
+    Type t=null;
+    Expression ex=null;
     if (jj_2_14(5)) {
       jj_consume_token(LPAREN);
       t = Type();
@@ -635,7 +604,7 @@
       jj_consume_token(56);
       jj_consume_token(LPAREN);
       jj_consume_token(RPAREN);
-     {if (true) return new AssigmentRestAST();}
+     {if (true) return new AssigmentRestAST(t);}
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case LPAREN:
@@ -649,7 +618,7 @@
       case STRING_LITERAL:
       case IDENTIFIER:
         ex = Expression();
-     {if (true) return ex;}
+     {if (true) return new AssigmentRestAST(ex);}
         break;
       default:
         jj_la1[14] = jj_gen;
@@ -661,8 +630,8 @@
   }
 
   final public IfStatementAST IfStatement() throws ParseException {
-    ExpressionAST ex=null;
-    StatementAST st=null;
+    Expression ex=null;
+    Statement st=null;
     jj_consume_token(IF);
     jj_consume_token(LPAREN);
     ex = Expression();
@@ -673,9 +642,9 @@
   }
 
   final public IfElseStatementAST IfElseStatement() throws ParseException {
-    ExpressionAST ex=null;
-    StatementAST stif=null;
-    StatementAST stelse=null;
+    Expression ex=null;
+    Statement stif=null;
+    Statement stelse=null;
     jj_consume_token(IF);
     jj_consume_token(LPAREN);
     ex = Expression();
@@ -688,8 +657,8 @@
   }
 
   final public WhileStatementAST WhileStatement() throws ParseException {
-    ExpressionAST ex=null;
-    StatementAST st=null;
+    Expression ex=null;
+    Statement st=null;
     jj_consume_token(WHILE);
     jj_consume_token(LPAREN);
     ex = Expression();
@@ -702,8 +671,8 @@
   final public SwitchStatementAST SwitchStatement() throws ParseException {
     IdentifierAST id=null;
     IntegerTypeAST it=null;
-    StatementAST st=null;
-    List<StatementAST> stlist = new ArrayList<StatementAST>();
+    Statement st=null;
+    ArrayList<Statement> stlist = new ArrayList<Statement>();
     jj_consume_token(WHITCH);
     jj_consume_token(LPAREN);
     id = Identifier();
@@ -716,20 +685,11 @@
     label_13:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case LPAREN:
       case LBRACE:
-      case NOT:
-      case FALSE:
       case IF:
       case WHILE:
       case WHITCH:
-      case NEW:
-      case THIS:
-      case TRUE:
       case PRINT:
-      case INTEGER_LITERAL:
-      case CHAR_LITERAL:
-      case STRING_LITERAL:
       case IDENTIFIER:
         ;
         break;
@@ -747,7 +707,7 @@
   }
 
   final public PrintStatementAST PrintStatement() throws ParseException {
-    ExpressionAST ex=null;
+    Expression ex=null;
     jj_consume_token(PRINT);
     jj_consume_token(LPAREN);
     ex = Expression();
@@ -757,7 +717,7 @@
     throw new Error("Missing return statement in function");
   }
 
-  final public ExpressionAST Expression() throws ParseException {
+  final public Expression Expression() throws ParseException {
     AndExpressionAST a=null;
     OrExpressionAST b=null;
     EqualExpressionAST c=null;
@@ -770,7 +730,7 @@
     ArrayLookupAST j=null;
     ArrayLengthAST k=null;
     MessageSendAST l=null;
-    PrimaryExpressionAST m=null;
+    PrimaryExpression m=null;
     if (jj_2_15(2147483647)) {
       a = AndExpression();
      {if (true) return a;}
@@ -832,8 +792,8 @@
   }
 
   final public AndExpressionAST AndExpression() throws ParseException {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
     pe1 = PrimaryExpression();
     jj_consume_token(58);
     pe2 = PrimaryExpression();
@@ -842,8 +802,8 @@
   }
 
   final public OrExpressionAST OrExpression() throws ParseException {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
     pe1 = PrimaryExpression();
     jj_consume_token(59);
     pe2 = PrimaryExpression();
@@ -852,8 +812,8 @@
   }
 
   final public EqualExpressionAST EqualExpression() throws ParseException {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
     pe1 = PrimaryExpression();
     jj_consume_token(ASSIGN);
     jj_consume_token(ASSIGN);
@@ -863,8 +823,8 @@
   }
 
   final public GreatExpressionAST GreatExpression() throws ParseException {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
     pe1 = PrimaryExpression();
     jj_consume_token(60);
     pe2 = PrimaryExpression();
@@ -873,8 +833,8 @@
   }
 
   final public LessExpressionAST LessExpression() throws ParseException {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
     pe1 = PrimaryExpression();
     jj_consume_token(LT);
     pe2 = PrimaryExpression();
@@ -883,8 +843,8 @@
   }
 
   final public PlusExpressionAST PlusExpression() throws ParseException {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
     pe1 = PrimaryExpression();
     jj_consume_token(PLUS);
     pe2 = PrimaryExpression();
@@ -893,8 +853,8 @@
   }
 
   final public MinusExpressionAST MinusExpression() throws ParseException {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
     pe1 = PrimaryExpression();
     jj_consume_token(MINUS);
     pe2 = PrimaryExpression();
@@ -903,8 +863,8 @@
   }
 
   final public TimesExpressionAST TimesExpression() throws ParseException {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
     pe1 = PrimaryExpression();
     jj_consume_token(54);
     pe2 = PrimaryExpression();
@@ -913,8 +873,8 @@
   }
 
   final public SubExpressionAST SubExpression() throws ParseException {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
     pe1 = PrimaryExpression();
     jj_consume_token(61);
     pe2 = PrimaryExpression();
@@ -923,8 +883,8 @@
   }
 
   final public ArrayLookupAST ArrayLookup() throws ParseException {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
     pe1 = PrimaryExpression();
     jj_consume_token(LSQPAREN);
     pe2 = PrimaryExpression();
@@ -934,7 +894,7 @@
   }
 
   final public ArrayLengthAST ArrayLength() throws ParseException {
-    PrimaryExpressionAST pe1=null;
+    PrimaryExpression pe1=null;
     pe1 = PrimaryExpression();
     jj_consume_token(DOT);
     jj_consume_token(LENGTH);
@@ -943,7 +903,7 @@
   }
 
   final public MessageSendAST MessageSend() throws ParseException {
-    PrimaryExpressionAST pex=null;
+    PrimaryExpression pex=null;
     IdentifierAST id=null;
     ExpressionListAST exl=null;
     pex = PrimaryExpression();
@@ -973,9 +933,9 @@
   }
 
   final public ExpressionListAST ExpressionList() throws ParseException {
-    ExpressionAST ex=null;
+    Expression ex=null;
     ExpressionRestAST exr=null;
-    List<ExpressionRestAST> exrlist = new ArrayList<ExpressionRestAST>();
+    ArrayList<ExpressionRestAST> exrlist = new ArrayList<ExpressionRestAST>();
     ex = Expression();
     label_14:
     while (true) {
@@ -987,17 +947,19 @@
       exr = ExpressionRest();
          exrlist.add(exr);
     }
+     {if (true) return new ExpressionListAST(ex,exrlist);}
+    throw new Error("Missing return statement in function");
   }
 
   final public ExpressionRestAST ExpressionRest() throws ParseException {
-    ExpressionAST ex=null;
+    Expression ex=null;
     jj_consume_token(55);
     ex = Expression();
      {if (true) return new ExpressionRestAST(ex);}
     throw new Error("Missing return statement in function");
   }
 
-  final public PrimaryExpressionAST PrimaryExpression() throws ParseException {
+  final public PrimaryExpression PrimaryExpression() throws ParseException {
     IntegerLiteralAST a=null;
     CharConstantAST b=null;
     StringConstantAST c=null;
@@ -1098,24 +1060,31 @@
 
   final public IdentifierAST Identifier() throws ParseException {
     jj_consume_token(IDENTIFIER);
-     {if (true) return new IdentifierAST();}
+    {if (true) return new IdentifierAST();}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public Identifier_Type Identifier_t() throws ParseException {
+    jj_consume_token(IDENTIFIER);
+     {if (true) return new Identifier_Type();}
     throw new Error("Missing return statement in function");
   }
 
   final public ThisExpressionAST ThisExpression() throws ParseException {
     jj_consume_token(THIS);
-     {if (true) return new ThisExpression();}
+     {if (true) return new ThisExpressionAST();}
     throw new Error("Missing return statement in function");
   }
 
   final public ArrayAllocationExpressionAST ArrayAllocationExpression() throws ParseException {
-    ExpressionAST ex=null;
+    SimpleType st=null;
+    Expression ex=null;
     jj_consume_token(NEW);
-    jj_consume_token(INTEGER);
+    st = SimpleType();
     jj_consume_token(LSQPAREN);
     ex = Expression();
     jj_consume_token(RSQPAREN);
-     {if (true) return new ArrayAllocationExpression(ex);}
+     {if (true) return new ArrayAllocationExpressionAST(st,ex);}
     throw new Error("Missing return statement in function");
   }
 
@@ -1125,21 +1094,20 @@
     jj_consume_token(NEW);
     id = Identifier();
     bex = BracketExpression();
-     {if (true) return new BracketExpression(id,bex);}
+     {if (true) return new AllocationExpressionAST(id,bex);}
     throw new Error("Missing return statement in function");
   }
 
   final public NotExpressionAST NotExpression() throws ParseException {
-    ExpressionAST ex=null;
+    Expression ex=null;
     jj_consume_token(NOT);
-    Expression();
-     {if (true) return new ExpressionAST(ex);}
+    ex = Expression();
+     {if (true) return new NotExpressionAST(ex);}
     throw new Error("Missing return statement in function");
   }
 
   final public BracketExpressionAST BracketExpression() throws ParseException {
-    ExpressionAST ex=null;
-    List<ExpressionAST> exlist = new ArrayList<ExpressionAST>();
+    Expression ex=null;
     jj_consume_token(LPAREN);
     label_15:
     while (true) {
@@ -1161,10 +1129,9 @@
         break label_15;
       }
       ex = Expression();
-         exlist.add(ex);
     }
     jj_consume_token(RPAREN);
-       {if (true) return new BracketExpressionAST(exlist);}
+       {if (true) return new BracketExpressionAST(ex);}
     throw new Error("Missing return statement in function");
   }
 
@@ -1372,7 +1339,7 @@
   }
 
   private boolean jj_3R_24() {
-    if (jj_3R_65()) return true;
+    if (jj_3R_64()) return true;
     return false;
   }
 
@@ -1403,10 +1370,12 @@
     return false;
   }
 
-  private boolean jj_3R_99() {
+  private boolean jj_3R_98() {
     if (jj_scan_token(NEW)) return true;
-    if (jj_3R_17()) return true;
-    if (jj_3R_101()) return true;
+    if (jj_3R_19()) return true;
+    if (jj_scan_token(LSQPAREN)) return true;
+    if (jj_3R_20()) return true;
+    if (jj_scan_token(RSQPAREN)) return true;
     return false;
   }
 
@@ -1419,15 +1388,6 @@
 
   private boolean jj_3R_108() {
     if (jj_3R_20()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_98() {
-    if (jj_scan_token(NEW)) return true;
-    if (jj_scan_token(INTEGER)) return true;
-    if (jj_scan_token(LSQPAREN)) return true;
-    if (jj_3R_20()) return true;
-    if (jj_scan_token(RSQPAREN)) return true;
     return false;
   }
 
@@ -1451,15 +1411,15 @@
     return false;
   }
 
+  private boolean jj_3R_97() {
+    if (jj_scan_token(THIS)) return true;
+    return false;
+  }
+
   private boolean jj_3R_77() {
     if (jj_3R_22()) return true;
     if (jj_scan_token(PLUS)) return true;
     if (jj_3R_22()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_97() {
-    if (jj_scan_token(THIS)) return true;
     return false;
   }
 
@@ -1471,6 +1431,11 @@
     if (jj_scan_token(ASSIGN)) return true;
     if (jj_3R_104()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_65() {
+    if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
@@ -1531,6 +1496,11 @@
     return false;
   }
 
+  private boolean jj_3R_94() {
+    if (jj_scan_token(STRING_LITERAL)) return true;
+    return false;
+  }
+
   private boolean jj_3R_84() {
     if (jj_scan_token(LBRACE)) return true;
     Token xsp;
@@ -1539,11 +1509,6 @@
       if (jj_3R_103()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(RBRACE)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_94() {
-    if (jj_scan_token(STRING_LITERAL)) return true;
     return false;
   }
 
@@ -1556,11 +1521,6 @@
 
   private boolean jj_3R_93() {
     if (jj_scan_token(CHAR_LITERAL)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_53() {
-    if (jj_3R_20()) return true;
     return false;
   }
 
@@ -1590,6 +1550,11 @@
     return false;
   }
 
+  private boolean jj_3R_92() {
+    if (jj_scan_token(INTEGER_LITERAL)) return true;
+    return false;
+  }
+
   private boolean jj_3R_72() {
     if (jj_3R_22()) return true;
     if (jj_scan_token(58)) return true;
@@ -1597,13 +1562,14 @@
     return false;
   }
 
-  private boolean jj_3R_92() {
-    if (jj_scan_token(INTEGER_LITERAL)) return true;
+  private boolean jj_3R_50() {
+    if (jj_3R_89()) return true;
     return false;
   }
 
-  private boolean jj_3R_50() {
-    if (jj_3R_89()) return true;
+  private boolean jj_3_29() {
+    if (jj_scan_token(NEW)) return true;
+    if (jj_3R_17()) return true;
     return false;
   }
 
@@ -1616,31 +1582,19 @@
     return false;
   }
 
-  private boolean jj_3_29() {
-    if (jj_scan_token(NEW)) return true;
-    if (jj_3R_17()) return true;
-    return false;
-  }
-
   private boolean jj_3_26() {
     if (jj_3R_22()) return true;
     if (jj_scan_token(DOT)) return true;
     return false;
   }
 
-  private boolean jj_3R_49() {
-    if (jj_3R_88()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_64() {
+  private boolean jj_3R_63() {
     if (jj_3R_101()) return true;
     return false;
   }
 
-  private boolean jj_3_10() {
-    if (jj_3R_17()) return true;
-    if (jj_scan_token(ASSIGN)) return true;
+  private boolean jj_3R_49() {
+    if (jj_3R_88()) return true;
     return false;
   }
 
@@ -1650,15 +1604,21 @@
     return false;
   }
 
+  private boolean jj_3_10() {
+    if (jj_3R_17()) return true;
+    if (jj_scan_token(ASSIGN)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_62() {
+    if (jj_3R_100()) return true;
+    return false;
+  }
+
   private boolean jj_3_25() {
     if (jj_3R_22()) return true;
     if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(LENGTH)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_63() {
-    if (jj_3R_100()) return true;
     return false;
   }
 
@@ -1678,16 +1638,16 @@
     return false;
   }
 
+  private boolean jj_3R_61() {
+    if (jj_3R_99()) return true;
+    return false;
+  }
+
   private boolean jj_3_24() {
     if (jj_3R_22()) return true;
     if (jj_scan_token(LSQPAREN)) return true;
     if (jj_3R_22()) return true;
     if (jj_scan_token(RSQPAREN)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_62() {
-    if (jj_3R_99()) return true;
     return false;
   }
 
@@ -1701,15 +1661,15 @@
     return false;
   }
 
+  private boolean jj_3R_60() {
+    if (jj_3R_98()) return true;
+    return false;
+  }
+
   private boolean jj_3_23() {
     if (jj_3R_22()) return true;
     if (jj_scan_token(61)) return true;
     if (jj_3R_22()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_61() {
-    if (jj_3R_98()) return true;
     return false;
   }
 
@@ -1723,7 +1683,7 @@
     return false;
   }
 
-  private boolean jj_3R_60() {
+  private boolean jj_3R_59() {
     if (jj_3R_97()) return true;
     return false;
   }
@@ -1752,10 +1712,7 @@
     jj_scanpos = xsp;
     if (jj_3R_51()) {
     jj_scanpos = xsp;
-    if (jj_3R_52()) {
-    jj_scanpos = xsp;
-    if (jj_3R_53()) return true;
-    }
+    if (jj_3R_52()) return true;
     }
     }
     }
@@ -1771,13 +1728,13 @@
     return false;
   }
 
-  private boolean jj_3R_41() {
-    if (jj_3R_81()) return true;
+  private boolean jj_3R_58() {
+    if (jj_3R_17()) return true;
     return false;
   }
 
-  private boolean jj_3R_59() {
-    if (jj_3R_17()) return true;
+  private boolean jj_3R_41() {
+    if (jj_3R_81()) return true;
     return false;
   }
 
@@ -1788,7 +1745,7 @@
     return false;
   }
 
-  private boolean jj_3R_58() {
+  private boolean jj_3R_57() {
     if (jj_3R_96()) return true;
     return false;
   }
@@ -1805,18 +1762,18 @@
     return false;
   }
 
-  private boolean jj_3R_57() {
+  private boolean jj_3R_56() {
     if (jj_3R_95()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_55() {
+    if (jj_3R_94()) return true;
     return false;
   }
 
   private boolean jj_3R_39() {
     if (jj_3R_79()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_56() {
-    if (jj_3R_94()) return true;
     return false;
   }
 
@@ -1827,13 +1784,13 @@
     return false;
   }
 
-  private boolean jj_3R_38() {
-    if (jj_3R_78()) return true;
+  private boolean jj_3R_54() {
+    if (jj_3R_93()) return true;
     return false;
   }
 
-  private boolean jj_3R_55() {
-    if (jj_3R_93()) return true;
+  private boolean jj_3R_38() {
+    if (jj_3R_78()) return true;
     return false;
   }
 
@@ -1847,6 +1804,8 @@
   private boolean jj_3R_22() {
     Token xsp;
     xsp = jj_scanpos;
+    if (jj_3R_53()) {
+    jj_scanpos = xsp;
     if (jj_3R_54()) {
     jj_scanpos = xsp;
     if (jj_3R_55()) {
@@ -1865,9 +1824,7 @@
     jj_scanpos = xsp;
     if (jj_3R_62()) {
     jj_scanpos = xsp;
-    if (jj_3R_63()) {
-    jj_scanpos = xsp;
-    if (jj_3R_64()) return true;
+    if (jj_3R_63()) return true;
     }
     }
     }
@@ -1881,7 +1838,7 @@
     return false;
   }
 
-  private boolean jj_3R_54() {
+  private boolean jj_3R_53() {
     if (jj_3R_92()) return true;
     return false;
   }
@@ -1955,14 +1912,14 @@
     return false;
   }
 
-  private boolean jj_3_27() {
-    if (jj_scan_token(55)) return true;
-    return false;
-  }
-
   private boolean jj_3R_110() {
     if (jj_scan_token(55)) return true;
     if (jj_3R_20()) return true;
+    return false;
+  }
+
+  private boolean jj_3_27() {
+    if (jj_scan_token(55)) return true;
     return false;
   }
 
@@ -2078,7 +2035,7 @@
     return false;
   }
 
-  private boolean jj_3R_65() {
+  private boolean jj_3R_64() {
     if (jj_3R_19()) return true;
     if (jj_scan_token(LSQPAREN)) return true;
     if (jj_scan_token(RSQPAREN)) return true;
@@ -2143,6 +2100,11 @@
     return false;
   }
 
+  private boolean jj_3R_106() {
+    if (jj_3R_20()) return true;
+    return false;
+  }
+
   private boolean jj_3R_29() {
     if (jj_3R_69()) return true;
     return false;
@@ -2166,8 +2128,14 @@
     return false;
   }
 
-  private boolean jj_3R_106() {
-    if (jj_3R_20()) return true;
+  private boolean jj_3R_101() {
+    if (jj_scan_token(LPAREN)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_106()) { jj_scanpos = xsp; break; }
+    }
+    if (jj_scan_token(RPAREN)) return true;
     return false;
   }
 
@@ -2207,21 +2175,16 @@
     return false;
   }
 
-  private boolean jj_3R_101() {
-    if (jj_scan_token(LPAREN)) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_106()) { jj_scanpos = xsp; break; }
-    }
-    if (jj_scan_token(RPAREN)) return true;
-    return false;
-  }
-
   private boolean jj_3R_80() {
     if (jj_3R_22()) return true;
     if (jj_scan_token(61)) return true;
     if (jj_3R_22()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_100() {
+    if (jj_scan_token(NOT)) return true;
+    if (jj_3R_20()) return true;
     return false;
   }
 
@@ -2264,14 +2227,15 @@
     return false;
   }
 
-  private boolean jj_3R_25() {
+  private boolean jj_3R_99() {
+    if (jj_scan_token(NEW)) return true;
     if (jj_3R_17()) return true;
+    if (jj_3R_101()) return true;
     return false;
   }
 
-  private boolean jj_3R_100() {
-    if (jj_scan_token(NOT)) return true;
-    if (jj_3R_20()) return true;
+  private boolean jj_3R_25() {
+    if (jj_3R_65()) return true;
     return false;
   }
 
@@ -2301,10 +2265,10 @@
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x0,0x1000000,0x800000,0x0,0x800000,0x0,0x800000,0xf0402200,0x8000,0x0,0x0,0x800000,0xd0400200,0xf0402200,0x10400200,0xf0402200,0x10400200,0x10400200,0x10000000,0x400200,0x10400200,};
+      jj_la1_0 = new int[] {0x0,0x1000000,0x800000,0x0,0x800000,0x0,0x800000,0xe0002000,0x8000,0x0,0x0,0x800000,0xc0000000,0xe0002000,0x10400200,0xe0002000,0x10400200,0x10400200,0x10000000,0x400200,0x10400200,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x2000,0x0,0x8d081,0x10,0x8d081,0x10,0x8d081,0xf0708,0x0,0x800000,0x80000,0xd081,0xf0708,0xf0708,0xf0308,0xf0708,0xf0308,0xf0308,0xf0300,0x0,0xf0308,};
+      jj_la1_1 = new int[] {0x2000,0x0,0x8d081,0x10,0x8d081,0x10,0x8d081,0x80400,0x0,0x800000,0x80000,0xd081,0x400,0x80400,0xf0308,0x80400,0xf0308,0xf0308,0xf0300,0x0,0xf0308,};
    }
   final private JJCalls[] jj_2_rtns = new JJCalls[29];
   private boolean jj_rescan = false;

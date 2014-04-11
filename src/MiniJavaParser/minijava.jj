@@ -150,8 +150,8 @@ TOKEN : /* IDENTIFIERS */
 
 GoalAST Goal() :
 {
-    List<ImportDeclarationAST> implist = new ArrayList<ImportDeclarationAST>();
-    List<TypeDeclarationAST> tydecls = new ArrayList<TypeDeclarationAST>();
+    ArrayList<ImportDeclarationAST> implist = new ArrayList<ImportDeclarationAST>();
+    ArrayList<TypeDeclarationAST> tydecls = new ArrayList<TypeDeclarationAST>();
     MainClassAST mc=null;
     ImportDeclarationAST imp=null;
     TypeDeclarationAST t=null;
@@ -199,13 +199,13 @@ MultipleImportDeclarationAST MultipleImportDeclaration():
     TypeNameAST tn=null;
 }
 {
-    "import" Tn=TypeName() "." "*" ";"
+    "import" tn=TypeName() "." "*" ";"
     {return new MultipleImportDeclarationAST(tn);}
 }
 
 TypeNameAST TypeName():
 {
-    List<IdentifierAST> idlist = new ArrayList<IdentifierAST>();
+    ArrayList<IdentifierAST> idlist = new ArrayList<IdentifierAST>();
     IdentifierAST id=null;
 }
 {
@@ -250,9 +250,9 @@ ClassDeclarationAST ClassDeclaration() :
 {
     IdentifierAST id=null;
     VarDeclarationAST vd=null;
-    List<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
+    ArrayList<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
     MethodDeclarationAST md=null;
-    List<MethodDeclarationAST> mdlist = new ArrayList<MethodDeclarationAST>();
+    ArrayList<MethodDeclarationAST> mdlist = new ArrayList<MethodDeclarationAST>();
 }
 {
   "class" id=Identifier()
@@ -273,12 +273,12 @@ ClassExtendsDeclarationAST ClassExtendsDeclaration() :
     IdentifierAST id1=null;
     IdentifierAST id2=null;
     VarDeclarationAST vd=null;
-    List<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
+    ArrayList<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
     MethodDeclarationAST md=null;
-    List<MethodDeclarationAST> mdlist = new ArrayList<MethodDeclarationAST>();
+    ArrayList<MethodDeclarationAST> mdlist = new ArrayList<MethodDeclarationAST>();
 }
 {
-  "class" id=Identifier()  "extends" id2=Identifier()"{" 
+  "class" id1=Identifier()  "extends" id2=Identifier()"{" 
     ( 
         vd=VarDeclaration()
         {vdlist.add(vd);}
@@ -291,7 +291,7 @@ ClassExtendsDeclarationAST ClassExtendsDeclaration() :
 
 VarDeclarationAST VarDeclaration():  
 {
-    TypeAST t=null;
+    Type t=null;
     IdentifierAST id=null;
 }
 { 
@@ -301,14 +301,14 @@ VarDeclarationAST VarDeclaration():
 
 MethodDeclarationAST MethodDeclaration():  
 {
-    TypeAST t=null;
+    Type t=null;
     IdentifierAST id=null;
     FormalParameterListAST fpl=null;
     VarDeclarationAST vd=null;
-    List<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
-    StatementAST st=null;
-    List<StatementAST> stlist = new ArrayList<StatementAST>();
-    ExpressionAST ex=null;
+    ArrayList<VarDeclarationAST> vdlist = new ArrayList<VarDeclarationAST>();
+    Statement st=null;
+    ArrayList<Statement> stlist = new ArrayList<Statement>();
+    Expression ex=null;
 }   
 {
   "public" t=Type() id=Identifier()"(" ( fpl=FormalParameterList() )? ")"   
@@ -331,7 +331,7 @@ FormalParameterListAST FormalParameterList() :
 {
     FormalParameterAST fp=null;
     FormalParameterRestAST fpr=null;
-    List<FormalParameterRestAST> fprlist = new ArrayList<FormalParameterRestAST>();
+    ArrayList<FormalParameterRestAST> fprlist = new ArrayList<FormalParameterRestAST>();
 }
 {
   fp=FormalParameter()
@@ -344,7 +344,7 @@ FormalParameterListAST FormalParameterList() :
 
 FormalParameterAST FormalParameter() :
 {
-    TypeAST t=null;
+    Type t=null;
     IdentifierAST id=null;
 }
 {
@@ -361,11 +361,11 @@ FormalParameterRestAST FormalParameterRest() :
     {return new FormalParameterRestAST(fp);}
 }
 
-TypeAST Type():
+Type Type():
 {
-    SimpleTypeAST st=null;
+    SimpleType st=null;
     ArrayTypeAST at=null;
-    IdentifierAST id=null;
+    Identifier_Type id=null;
 }
 {
     LOOKAHEAD(SimpleType())  
@@ -376,18 +376,18 @@ TypeAST Type():
     at=ArrayType()
     {return at;}
 |
-    id=Identifier()
+    id=Identifier_t()
     {return id;}
 }
 
-SimpleTypeAST SimpleType():
+SimpleType SimpleType():
 {
     CharTypeAST ct;
     BooleanTypeAST bt;
     IntegerTypeAST it;
     VoidTypeAST vt;
     ObjectTypeAST ot;
-    StringTypeASR st;
+    StringTypeAST st;
 }
 {
     ct=CharType()
@@ -411,7 +411,7 @@ SimpleTypeAST SimpleType():
 
 ArrayTypeAST ArrayType() :
 {
-    SimpleTypeAST st=null;
+    SimpleType st=null;
 }
 {
     st=SimpleType() "[" "]"
@@ -461,7 +461,7 @@ VoidTypeAST VoidType():
     {return new VoidTypeAST();}
 }
 
-StatementAST Statement():
+Statement Statement():
 {
     BlockAST a=null;
     AssignmentStatementAST b=null;
@@ -471,7 +471,7 @@ StatementAST Statement():
     WhileStatementAST f=null;
     SwitchStatementAST g=null;
     PrintStatementAST h=null;
-    ExpressionAST i=null;
+    Expression i=null;
 }
 {
     LOOKAHEAD("{" "}")
@@ -502,15 +502,15 @@ StatementAST Statement():
 |
     h=PrintStatement()
     {return h;}
-|
-    i=Expression()
-    {return i;}
+//|
+    //i=Expression()
+    //{return i;}
 }
 
 BlockAST Block() :
 {
-    StatementAST st=null;
-    List<StatementAST> stlist = new ArrayList<StatementAST>();
+    Statement st=null;
+    ArrayList<Statement> stlist = new ArrayList<Statement>();
 }
 {
   "{" ( 
@@ -533,7 +533,7 @@ AssignmentStatementAST AssignmentStatement() :
 ArrayAssignmentStatementAST ArrayAssignmentStatement() :
 {
     IdentifierAST id=null;
-    ExpressionAST ex=null;
+    Expression ex=null;
     AssigmentRestAST sr=null;
 }
 {
@@ -543,22 +543,22 @@ ArrayAssignmentStatementAST ArrayAssignmentStatement() :
 
 AssigmentRestAST AssigmentRest():
 { 
-    TypeAST t=null;
-    ExpressionAST ex=null;
+    Type t=null;
+    Expression ex=null;
 }
 {
     LOOKAHEAD(5)
     "(" t=Type() ")" "System.in.read" "(" ")"
-    {return new AssigmentRestAST();}
+    {return new AssigmentRestAST(t);}
 |    
     ex=Expression()
-    {return ex;}
+    {return new AssigmentRestAST(ex);}
 }
 
 IfStatementAST IfStatement():
 {
-    ExpressionAST ex=null;
-    StatementAST st=null;
+    Expression ex=null;
+    Statement st=null;
 }
 {
   "if" "(" ex=Expression() ")" st=Statement()
@@ -567,9 +567,9 @@ IfStatementAST IfStatement():
     
 IfElseStatementAST  IfElseStatement():
 {
-    ExpressionAST ex=null;
-    StatementAST stif=null;
-    StatementAST stelse=null;
+    Expression ex=null;
+    Statement stif=null;
+    Statement stelse=null;
 }
 {
     "if" "(" ex=Expression() ")" stif=Statement() "else" stelse=Statement()
@@ -578,8 +578,8 @@ IfElseStatementAST  IfElseStatement():
 
 WhileStatementAST WhileStatement():
 {
-    ExpressionAST ex=null;
-    StatementAST st=null;
+    Expression ex=null;
+    Statement st=null;
 }
 {
   "while" "(" ex=Expression() ")" st=Statement() 
@@ -590,8 +590,8 @@ SwitchStatementAST SwitchStatement():
 {
     IdentifierAST id=null;
     IntegerTypeAST it=null;
-    StatementAST st=null;
-    List<StatementAST> stlist = new ArrayList<StatementAST>();
+    Statement st=null;
+    ArrayList<Statement> stlist = new ArrayList<Statement>();
 }
 {   
     "switch" "(" id=Identifier() ")" "{" "case" it=IntegerType() ":"
@@ -604,14 +604,14 @@ SwitchStatementAST SwitchStatement():
 
 PrintStatementAST PrintStatement() :
 {
-    ExpressionAST ex=null;
+    Expression ex=null;
 }
 {
   "System.out.println" "(" ex=Expression() ")" ";"
     {return new PrintStatementAST(ex);}
 }
 
-ExpressionAST Expression():
+Expression Expression():
 {
     AndExpressionAST a=null;
     OrExpressionAST b=null;
@@ -625,7 +625,7 @@ ExpressionAST Expression():
     ArrayLookupAST j=null;
     ArrayLengthAST k=null;
     MessageSendAST l=null;
-    PrimaryExpressionAST m=null;
+    PrimaryExpression m=null;
 }
 {
     LOOKAHEAD(PrimaryExpression() "&&" PrimaryExpression())
@@ -682,8 +682,8 @@ ExpressionAST Expression():
 
 AndExpressionAST AndExpression() :
 {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
 } 
 {
     pe1=PrimaryExpression() "&&" pe2=PrimaryExpression()
@@ -692,8 +692,8 @@ AndExpressionAST AndExpression() :
 
 OrExpressionAST OrExpression() :
 {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
 }
 {
     pe1=PrimaryExpression() "||" pe2=PrimaryExpression()
@@ -702,8 +702,8 @@ OrExpressionAST OrExpression() :
 
 EqualExpressionAST EqualExpression() :
 {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
 } 
 {
     pe1=PrimaryExpression() "=" "=" pe2=PrimaryExpression()
@@ -712,8 +712,8 @@ EqualExpressionAST EqualExpression() :
 
 GreatExpressionAST GreatExpression():
 {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
 }
 {
     pe1=PrimaryExpression() ">" pe2=PrimaryExpression()
@@ -722,8 +722,8 @@ GreatExpressionAST GreatExpression():
 
 LessExpressionAST LessExpression() :
 {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
 }
 {
     pe1=PrimaryExpression() "<" pe2=PrimaryExpression()
@@ -732,8 +732,8 @@ LessExpressionAST LessExpression() :
 
 PlusExpressionAST PlusExpression() :
 {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
 }
 {
     pe1=PrimaryExpression() "+" pe2=PrimaryExpression()
@@ -742,8 +742,8 @@ PlusExpressionAST PlusExpression() :
 
 MinusExpressionAST MinusExpression() :
 {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
 }
 {
     pe1=PrimaryExpression() "-" pe2=PrimaryExpression()
@@ -752,8 +752,8 @@ MinusExpressionAST MinusExpression() :
 
 TimesExpressionAST TimesExpression() :
 {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
 }
 {
     pe1=PrimaryExpression() "*" pe2=PrimaryExpression()
@@ -762,8 +762,8 @@ TimesExpressionAST TimesExpression() :
 
 SubExpressionAST SubExpression() :
 {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
 }
 {
     pe1=PrimaryExpression() "/" pe2=PrimaryExpression()
@@ -772,8 +772,8 @@ SubExpressionAST SubExpression() :
 
 ArrayLookupAST ArrayLookup():
 {
-    PrimaryExpressionAST pe1=null;
-    PrimaryExpressionAST pe2=null;
+    PrimaryExpression pe1=null;
+    PrimaryExpression pe2=null;
 }
 {
     pe1=PrimaryExpression() "[" pe2=PrimaryExpression() "]"
@@ -782,7 +782,7 @@ ArrayLookupAST ArrayLookup():
 
 ArrayLengthAST ArrayLength() :
 {
-    PrimaryExpressionAST pe1=null;
+    PrimaryExpression pe1=null;
 }
 {
     pe1=PrimaryExpression() "." "length"
@@ -791,7 +791,7 @@ ArrayLengthAST ArrayLength() :
 
 MessageSendAST MessageSend() :
 {
-    PrimaryExpressionAST pex=null;
+    PrimaryExpression pex=null;
     IdentifierAST id=null;
     ExpressionListAST exl=null;
 }
@@ -803,9 +803,9 @@ MessageSendAST MessageSend() :
 
 ExpressionListAST ExpressionList() :
 {
-    ExpressionAST ex=null;
+    Expression ex=null;
     ExpressionRestAST exr=null;
-    List<ExpressionRestAST> exrlist = new ArrayList<ExpressionRestAST>();
+    ArrayList<ExpressionRestAST> exrlist = new ArrayList<ExpressionRestAST>();
 }
 {
     ex=Expression()
@@ -813,18 +813,19 @@ ExpressionListAST ExpressionList() :
         exr=ExpressionRest()
         {exrlist.add(exr);}
     )* 
+    {return new ExpressionListAST(ex,exrlist);}
 }
 
 ExpressionRestAST ExpressionRest() :
 {
-    ExpressionAST ex=null;
+    Expression ex=null;
 }
 {
     "," ex=Expression()
     {return new ExpressionRestAST(ex);}
 }
 
-PrimaryExpressionAST PrimaryExpression() :
+PrimaryExpression PrimaryExpression() :
 {
     IntegerLiteralAST a=null;
     CharConstantAST b=null;
@@ -914,24 +915,32 @@ IdentifierAST Identifier() :
 {}
 {
   <IDENTIFIER>
-    {return new IdentifierAST();}
+   {return new IdentifierAST();}
+}
+
+Identifier_Type Identifier_t():
+{}
+{
+  <IDENTIFIER>
+    {return new Identifier_Type();}
 }
 
 ThisExpressionAST ThisExpression() :
 {}
 {
     "this"
-    {return new ThisExpression();}
+    {return new ThisExpressionAST();}
     
 }
 
 ArrayAllocationExpressionAST ArrayAllocationExpression() :
 {
-    ExpressionAST ex=null;
+    SimpleType st=null;
+    Expression ex=null;
 }
 {
-    "new" "int" "["ex= Expression() "]"
-    {return new ArrayAllocationExpression(ex);}
+    "new" st=SimpleType() "[" ex= Expression() "]"
+    {return new ArrayAllocationExpressionAST(st,ex);}
 }
 
 AllocationExpressionAST AllocationExpression() :
@@ -941,28 +950,26 @@ AllocationExpressionAST AllocationExpression() :
 }
 {
     "new" id=Identifier() bex=BracketExpression()
-    {return new BracketExpression(id,bex);}
+    {return new AllocationExpressionAST(id,bex);}
 }
 
 NotExpressionAST NotExpression():
 {
-    ExpressionAST ex=null;
+    Expression ex=null;
 }
 {
-  "!" Expression() 
-    {return new ExpressionAST(ex);}
+  "!" ex=Expression() 
+    {return new NotExpressionAST(ex);}
 }
 
 BracketExpressionAST BracketExpression() :
 {
-    ExpressionAST ex=null;
-    List<ExpressionAST> exlist = new ArrayList<ExpressionAST>();
+    Expression ex=null;
 }
 {
   "(" ( 
         ex=Expression()
-        {exlist.add(ex);}
       )* ")"
-      {return new BracketExpressionAST(exlist);}
+      {return new BracketExpressionAST(ex);}
 }
 

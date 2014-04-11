@@ -10,17 +10,6 @@ package AST;
  *
  * @author administrador
  */
-public class TypeDeclarationAST extends AST {
-    
-    private ClassDeclarationAST cd;
-    private ClassExtendsDeclarationAST ced;
-
-    public TypeDeclarationAST(ClassDeclarationAST cd, ClassExtendsDeclarationAST ced) {
-        this.cd = cd;
-        this.ced = ced;
-    }
-    
-    public Object visit(Visitor v,Object arg){
-        return v.visitTypeDeclarationAST(this, arg);
-    } 
+public abstract class TypeDeclarationAST extends AST {
+    public abstract Object visit(Visitor v,Object arg);   
 }
