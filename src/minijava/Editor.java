@@ -59,7 +59,7 @@ public class Editor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setPreferredSize(null);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -76,7 +76,7 @@ public class Editor extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Program");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.setAutoscrolls(true);
         jScrollPane3.setViewportView(jTree1);
@@ -128,9 +128,11 @@ public class Editor extends javax.swing.JFrame {
                         .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        getAccessibleContext().setAccessibleParent(jEditorPane1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -188,6 +190,7 @@ public class Editor extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             jTextArea1.setText("");  
+            jTree1.setModel(new DefaultTreeModel(null));
             //writeFile(jTextField1.getText(),jEditorPane1.getText());
             parse();
             for (int i = 0; i < jTree1.getRowCount(); i++) {
@@ -209,7 +212,7 @@ public class Editor extends javax.swing.JFrame {
         fileChooser.showOpenDialog(this);        
         if (fileChooser.getSelectedFile() != null) {            
             writeFile("last.txt",fileChooser.getSelectedFile().getAbsolutePath());
-            jEditorPane1.setText(readFile ( jTextField1.getText() ));
+            jEditorPane1.setText(readFile(fileChooser.getSelectedFile().getAbsolutePath()));
             jTextField1.setText(fileChooser.getSelectedFile().getAbsolutePath());
         }
         }catch(Exception er){jTextArea1.setText(er.toString());}
