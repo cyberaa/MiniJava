@@ -1,0 +1,28 @@
+import java.awt.*;
+import java.awt.event.*;
+
+  class ClassActions extends ActionListener 
+  {
+    public void actionPerformed(ActionEvent evento) 
+    {
+      Object objeto; 
+      objeto = evento.getSource(); 
+      
+      if (objeto == b1) 
+         this.b1_ActionPerformed(evento);
+      return null;
+    }
+  
+  public void b1_ActionPerformed(ActionEvent evento)
+  { 
+    int res;
+    int n;
+    String temp;
+    temp = t1.getText();
+    n = Integer.parseInt(temp); 
+    res = this.ComputeFac(n);
+    temp = String.valueOf(res);
+    l1.setText(temp);
+    return null;
+  }
+}

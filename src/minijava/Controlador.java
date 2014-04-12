@@ -20,8 +20,8 @@ public class Controlador {
     {
         GUI=nn;
     }
-    public AST ParseProgram() throws Exception{
-        MiniJavaParser P=  new MiniJavaParser(new java.io.FileInputStream("prueba.txt"));
+    public AST ParseProgram(String filepos) throws Exception{
+        MiniJavaParser P=  new MiniJavaParser(new java.io.FileInputStream(filepos));
         AST raiz = P.Goal();        
         return raiz;
     }

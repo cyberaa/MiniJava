@@ -166,7 +166,7 @@ GoalAST Goal() :
         t=TypeDeclaration()
         {tydecls.add(t);}
     )*
-    <EOF>
+    <EOF> 
     {return  new GoalAST(implist,mc,tydecls);}
 }
 
