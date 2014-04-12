@@ -10,13 +10,7 @@ import ASTPRINT.ASTPRINT;
 import MiniJavaParser.MiniJavaParser;
 import MiniJavaParser.ParseException;
 import MiniJavaParser.TokenMgrError;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -155,13 +149,19 @@ public class Editor extends javax.swing.JFrame {
             }return content;
     }
 
-   private void writeFile(String filename,String inputtext)
-    {try {
-        BufferedWriter out = new BufferedWriter(new FileWriter(filename));
-        out.write(inputtext);
-        out.close();}catch (IOException e){
-            System.out.println("Exception ");       
-        }
+   private void writeFile(String filename,String inputtext) throws Exception
+    {
+//        try {
+//        BufferedWriter out = new BufferedWriter(new FileWriter(filename));
+//        out.write(inputtext);
+//        out.close();}catch (IOException e){
+//            System.out.println("Exception ");       
+//        }
+         Writer output = null;
+         File file = new File(filename);
+         output = new BufferedWriter(new FileWriter(file));
+         output.write(inputtext);
+         output.close();  
     }
     
     private void parse() throws Exception
@@ -191,7 +191,7 @@ public class Editor extends javax.swing.JFrame {
         try{
             jTextArea1.setText("");  
             jTree1.setModel(new DefaultTreeModel(null));
-            //writeFile(jTextField1.getText(),jEditorPane1.getText());
+            writeFile(jTextField1.getText(),jEditorPane1.getText());
             parse();
             for (int i = 0; i < jTree1.getRowCount(); i++) {
                 jTree1.expandRow(i);}
