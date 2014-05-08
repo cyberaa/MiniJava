@@ -1,1 +1,1 @@
-C:\Users\Daniel\Documents\NetBeansProjects\MiniJava\prueba.txt
+/Users/itcr/NetBeansProjects/MiniJava/files/prueba.txt

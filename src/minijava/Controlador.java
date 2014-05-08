@@ -25,4 +25,5 @@ public class Controlador {
         AST raiz = P.Goal();        
         return raiz;
     }
+   
 }

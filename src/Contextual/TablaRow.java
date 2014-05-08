@@ -10,13 +10,17 @@ import AST.*;
  *
  * @author administrador
  */
-public class Tabla {
+public class TablaRow {
 
   public String nombreID;
   public int nivel;
   public AST reference;
   
-  public Tabla(String n, int ni, AST reference){
+  public TablaRow(){
+      
+  }
+  
+  public TablaRow(String n, int ni, AST reference){
     nombreID = n;
     nivel = ni;
     this.reference = reference;

@@ -4,26 +4,26 @@
     import java.util.ArrayList;
     import java.util.List;
     public class MiniJavaParser implements MiniJavaParserConstants {
-          public static void main(String args[]) {
-            MiniJavaParser parser;
-              try {
-                System.out.println("MiniJava parsing from '" + "prueba.txt" + "' file...");
-                parser = new MiniJavaParser(new java.io.FileInputStream("prueba.txt"));
-              } catch (java.io.FileNotFoundException e) {
-                System.out.println("Error: File not found.");
-                return;
-              }
-            try {
-              parser.Goal();
-              System.out.println("MiniJava program parsed successfully.");
-            } catch (ParseException e) {
-              System.out.println("Encountered errors during parse.");
-              System.out.println(e.getMessage());
-            } catch (TokenMgrError e) {
-              System.out.println("Encountered errors during Scanning.");
-              System.out.println(e.getMessage());
-            }
-        }
+//          public static void main(String args[]) {
+//            MiniJavaParser parser;
+//              try {
+//                System.out.println("MiniJava parsing from '" + "prueba.txt" + "' file...");
+//                parser = new MiniJavaParser(new java.io.FileInputStream("prueba.txt"));
+//              } catch (java.io.FileNotFoundException e) {
+//                System.out.println("Error: File not found.");
+//                return;
+//              }
+//            try {
+//              parser.Goal();
+//              System.out.println("MiniJava program parsed successfully.");
+//            } catch (ParseException e) {
+//              System.out.println("Encountered errors during parse.");
+//              System.out.println(e.getMessage());
+//            } catch (TokenMgrError e) {
+//              System.out.println("Encountered errors during Scanning.");
+//              System.out.println(e.getMessage());
+//            }
+//        }
 
 /************************************
  * The MiniJava Grammar Starts Here *
