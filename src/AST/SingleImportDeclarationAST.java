@@ -17,7 +17,7 @@ public class SingleImportDeclarationAST extends ImportDeclarationAST{
         this.tn = tn;
     }
     
-        public Object visit(Visitor v,Object arg){
+    public Object visit(Visitor v,Object arg){
         return v.visitSingleImportDeclaration(this, arg);
     }
 }

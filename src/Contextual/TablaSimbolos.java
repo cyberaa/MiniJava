@@ -34,7 +34,7 @@ public class TablaSimbolos {
                 result= true;
         return result;
     }
-
+    
     public TablaRow retrieve(String n) {
         int cont = ASTtable.size() - 1;
         while ((cont >= 0) && ((TablaRow) ASTtable.get(cont)).nivel >= 0) {

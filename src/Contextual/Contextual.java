@@ -9,7 +9,7 @@ import AST.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-//    DefaultTableModel tablemodel=new DefaultTableModel();
+//    DefaultTableModel tablemodel= (DefaultTableModel) arg;
 //    tablemodel.addRow(new Object[]{});
 /**
  *
@@ -24,16 +24,18 @@ public class Contextual implements Visitor{
     public Object visitGoalAST(GoalAST c, Object arg) {
         DefaultTableModel tablemodel= (DefaultTableModel) arg;
         if(c.id.size() >0 ){
+            Symtable.openScope();
             for(int i=0; i < c.id.size(); i++){
-                c.id.get(i).visit(this, tablemodel);
+                    c.id.get(i).visit(this, tablemodel);
             }
+            Symtable.closeScope();
         }
         if (c.mc != null) {
             c.mc.visit(this, tablemodel);
         }
-        if (c.td.size() >0 ) {
+        if (c.td.size() >0 ){
             for(int i=0; i < c.td.size(); i++){
-                c.td.get(i).visit(this, tablemodel);                
+                //c.td.get(i).visit(this, tablemodel);                
             }
         }        
         return null;        
@@ -42,7 +44,7 @@ public class Contextual implements Visitor{
     @Override
     public Object visitImportDeclaration(ImportDeclarationAST c, Object arg) {
         c.visit(this, arg);
-       return null;
+        return null;
     }
 
     @Override
@@ -71,14 +73,14 @@ public class Contextual implements Visitor{
                 tableobject=Symtable.enter(c.id1.getStringvalue(), c);
                 tablemodel.addRow(new Object[]{tableobject.nivel,tableobject.reference.getClass().getName(),tableobject.nombreID,null});}
             else
-                tablemodel.addRow(new Object[]{tableobject.nivel,c.getClass().getName(),tableobject.nombreID,"already exists"});
+                tablemodel.addRow(new Object[]{null,c.getClass().getName(),c.id1.getStringvalue(),"already exists"});
         }
         if (c.id2 != null) {
             if(!Symtable.getIdentifier(c.id2.getStringvalue())){
                 tableobject=Symtable.enter(c.id2.getStringvalue(), c);
                 tablemodel.addRow(new Object[]{tableobject.nivel,tableobject.reference.getClass().getName(),tableobject.nombreID,null});}
             else
-                tablemodel.addRow(new Object[]{tableobject.nivel,c.getClass().getName(),tableobject.nombreID,"already exists"});
+                tablemodel.addRow(new Object[]{null,c.getClass().getName(),c.id2.getStringvalue(),"already exists"});
         }
         if (c.ps0 != null) {
             c.ps0.visit(this, tablemodel);
@@ -264,47 +266,39 @@ public class Contextual implements Visitor{
 
     @Override
     public Object visitAllocationExpressionAST(AllocationExpressionAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
+        DefaultTableModel tablemodel= (DefaultTableModel) arg;
         if (aThis.id != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id.getStringvalue());
-            root.add(h0);
+            if(Symtable.getIdentifier(aThis.id.getStringvalue())){
+                tableobject=Symtable.enter(aThis.id.getStringvalue(), aThis);
+                tablemodel.addRow(new Object[]{tableobject.nivel,tableobject.reference.getClass().getName(),tableobject.nombreID,null});}
+            else
+                tablemodel.addRow(new Object[]{null,aThis.getClass().getName(),aThis.id.getStringvalue(),"does not exists"});
         }
         if (aThis.ex != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.ex.getClass().getName());
-            root.add(h0);
-            aThis.ex.visit(this, h0);
+            aThis.ex.visit(this, arg);
         }
        return null;
     }
 
     @Override
     public Object visitAndExpressionAST(AndExpressionAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
         if (aThis.pex1 != null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.pex1.getClass().getName());
-            root.add(h0);
-            aThis.pex1.visit(this, h0);
+            aThis.pex1.visit(this, arg);
         }
         if (aThis.pex2 != null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.pex2.getClass().getName());
-            root.add(h0);
-            aThis.pex2.visit(this, h0);
+            aThis.pex2.visit(this, arg);
         }
        return null;
     }
 
     @Override
     public Object visitArrayAllocationExpressionAST(ArrayAllocationExpressionAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
         if (aThis.ex != null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.ex.getClass().getName());
-            root.add(h0);
-            aThis.ex.visit(this, h0);
+            aThis.ex.visit(this, arg);
         }
         if (aThis.st != null){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.st.getClass().getName());
-            root.add(h0);
-            aThis.st.visit(this, h0);
+
+            aThis.st.visit(this, arg);
         }
        return null;
     }
@@ -414,11 +408,8 @@ public class Contextual implements Visitor{
 
     @Override
     public Object visitBracketExpressionAST(BracketExpressionAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
         if (aThis.ex != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.ex.getClass().getName());
-            root.add(h0);
-            aThis.ex.visit(this, h0);
+            aThis.ex.visit(this, arg);
         }
        return null;
     }
@@ -457,19 +448,12 @@ public class Contextual implements Visitor{
 
     @Override
     public Object visitExpressionListAST(ExpressionListAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
         if (aThis.ex != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.ex.getClass().getName());
-            root.add(h0);
-            aThis.ex.visit(this, h0);
+            aThis.ex.visit(this, arg);
         }
         if(aThis.exr.size() > 0){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.exr.getClass().getName());
             for(int i=0; i < aThis.exr.size(); i++){
-                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(aThis.exr.get(i).getClass().getName());
-                h0.add(temp);
-                aThis.exr.get(i).visit(this, temp);
-                root.add(h0);  
+                aThis.exr.get(i).visit(this, arg);
             }
         }
        return null;
@@ -477,11 +461,8 @@ public class Contextual implements Visitor{
 
     @Override
     public Object visitExpressionRestAST(ExpressionRestAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
         if (aThis.ex != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.ex.getClass().getName());
-            root.add(h0);
-            aThis.ex.visit(this, h0);
+            aThis.ex.visit(this, arg);
         }
        return null;
     }
@@ -551,17 +532,11 @@ public class Contextual implements Visitor{
 
     @Override
     public Object visitIntegerLiteralAST(IntegerLiteralAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
-        DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.getStringValue());
-        root.add(h0);
         return  null;
     }
 
     @Override
     public Object visitIntegerTypeAST(IntegerTypeAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
-        DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.getClass().getName());
-        root.add(h0);
         return  null;
     }
 
@@ -583,20 +558,19 @@ public class Contextual implements Visitor{
 
     @Override
     public Object visitMessageSendAST(MessageSendAST aThis, Object arg){
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
+        DefaultTableModel tablemodel= (DefaultTableModel) arg;
         if (aThis.ex != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.ex.getClass().getName());
-            root.add(h0);
-            aThis.ex.visit(this, h0);
+            aThis.ex.visit(this, tablemodel);
         }
         if (aThis.id != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id.getStringvalue());
-            root.add(h0);
+            if(Symtable.getIdentifier(aThis.id.getStringvalue())){
+                tableobject=Symtable.enter(aThis.id.getStringvalue(), aThis);
+                tablemodel.addRow(new Object[]{tableobject.nivel,tableobject.reference.getClass().getName(),tableobject.nombreID,null});}
+            else
+                tablemodel.addRow(new Object[]{null,aThis.getClass().getName(),aThis.id.getStringvalue(),"does not exists"});
         }
         if (aThis.exl != null) {
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.exl.getClass().getName());
-            root.add(h0);
-            aThis.exl.visit(this, h0);
+            aThis.exl.visit(this, tablemodel);
         }
        return null;
     }
@@ -630,23 +604,26 @@ public class Contextual implements Visitor{
 
     @Override
     public Object visitIdentifierAST(IdentifierAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
-        DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.getStringvalue());
-        root.add(h0);
         return null;
     }
 
     @Override
     public Object visitTypeNameAST(TypeNameAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
+        DefaultTableModel tablemodel= (DefaultTableModel) arg;
         if(aThis.id.size() > 0){
-            DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.id.getClass().getName());
+            String longid="";
             for(int i=0; i < aThis.id.size(); i++){
-                DefaultMutableTreeNode temp = new DefaultMutableTreeNode(aThis.id.get(i).getStringvalue());
-                h0.add(temp);
-                aThis.id.get(i).visit(this, temp);
-                root.add(h0);  
+                longid=longid+aThis.id.get(i).getStringvalue();
+                if((i+1) < aThis.id.size())
+                   longid=longid+"."; 
+                aThis.id.get(i).visit(this, tablemodel);
             }
+            if(!Symtable.getIdentifier(longid)){
+                tableobject=Symtable.enter(longid, aThis);
+                tablemodel.addRow(new Object[]{tableobject.nivel,tableobject.reference.getClass().getName(),tableobject.nombreID,null});
+            }
+            else
+                tablemodel.addRow(new Object[]{null,aThis.getClass().getName(),longid,"already exists"});
         }
        return null;
     }
@@ -791,10 +768,7 @@ public class Contextual implements Visitor{
     
     @Override
     public Object visitThisExpressionAST(ThisExpressionAST aThis, Object arg) {
-        DefaultMutableTreeNode root =(DefaultMutableTreeNode) arg;
-        DefaultMutableTreeNode h0 = new DefaultMutableTreeNode(aThis.getStringValue());
-        root.add(h0);
-        return  root;
+        return  null;
     }
 
     @Override

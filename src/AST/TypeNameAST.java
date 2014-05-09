@@ -17,6 +17,7 @@ public class TypeNameAST extends AST{
     public TypeNameAST(ArrayList<IdentifierAST>  id) {
         this.id = id;
     }
+    
     public Object visit(Visitor v, Object arg) {
         return v.visitTypeNameAST(this,arg);
     }
